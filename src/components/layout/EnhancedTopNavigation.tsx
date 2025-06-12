@@ -275,10 +275,6 @@ const EnhancedTopNavigation: React.FC = () => {
     }).format(amount);
   };
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   const isActive = (path: string) => {
     return location.pathname.startsWith(path);
   };
@@ -386,14 +382,6 @@ const EnhancedTopNavigation: React.FC = () => {
       {/* Breadcrumb Navigation - Enhanced styling */}
       <div className="border-t border-gray-200 bg-gray-50 px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 items-center">
-          <button
-            onClick={handleBack}
-            className="mr-4 rounded-md p-2 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700"
-            aria-label="Go back"
-          >
-            <ArrowLeftIcon className="h-5 w-5" />
-          </button>
-
           <nav className="flex items-center text-sm">
             {previousPageTitle && (
               <>

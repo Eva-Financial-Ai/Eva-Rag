@@ -1,5 +1,4 @@
 import {
-  faArrowLeft,
   faChevronDown,
   faRobot,
   faTachometerAlt,
@@ -203,7 +202,6 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
     );
   };
 
-  const handleGoBack = () => navigate(-1);
   const handleGoToDashboard = () => {
     const coreRole = mapUserRoleTypeToUserRole(currentUserType);
     navigate(`/${coreRole}/dashboard`);
@@ -237,14 +235,6 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
     <nav className="bg-white flex items-center justify-between border-b border-gray-200 px-4 py-3">
       {/* Left Section */}
       <div className="flex items-center space-x-4">
-        <button
-          onClick={handleGoBack}
-          className="text-gray-600 transition-colors hover:text-gray-800"
-          title="Go Back"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </button>
-
         <button
           onClick={handleGoToDashboard}
           className="text-blue-600 transition-colors hover:text-blue-800"
