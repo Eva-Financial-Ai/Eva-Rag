@@ -210,32 +210,31 @@ export interface BusinessUserPersona {
 
 #### **How User Types Are Assigned**
 
-1. **During Signup/Login**: User type is determined based on:
+**During Signup/Login**: User type is determined based on:
+- Email domain mapping (e.g., @lender.com → Lender role)
+- Organization affiliation in Auth0
+- Pre-configured Auth0 rules and metadata
+- System admin manual assignment (for special cases)
 
-   - Email domain mapping (e.g., @lender.com → Lender role)
-   - Organization affiliation in Auth0
-   - Pre-configured Auth0 rules and metadata
-   - System admin manual assignment (for special cases)
+**Role Assignment Process**:
+1. Initial role assignment via Auth0 rules
+2. System administrators can modify roles post-registration
+3. Roles are stored in Auth0 user metadata
+4. JWT tokens include role claims for authorization
 
-2. **Role Assignment Process**:
-
-   - Initial role assignment via Auth0 rules
-   - System administrators can modify roles post-registration
-   - Roles are stored in Auth0 user metadata
-   - JWT tokens include role claims for authorization
-
-3. **Available User Types**:
-   - **Borrower**: Default role for general users
-   - **Lender**: Financial institution representatives
-   - **Broker**: Deal facilitators and intermediaries
-   - **Vendor**: Service providers and partners
-   - **Admin**: System administrators with full access
+**Available User Types**:
+- **Borrower**: Default role for general users
+- **Lender**: Financial institution representatives
+- **Broker**: Deal facilitators and intermediaries
+- **Vendor**: Service providers and partners
+- **Admin**: System administrators with full access
 
 #### **Migration Timeline**
-
 - **Current State**: User type selector visible for testing
 - **End of Staging**: User type selector removed
 - **Production**: Full Auth0-based authentication only
+
+Based on the [Auth0 application settings documentation](https://auth0.com/docs/get-started/applications/application-settings) and [regular web application registration guide](https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps), our implementation follows enterprise security best practices.
 
 ## 🛡️ **Security Infrastructure**
 
