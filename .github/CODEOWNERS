@@ -1,0 +1,261 @@
+# =============================================================================
+# EVA PLATFORM - CODE OWNERSHIP & SECURITY REVIEWS
+# =============================================================================
+# CRITICAL: Ensures security team reviews for sensitive code changes
+# Financial application code requires specialized security oversight
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# GLOBAL OWNERSHIP (Default)
+# -----------------------------------------------------------------------------
+# Security team has oversight on all changes for financial application
+* @eva-security-team
+
+# -----------------------------------------------------------------------------
+# SECURITY-CRITICAL FILES (MANDATORY SECURITY REVIEW)
+# -----------------------------------------------------------------------------
+
+# GitHub Security Configuration
+/.github/workflows/ @eva-security-team @eva-devops-team
+/.github/SECURITY.md @eva-security-team
+/.github/CODEOWNERS @eva-security-team
+.gitignore @eva-security-team
+
+# Environment & Configuration
+.env* @eva-security-team
+*.env @eva-security-team
+/src/config/ @eva-security-team @eva-core-developers
+/src/utils/envValidator.ts @eva-security-team
+
+# Client-Side Security
+/src/utils/clientSideSecurity.ts @eva-security-team
+/src/utils/security.ts @eva-security-team
+/src/utils/encryption.ts @eva-security-team
+
+# Authentication & Authorization
+/src/auth/ @eva-security-team @eva-auth-team
+/src/services/auth/ @eva-security-team @eva-auth-team
+/src/config/auth0.ts @eva-security-team @eva-auth-team
+/src/services/auth0Service.ts @eva-security-team @eva-auth-team
+
+# -----------------------------------------------------------------------------
+# FINANCIAL DATA & CALCULATIONS (SECURITY + FINANCE REVIEW)
+# -----------------------------------------------------------------------------
+
+# Financial Services Integration
+/src/services/smartMatchingService.ts @eva-security-team @eva-finance-team
+/src/services/financialCalculations/ @eva-security-team @eva-finance-team
+/src/utils/financial/ @eva-security-team @eva-finance-team
+
+# Payment Processing
+/src/services/stripe/ @eva-security-team @eva-payments-team
+/src/services/plaid/ @eva-security-team @eva-payments-team
+/src/api/ShieldAuthConnector.ts @eva-security-team @eva-kyc-team
+
+# Customer Data Handling
+/src/components/borrower/ @eva-security-team @eva-finance-team
+/src/components/customerRetention/ @eva-security-team @eva-customer-team
+/src/services/customerDataService.ts @eva-security-team @eva-customer-team
+
+# Financial Calculations & Risk Assessment
+/src/components/risk/ @eva-security-team @eva-risk-team
+/src/services/riskAssessment/ @eva-security-team @eva-risk-team
+/src/utils/calculations/ @eva-security-team @eva-finance-team
+
+# -----------------------------------------------------------------------------
+# API INTEGRATIONS & EXTERNAL SERVICES (SECURITY + API TEAM)
+# -----------------------------------------------------------------------------
+
+# External API Services
+/src/services/*Service.ts @eva-security-team @eva-api-team
+/src/api/ @eva-security-team @eva-api-team
+/src/services/external/ @eva-security-team @eva-api-team
+
+# Data Processing & Document Handling
+/src/services/documentProcessing/ @eva-security-team @eva-document-team
+/src/components/document/ @eva-security-team @eva-document-team
+/src/utils/ocr/ @eva-security-team @eva-document-team
+
+# -----------------------------------------------------------------------------
+# DATA STORAGE & STATE MANAGEMENT (SECURITY + ARCHITECTURE)
+# -----------------------------------------------------------------------------
+
+# State Management
+/src/contexts/ @eva-security-team @eva-core-developers
+/src/providers/ @eva-security-team @eva-core-developers
+/src/hooks/useCustomerData.ts @eva-security-team @eva-customer-team
+
+# Local Storage & Session Management
+/src/utils/storage.ts @eva-security-team @eva-core-developers
+/src/services/sessionManagement.ts @eva-security-team @eva-auth-team
+
+# -----------------------------------------------------------------------------
+# BUILD & DEPLOYMENT (SECURITY + DEVOPS)
+# -----------------------------------------------------------------------------
+
+# Build Configuration
+package.json @eva-security-team @eva-devops-team
+package-lock.json @eva-security-team @eva-devops-team
+craco.config.js @eva-security-team @eva-devops-team
+webpack.config.* @eva-security-team @eva-devops-team
+
+# Docker & Deployment
+Dockerfile @eva-security-team @eva-devops-team
+docker-compose.* @eva-security-team @eva-devops-team
+nginx.conf @eva-security-team @eva-devops-team
+
+# CI/CD Configuration
+/.github/workflows/ @eva-security-team @eva-devops-team
+/scripts/ @eva-security-team @eva-devops-team
+
+# Vercel Configuration
+vercel.json @eva-security-team @eva-devops-team
+/api/ @eva-security-team @eva-api-team
+
+# -----------------------------------------------------------------------------
+# TESTING & QUALITY ASSURANCE (SECURITY + QA)
+# -----------------------------------------------------------------------------
+
+# Security Tests
+/src/**/*.security.test.* @eva-security-team @eva-qa-team
+/src/test/security/ @eva-security-team @eva-qa-team
+/cypress/e2e/security/ @eva-security-team @eva-qa-team
+
+# Financial Data Tests
+/src/**/*financial*.test.* @eva-security-team @eva-finance-team @eva-qa-team
+/src/**/*customer*.test.* @eva-security-team @eva-customer-team @eva-qa-team
+
+# API Integration Tests
+/src/**/*api*.test.* @eva-security-team @eva-api-team @eva-qa-team
+
+# -----------------------------------------------------------------------------
+# DOCUMENTATION (TECHNICAL WRITING + SECURITY)
+# -----------------------------------------------------------------------------
+
+# Security Documentation
+/docs/security/ @eva-security-team @eva-tech-writing
+SECURITY.md @eva-security-team
+GITHUB_SECURITY_SETUP.md @eva-security-team @eva-devops-team
+
+# API Documentation
+/docs/api/ @eva-security-team @eva-api-team @eva-tech-writing
+/public/docs/ @eva-security-team @eva-api-team
+
+# Compliance Documentation
+/docs/compliance/ @eva-security-team @eva-compliance-team
+/docs/privacy/ @eva-security-team @eva-legal-team
+
+# -----------------------------------------------------------------------------
+# SPECIFIC HIGH-RISK COMPONENTS (EXTRA SCRUTINY)
+# -----------------------------------------------------------------------------
+
+# Dashboard & Analytics (Customer Data Display)
+/src/components/dashboard/ @eva-security-team @eva-analytics-team
+/src/components/analytics/ @eva-security-team @eva-analytics-team
+/src/pages/dashboard/ @eva-security-team @eva-analytics-team
+
+# User Management & Profile
+/src/components/user/ @eva-security-team @eva-auth-team
+/src/services/userManagement.ts @eva-security-team @eva-auth-team
+
+# Transaction Processing
+/src/components/transactions/ @eva-security-team @eva-payments-team
+/src/services/transactionService.ts @eva-security-team @eva-payments-team
+
+# Credit & Loan Processing
+/src/components/credit/ @eva-security-team @eva-credit-team
+/src/services/loanProcessing/ @eva-security-team @eva-credit-team
+
+# -----------------------------------------------------------------------------
+# INFRASTRUCTURE & MONITORING (DEVOPS + SECURITY)
+# -----------------------------------------------------------------------------
+
+# Monitoring & Logging
+/src/utils/errorReporter/ @eva-security-team @eva-monitoring-team
+/src/services/monitoring/ @eva-security-team @eva-monitoring-team
+/monitoring/ @eva-security-team @eva-devops-team
+
+# Performance & Analytics
+/src/utils/analytics.ts @eva-security-team @eva-analytics-team
+/scripts/performance/ @eva-security-team @eva-performance-team
+
+# -----------------------------------------------------------------------------
+# THIRD-PARTY INTEGRATIONS (SECURITY + VENDOR TEAM)
+# -----------------------------------------------------------------------------
+
+# External Service Connectors
+/src/services/external/ @eva-security-team @eva-vendor-team
+/src/integrations/ @eva-security-team @eva-vendor-team
+
+# Webhook Handlers
+/src/webhooks/ @eva-security-team @eva-api-team
+/api/webhooks/ @eva-security-team @eva-api-team
+
+# -----------------------------------------------------------------------------
+# EMERGENCY OVERRIDES
+# -----------------------------------------------------------------------------
+# The following accounts can override code ownership in emergencies:
+# - @eva-cto (CTO override for critical issues)
+# - @eva-security-lead (Security lead for security incidents)
+# - @eva-incident-response (Incident response team)
+
+# Emergency access should be documented and reviewed within 24 hours
+
+# EVA AI Frontend Code Owners
+# These owners will be requested for review when someone opens a pull request.
+
+# Global owners - all files require review from frontend team
+* @eva-financial-ai/frontend-team
+
+# Core application files require senior developer review
+/src/App.tsx @eva-financial-ai/senior-developers
+/src/index.tsx @eva-financial-ai/senior-developers
+/src/main.tsx @eva-financial-ai/senior-developers
+
+# Configuration files require senior developer review
+package.json @eva-financial-ai/senior-developers
+package-lock.json @eva-financial-ai/senior-developers
+tsconfig.json @eva-financial-ai/senior-developers
+vite.config.ts @eva-financial-ai/senior-developers
+tailwind.config.js @eva-financial-ai/senior-developers
+
+# CI/CD and deployment files require DevOps team review
+/.github/ @eva-financial-ai/devops-team
+/scripts/ @eva-financial-ai/devops-team
+wrangler.toml @eva-financial-ai/devops-team
+DEPLOYMENT.md @eva-financial-ai/devops-team
+
+# Security and authentication require security team review
+/src/contexts/AuthContext.tsx @eva-financial-ai/security-team
+/src/services/AuthService.ts @eva-financial-ai/security-team
+/src/hooks/useAuth.ts @eva-financial-ai/security-team
+
+# Financial components require extra scrutiny from senior developers and compliance
+/src/components/credit/ @eva-financial-ai/senior-developers @eva-financial-ai/compliance-team
+/src/components/risk/ @eva-financial-ai/senior-developers @eva-financial-ai/compliance-team
+/src/components/deal/ @eva-financial-ai/senior-developers @eva-financial-ai/compliance-team
+/src/utils/financialCalculations.ts @eva-financial-ai/senior-developers @eva-financial-ai/compliance-team
+/src/services/TransactionService.ts @eva-financial-ai/senior-developers @eva-financial-ai/compliance-team
+
+# Customer data and CRM components require privacy review
+/src/components/customerRetention/ @eva-financial-ai/privacy-team
+/src/services/CRMService.ts @eva-financial-ai/privacy-team
+/src/contexts/EVACustomerContext.tsx @eva-financial-ai/privacy-team
+
+# API and service layer require backend team coordination
+/src/api/ @eva-financial-ai/backend-team @eva-financial-ai/frontend-team
+/src/services/ @eva-financial-ai/backend-team @eva-financial-ai/frontend-team
+
+# Documentation requires documentation team review
+README.md @eva-financial-ai/documentation-team
+/docs/ @eva-financial-ai/documentation-team
+*.md @eva-financial-ai/documentation-team
+
+# Testing files require QA team review
+/src/**/*.test.ts @eva-financial-ai/qa-team
+/src/**/*.test.tsx @eva-financial-ai/qa-team
+/src/test/ @eva-financial-ai/qa-team
+
+# Environment and configuration
+.env.example @eva-financial-ai/devops-team @eva-financial-ai/security-team
+.gitignore @eva-financial-ai/senior-developers

@@ -1,0 +1,137 @@
+/* Conversation.css */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .transaction-conversations-container .conversation-list {
+    width: 100%;
+    display: block;
+  }
+  
+  .transaction-conversations-container .conversation-content {
+    width: 100%;
+    display: none;
+  }
+  
+  .transaction-conversations-container.conversation-active .conversation-list {
+    display: none;
+  }
+  
+  .transaction-conversations-container.conversation-active .conversation-content {
+    display: block;
+  }
+  
+  .conversation-back-button {
+    display: block !important;
+  }
+  
+  .smart-match-panel .lender-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Theme colors */
+:root {
+  --eva-primary: #2563eb;
+  --eva-primary-hover: #1d4ed8;
+  --eva-ai: #9333ea;
+  --eva-ai-light: #f3e8ff;
+  --eva-success: #10b981;
+  --eva-warning: #f59e0b;
+  --eva-danger: #ef4444;
+  --eva-neutral: #6b7280;
+  --eva-light: #f9fafb;
+  --eva-dark: #111827;
+}
+
+/* Animation for typing indicator */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.typing-dot {
+  animation: bounce 1s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Smart Match glow effect */
+.smart-match-card {
+  transition: all 0.3s ease;
+}
+
+.smart-match-card:hover {
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Intelligence menu animation */
+.intelligence-menu {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Role-specific message styles */
+.message-eva {
+  position: relative;
+}
+
+.message-eva:before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 70%;
+  background-color: var(--eva-ai);
+}
+
+/* Status badge animation */
+.status-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.status-badge.urgent:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(239, 68, 68, 0.3), transparent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+} 

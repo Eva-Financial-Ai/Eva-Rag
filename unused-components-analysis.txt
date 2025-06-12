@@ -1,0 +1,68 @@
+# Analysis of Potentially Unused Components
+
+This analysis categorizes the identified unused components into three groups:
+
+## 1. Likely Genuinely Unused (Safe to Remove)
+
+These components appear to be genuinely unused in the application, likely because:
+- They were created for features that were never fully implemented
+- They were replaced by newer components
+- They were part of experimental features that were abandoned
+
+Components in this category:
+- ThirdPartyAuthModal, DocumentUploadModal, PlaidLinkModal, StripeConnectModal (integration modals that may have been replaced)
+- MyPortfolioWallet, PyPortfolioWallet (likely experimental implementations)
+- CreditAnalysisChatInterface, AIChatAdvisor (likely replaced by EVA AI assistant integration)
+- BlockchainTransactionViewer, BlockchainButton, PortfolioDropdown, UniCurrency (blockchain features that might not have been fully integrated)
+- FundingTrendsChart, MetricCard, DealProgressCard (analytics components that might have been replaced)
+
+## 2. Potentially Needed But Not Properly Wired Up
+
+These components might still be relevant to your system but aren't properly imported or used in the codebase. They could be:
+- Components that should be used but aren't properly imported
+- Recently developed components not yet integrated
+- Components imported dynamically or conditionally that our detection script missed
+
+Components in this category:
+- DocumentRequestTracker, DocumentRequestModal, DocumentList, DocumentComparisonViewer (core document management features)
+- RiskMetricsDisplay, RiskConfiguration, RiskAccordionItem (risk assessment features)
+- CreditApplicationTabs, BankStatementVerification, CreditRiskAnalysis (credit assessment features)
+- GlobalErrorBoundary (likely should be used for error handling)
+- CustomerCard, ContactImport, CustomersTable (customer management features that should be in use)
+- MainNavigation, MainLayout (layout components that should be in use)
+- CreditScoreGauge, DynamicDashboard (dashboard components)
+
+## 3. Development/Demo Components (Can Be Removed or Moved)
+
+These components are likely for development, testing, or demonstration purposes and aren't meant for production:
+- RouterSelector, PQCryptographyProvider (development utilities)
+- ResponsiveTestingPanel, SideNavigationTest, PerformanceMonitor (testing components)
+- DemoModeSwitcherPanel, DemoCreditsManager, DemoCreditsManagerFix (demo-specific components)
+- RiskReportDevTools, UserStoriesView (development tooling)
+- EVAAssistantWithCustomAgents (likely a demo or test version of the assistant)
+- SmartMatchSkeleton, StructureEditorSkeleton (placeholders/skeletons for development)
+
+## Recommended Next Steps
+
+1. **For Category 1 (Likely Unused)**: 
+   These can be safely moved to the backup directory or removed.
+
+2. **For Category 2 (Potentially Needed)**:
+   - Review each component to understand its purpose
+   - Check if there are newer components that replaced their functionality
+   - Consider properly integrating any that should be used in the application
+
+3. **For Category 3 (Development/Demo)**:
+   - Move to a separate 'dev-components' directory instead of removing completely
+   - Add clear documentation about their purpose
+   - Consider adding a feature flag system to control their visibility
+
+## Note on Detection Method
+
+Our detection method has limitations:
+- It only checks for static imports and basic JSX usage
+- It doesn't account for dynamic imports via React.lazy() or import()
+- It might miss components referenced via string literals or dynamic variables
+- It doesn't check for components used in complex ways (HOCs, render props, etc.)
+
+Before permanently removing components, verify each one's purpose and usage patterns. 

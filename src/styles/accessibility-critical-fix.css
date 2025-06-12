@@ -1,0 +1,239 @@
+/* =====================================================
+   ACCESSIBILITY ENHANCEMENTS - Context-aware visibility
+   =====================================================
+   Provides proper contrast without breaking design intent
+*/
+
+/* Ensure minimum contrast ratios for WCAG compliance */
+
+/* Light backgrounds should have dark text */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-red-50,
+.bg-yellow-50,
+.bg-green-50,
+.bg-blue-50,
+.bg-indigo-50,
+.bg-purple-50,
+.bg-pink-50 {
+  color: var(--color-text-primary);
+}
+
+/* Dark backgrounds should have light text */
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900,
+.bg-black,
+.bg-red-600,
+.bg-red-700,
+.bg-red-800,
+.bg-red-900,
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-green-600,
+.bg-green-700,
+.bg-green-800,
+.bg-green-900 {
+  color: var(--color-text-inverse);
+}
+
+/* Primary brand colors with proper text */
+.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+}
+
+/* Links - ensure they meet contrast requirements */
+a:not(.btn):not(.nav-link) {
+  color: var(--color-text-link);
+  text-decoration: underline;
+}
+
+a:not(.btn):not(.nav-link):hover {
+  color: var(--color-text-link-hover);
+  text-decoration: underline;
+}
+
+/* Focus states for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--color-border-focus);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+/* Ensure interactive elements have sufficient size */
+button,
+a,
+[role="button"],
+input[type="checkbox"],
+input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+  position: relative;
+}
+
+/* Checkbox and radio button clickable area */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+}
+
+input[type="checkbox"]::before,
+input[type="radio"]::before {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+}
+
+.skip-to-main:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+  
+  button,
+  .btn,
+  .card,
+  input,
+  select,
+  textarea {
+    border: 2px solid currentColor !important;
+  }
+  
+  a:not(.btn) {
+    text-decoration: underline !important;
+    text-decoration-thickness: 2px !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Color blind friendly patterns */
+.success-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.1) 10px,
+    rgba(0, 0, 0, 0.1) 20px
+  );
+}
+
+.error-pattern {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.1) 10px,
+    rgba(0, 0, 0, 0.1) 20px
+  );
+}
+
+.warning-pattern {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.1) 10px,
+    rgba(0, 0, 0, 0.1) 20px
+  );
+}
+
+/* Ensure form labels are associated */
+label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: var(--font-medium);
+}
+
+/* Error messages should be clear */
+.error-message,
+[role="alert"] {
+  color: var(--color-error);
+  font-weight: var(--font-medium);
+  margin-top: var(--space-1);
+}
+
+/* Loading states should be announced */
+[aria-busy="true"]::after {
+  content: " (Loading...)";
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* Print styles for better readability */
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: black;
+    background: white;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

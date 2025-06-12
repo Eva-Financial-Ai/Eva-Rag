@@ -1,0 +1,191 @@
+{
+  "load_balancer_config": {
+    "name": "EVA AI API Gateway Load Balancer",
+    "version": "2.5.0",
+    "last_updated": "2025-06-06T10:30:00.000Z",
+    "environments": {
+      "staging": {
+        "load_balancer": {
+          "name": "eva-api-lb-staging",
+          "hostname": "api-staging.evafi.ai",
+          "enabled": true,
+          "pool": "eva-api-pool-staging",
+          "regions": ["WNAM", "ENAM", "WEU", "EEU", "APAC"],
+          "steering_policy": "geo"
+        },
+        "pool": {
+          "name": "eva-api-pool-staging",
+          "origins": [
+            {
+              "name": "eva-api-gateway-staging",
+              "address": "eva-api-gateway-staging.evafiai.workers.dev",
+              "enabled": true,
+              "weight": 1,
+              "header": {
+                "Host": ["eva-api-gateway-staging.evafiai.workers.dev"]
+              }
+            }
+          ],
+          "monitor": "eva-health-monitor-staging",
+          "enabled": true,
+          "minimum_origins": 1
+        },
+        "health_monitor": {
+          "name": "eva-health-monitor-staging",
+          "type": "https",
+          "method": "GET",
+          "path": "/api/health",
+          "interval": 30,
+          "retries": 3,
+          "timeout": 10,
+          "expected_codes": "200",
+          "expected_body": "healthy",
+          "follow_redirects": false,
+          "allow_insecure": false
+        }
+      },
+      "production": {
+        "load_balancer": {
+          "name": "eva-api-lb-production",
+          "hostname": "api.evafi.ai",
+          "enabled": true,
+          "pool": "eva-api-pool-production",
+          "regions": ["WNAM", "ENAM", "WEU", "EEU", "APAC"],
+          "steering_policy": "geo"
+        },
+        "pool": {
+          "name": "eva-api-pool-production",
+          "origins": [
+            {
+              "name": "eva-api-gateway-production-primary",
+              "address": "eva-api-gateway-production.evafiai.workers.dev",
+              "enabled": true,
+              "weight": 1,
+              "header": {
+                "Host": ["eva-api-gateway-production.evafiai.workers.dev"]
+              }
+            }
+          ],
+          "monitor": "eva-health-monitor-production",
+          "enabled": true,
+          "minimum_origins": 1
+        },
+        "health_monitor": {
+          "name": "eva-health-monitor-production",
+          "type": "https",
+          "method": "GET",
+          "path": "/api/health",
+          "interval": 30,
+          "retries": 3,
+          "timeout": 10,
+          "expected_codes": "200",
+          "expected_body": "healthy",
+          "follow_redirects": false,
+          "allow_insecure": false
+        }
+      }
+    },
+    "geo_steering": {
+      "WNAM": {
+        "description": "Western North America",
+        "countries": ["US", "CA", "MX"],
+        "pool_weights": {
+          "primary": 100,
+          "backup": 0
+        }
+      },
+      "ENAM": {
+        "description": "Eastern North America",
+        "countries": ["US", "CA"],
+        "pool_weights": {
+          "primary": 100,
+          "backup": 0
+        }
+      },
+      "WEU": {
+        "description": "Western Europe",
+        "countries": ["GB", "FR", "DE", "NL", "IE"],
+        "pool_weights": {
+          "primary": 100,
+          "backup": 0
+        }
+      },
+      "EEU": {
+        "description": "Eastern Europe",
+        "countries": ["PL", "CZ", "HU", "RO"],
+        "pool_weights": {
+          "primary": 100,
+          "backup": 0
+        }
+      },
+      "APAC": {
+        "description": "Asia Pacific",
+        "countries": ["JP", "SG", "AU", "KR", "IN"],
+        "pool_weights": {
+          "primary": 100,
+          "backup": 0
+        }
+      }
+    },
+    "traffic_steering_options": {
+      "failover": {
+        "description": "Route traffic to backup pool only when primary fails",
+        "enabled": true
+      },
+      "random": {
+        "description": "Distribute traffic randomly across available pools",
+        "enabled": false
+      },
+      "least_outstanding_requests": {
+        "description": "Route to pool with fewest outstanding requests",
+        "enabled": false
+      },
+      "geo": {
+        "description": "Route based on geographic location of client",
+        "enabled": true
+      }
+    },
+    "performance_targets": {
+      "response_time_p50": "50ms",
+      "response_time_p95": "100ms",
+      "response_time_p99": "200ms",
+      "availability": "99.99%",
+      "error_rate": "<0.01%"
+    },
+    "scaling_parameters": {
+      "max_requests_per_second": 100000,
+      "auto_scaling": {
+        "enabled": true,
+        "cpu_threshold": 80,
+        "memory_threshold": 85,
+        "scale_up_cooldown": 300,
+        "scale_down_cooldown": 600
+      }
+    },
+    "monitoring": {
+      "health_check_frequency": "30s",
+      "metrics_collection": "real-time",
+      "alerting": {
+        "health_check_failures": 3,
+        "response_time_threshold": "500ms",
+        "error_rate_threshold": "1%"
+      }
+    },
+    "stream_integration": {
+      "subdomain": "customer-9eikf9ekxbfirnkc.cloudflarestream.com",
+      "features": {
+        "video_upload": true,
+        "transcoding": true,
+        "adaptive_bitrate": true,
+        "global_cdn": true,
+        "analytics": true
+      },
+      "endpoints": ["/api/v1/stream/upload", "/api/v1/stream/videos", "/api/v1/stream/analytics"],
+      "load_balancing": {
+        "enabled": true,
+        "pool": "eva-stream-pool",
+        "priority": "high"
+      }
+    }
+  }
+}

@@ -1,0 +1,185 @@
+/* Component Styles */
+
+/* Button Components */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.btn-success {
+  @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+/* Card Components */
+.card {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
+
+.card-dark {
+  @apply bg-gray-800 rounded-lg shadow-md p-6;
+}
+
+/* Input Components */
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+.input-field-dark {
+  @apply w-full p-3 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Layout Components */
+.container-fluid {
+  @apply w-full px-4 mx-auto;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex items-center justify-between;
+}
+
+/* Navigation Components */
+.nav-link {
+  @apply px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors;
+}
+
+.nav-link-active {
+  @apply px-3 py-2 rounded-lg text-blue-600 bg-blue-50 font-medium;
+}
+
+/* Dashboard Components */
+.dashboard-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+}
+
+.dashboard-card-dark {
+  @apply bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6 hover:shadow-md transition-shadow;
+}
+
+.metric-card {
+  @apply bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-4 text-white;
+}
+
+.metric-value {
+  @apply text-2xl font-bold mb-1;
+}
+
+.metric-label {
+  @apply text-sm opacity-90;
+}
+
+/* Form Components */
+.form-group {
+  @apply mb-4;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+.form-label-dark {
+  @apply block text-sm font-medium text-gray-300 mb-2;
+}
+
+.form-control {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+}
+
+.form-control-dark {
+  @apply w-full p-3 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+}
+
+/* Select Components */
+.select-field {
+  @apply w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.select-field-dark {
+  @apply w-full p-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+/* Loading Components */
+.spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600;
+}
+
+.loading-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-effect {
+  @apply backdrop-blur-sm bg-white/10 border border-white/20;
+}
+
+.hover-lift {
+  @apply transform transition-transform hover:-translate-y-1;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Utilities */
+.responsive-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.responsive-flex {
+  @apply flex flex-col md:flex-row;
+}
+
+/* Dark Mode Overrides */
+.dark .card {
+  @apply bg-gray-800 text-white;
+}
+
+.dark .input-field {
+  @apply bg-gray-700 border-gray-600 text-white;
+}
+
+.dark .nav-link {
+  @apply text-gray-300 hover:text-white hover:bg-gray-700;
+}

@@ -1,0 +1,59 @@
+{
+  "documents": [
+    {
+      "name": "loan-application.pdf",
+      "type": "application/pdf",
+      "category": "loan",
+      "size": 2048000,
+      "content": "JVBERi0xLjQKJeLjz9MKNCAwIG9iaiA8PC9MZW5ndGggNTAvRmlsdGVyL0ZsYXRlRGVjb2RlPj4Kc3RyZWFtCnjaK1YI0DMwMFAIyUjNTc7PSVVwyy9JVXC0UnBJTUvLzEm1UvDLL0sFAKiKC2MKZW5kc3RyZWFtCmVuZG9iago="
+    },
+    {
+      "name": "financial-statement.xlsx",
+      "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "category": "financial",
+      "size": 1024000,
+      "content": "UEsDBAoAAAAAAIdO4kgAAAAAAAAAAAAAAAAJAAAAZG9jUHJvcHMvUEsDBBQAAAAIAIdO4kiaOAfyCQEAALoCAAAQAAAAZG9jUHJvcHMvYXBwLnhtbJlSy07DMBC8I/EPlt+b1AUhVE0rEEiIA4gXfIBJNokV2xvZbpO/ZzeJWloQQnCztjOzO7Mbb6azTaE2YKzUKkHRMEQKVKZzqVYJep0/BFNkHVc5L7SCBNVg0Sw9P5tyluVmAS+mMAtQjks8xVGZg0tQxl3JGLOZhILbYWaAq9hCm4K7j3rFGC8yWPJ8U4DjMBwzf="
+    },
+    {
+      "name": "tax-return-2023.pdf",
+      "type": "application/pdf",
+      "category": "tax",
+      "size": 3072000,
+      "content": "JVBERi0xLjQKJeLjz9MKNCAwIG9iaiA8PC9MZW5ndGggNTAvRmlsdGVyL0ZsYXRlRGVjb2RlPj4Kc3RyZWFtCnjaK1YI0DMwMFAIyUjNTc7PSVVwyy9JVXC0UnBJTUvLzEm1UvDLL0sFAKiKC2MKZW5kc3RyZWFtCmVuZG9iago="
+    },
+    {
+      "name": "operating-agreement.pdf",
+      "type": "application/pdf",
+      "category": "legal",
+      "size": 1536000,
+      "content": "JVBERi0xLjQKJeLjz9MKNCAwIG9iaiA8PC9MZW5ndGggNTAvRmlsdGVyL0ZsYXRlRGVjb2RlPj4Kc3RyZWFtCnjaK1YI0DMwMFAIyUjNTc7PSVVwyy9JVXC0UnBJTUvLzEm1UvDLL0sFAKiKC2MKZW5kc3RyZWFtCmVuZG9iago="
+    },
+    {
+      "name": "kyc-verification.jpg",
+      "type": "image/jpeg",
+      "category": "compliance",
+      "size": 512000,
+      "content": "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+    },
+    {
+      "name": "property-deed.pdf",
+      "type": "application/pdf",
+      "category": "collateral",
+      "size": 2560000,
+      "content": "JVBERi0xLjQKJeLjz9MKNCAwIG9iaiA8PC9MZW5ndGggNTAvRmlsdGVyL0ZsYXRlRGVjb2RlPj4Kc3RyZWFtCnjaK1YI0DMwMFAIyUjNTc7PSVVwyy9JVXC0UnBJTUvLzEm1UvDLL0sFAKiKC2MKZW5kc3RyZWFtCmVuZG9iago="
+    }
+  ],
+  "invalidFiles": [
+    {
+      "name": "malicious.exe",
+      "type": "application/x-msdownload",
+      "content": "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1vZGUuDQ0KJAAAAAAAAABQRQAATAEDAAAAAAAAAAAAAAAAAAAAAPAAIgALATAAABIAAAAIAAAAAAAALjAAAAAgAAAAQAAAAABAAAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACQAAAAAgAAAAAAAAMAQIUAABAAABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOQAAABPAAAAAEAAAKgDAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "name": "large-file.pdf",
+      "type": "application/pdf",
+      "size": 105906176,
+      "content": "JVBERi0xLjQKJeLjz9MKNCAwIG9iaiA8PC9MZW5ndGggNTAvRmlsdGVyL0ZsYXRlRGVjb2RlPj4Kc3RyZWFtCnjaK1YI0DMwMFAIyUjNTc7PSVVwyy9JVXC0UnBJTUvLzEm1UvDLL0sFAKiKC2MKZW5kc3RyZWFtCmVuZG9iago="
+    }
+  ]
+}

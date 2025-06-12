@@ -1,0 +1,594 @@
+/**
+ * 🎨 STANDARDIZED LAYOUT SYSTEM
+ * Consistent page sizing and spacing across EVA Financial Application
+ */
+
+/* Layout System CSS Variables and Utilities */
+
+:root {
+  /* Layout Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Container Max Widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+
+  /* Spacing Scale (8px base) */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-20: 5rem; /* 80px */
+  --spacing-24: 6rem; /* 96px */
+
+  /* Grid System */
+  --grid-columns: 12;
+  --grid-gap-sm: var(--spacing-4);
+  --grid-gap-md: var(--spacing-6);
+  --grid-gap-lg: var(--spacing-8);
+
+  /* Card Dimensions */
+  --card-padding-sm: var(--spacing-4);
+  --card-padding-md: var(--spacing-6);
+  --card-padding-lg: var(--spacing-8);
+  --card-border-radius: 0.5rem;
+  --card-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --card-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Header Heights */
+  --header-height-sm: 3.5rem; /* 56px */
+  --header-height-md: 4rem; /* 64px */
+  --header-height-lg: 5rem; /* 80px */
+
+  /* Navigation Widths */
+  --nav-width-collapsed: 4rem; /* 64px */
+  --nav-width-expanded: 16rem; /* 256px */
+  --nav-width-mobile: 100%;
+
+  /* Z-index Scale */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+}
+
+/* Universal Layout Classes */
+.universal-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.universal-layout-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.universal-layout-main {
+  flex: 1;
+  width: 100%;
+}
+
+.universal-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Consistent Spacing Utilities */
+.spacing-xs {
+  gap: var(--spacing-2);
+}
+.spacing-sm {
+  gap: var(--spacing-4);
+}
+.spacing-md {
+  gap: var(--spacing-6);
+}
+.spacing-lg {
+  gap: var(--spacing-8);
+}
+.spacing-xl {
+  gap: var(--spacing-12);
+}
+.spacing-2xl {
+  gap: var(--spacing-16);
+}
+
+/* Padding Utilities */
+.p-xs {
+  padding: var(--spacing-2);
+}
+.p-sm {
+  padding: var(--spacing-4);
+}
+.p-md {
+  padding: var(--spacing-6);
+}
+.p-lg {
+  padding: var(--spacing-8);
+}
+.p-xl {
+  padding: var(--spacing-12);
+}
+
+.px-xs {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.px-sm {
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+}
+.px-md {
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+}
+.px-lg {
+  padding-left: var(--spacing-8);
+  padding-right: var(--spacing-8);
+}
+.px-xl {
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-12);
+}
+
+.py-xs {
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+}
+.py-sm {
+  padding-top: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+}
+.py-md {
+  padding-top: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
+}
+.py-lg {
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+}
+.py-xl {
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-12);
+}
+
+/* Margin Utilities */
+.m-xs {
+  margin: var(--spacing-2);
+}
+.m-sm {
+  margin: var(--spacing-4);
+}
+.m-md {
+  margin: var(--spacing-6);
+}
+.m-lg {
+  margin: var(--spacing-8);
+}
+.m-xl {
+  margin: var(--spacing-12);
+}
+
+.mx-xs {
+  margin-left: var(--spacing-2);
+  margin-right: var(--spacing-2);
+}
+.mx-sm {
+  margin-left: var(--spacing-4);
+  margin-right: var(--spacing-4);
+}
+.mx-md {
+  margin-left: var(--spacing-6);
+  margin-right: var(--spacing-6);
+}
+.mx-lg {
+  margin-left: var(--spacing-8);
+  margin-right: var(--spacing-8);
+}
+.mx-xl {
+  margin-left: var(--spacing-12);
+  margin-right: var(--spacing-12);
+}
+
+.my-xs {
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+.my-sm {
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+.my-md {
+  margin-top: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+}
+.my-lg {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+.my-xl {
+  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-12);
+}
+
+/* Grid System Classes */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--grid-gap-md);
+}
+
+.grid-container-sm {
+  gap: var(--grid-gap-sm);
+}
+.grid-container-lg {
+  gap: var(--grid-gap-lg);
+}
+
+/* Responsive Grid Columns */
+@media (min-width: 640px) {
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Card Styles */
+.consistent-card {
+  background-color: white;
+  border-radius: var(--card-border-radius);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.consistent-card-shadow-sm {
+  box-shadow: var(--card-shadow-sm);
+}
+.consistent-card-shadow-md {
+  box-shadow: var(--card-shadow-md);
+}
+.consistent-card-shadow-lg {
+  box-shadow: var(--card-shadow-lg);
+}
+
+.consistent-card-header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.consistent-card-footer {
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Page Section Styles */
+.page-section {
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+}
+
+.page-section-sm {
+  padding-top: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
+}
+
+.page-section-lg {
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-12);
+}
+
+/* Responsive Container Padding */
+@media (max-width: 640px) {
+  .universal-container {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .universal-container {
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+  }
+}
+
+@media (min-width: 1025px) {
+  .universal-container {
+    padding-left: var(--spacing-8);
+    padding-right: var(--spacing-8);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .universal-layout {
+    background-color: #111827;
+  }
+
+  .universal-layout-header {
+    background-color: #1f2937;
+    border-bottom-color: #374151;
+  }
+
+  .consistent-card {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+
+  .consistent-card-header,
+  .consistent-card-footer {
+    border-color: #374151;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .universal-layout-header {
+    position: static;
+  }
+
+  .universal-container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .consistent-card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
+
+/* Page Container Standards */
+.eva-page-container {
+  @apply container mx-auto px-4 py-6 max-w-7xl;
+  min-height: calc(100vh - 106px); /* Adjust for navigation */
+}
+
+.eva-page-container-narrow {
+  @apply container mx-auto px-4 py-6 max-w-4xl;
+  min-height: calc(100vh - 106px);
+}
+
+.eva-page-container-wide {
+  @apply container mx-auto px-6 py-8 max-w-full;
+  min-height: calc(100vh - 106px);
+}
+
+/* Section Spacing Standards */
+.eva-section {
+  @apply mb-6;
+}
+
+.eva-section-tight {
+  @apply mb-4;
+}
+
+.eva-section-loose {
+  @apply mb-8;
+}
+
+/* Card/Component Spacing */
+.eva-card-container {
+  @apply p-6 bg-white rounded-lg shadow-sm;
+}
+
+.eva-card-container-compact {
+  @apply p-4 bg-white rounded-lg shadow-sm;
+}
+
+/* Grid Systems */
+.eva-grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.eva-grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.eva-grid-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* Dashboard Specific Layouts */
+.eva-dashboard-container {
+  @apply container mx-auto px-4 py-6 max-w-7xl;
+  min-height: calc(100vh - 106px);
+}
+
+.eva-dashboard-metrics {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6;
+}
+
+.eva-dashboard-content {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+}
+
+.eva-dashboard-main {
+  @apply lg:col-span-2 space-y-6;
+}
+
+.eva-dashboard-sidebar {
+  @apply lg:col-span-1 space-y-6;
+}
+
+/* Form Layouts */
+.eva-form-container {
+  @apply max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-sm;
+}
+
+.eva-form-section {
+  @apply mb-6;
+}
+
+.eva-form-fields {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+/* Transaction/Deal Layouts */
+.eva-transaction-container {
+  @apply container mx-auto px-4 py-6 max-w-6xl;
+  min-height: calc(100vh - 106px);
+}
+
+.eva-transaction-header {
+  @apply mb-6 p-6 bg-white rounded-lg shadow-sm;
+}
+
+.eva-transaction-content {
+  @apply grid grid-cols-1 lg:grid-cols-4 gap-6;
+}
+
+.eva-transaction-main {
+  @apply lg:col-span-3 space-y-6;
+}
+
+.eva-transaction-sidebar {
+  @apply lg:col-span-1 space-y-6;
+}
+
+/* List/Table Layouts */
+.eva-list-container {
+  @apply bg-white rounded-lg shadow-sm overflow-hidden;
+}
+
+.eva-list-header {
+  @apply px-6 py-4 bg-gray-50 border-b;
+}
+
+.eva-list-content {
+  @apply divide-y divide-gray-200;
+}
+
+.eva-list-item {
+  @apply px-6 py-4 hover:bg-gray-50 transition-colors;
+}
+
+/* Modal/Dialog Layouts */
+.eva-modal-container {
+  @apply max-w-2xl mx-auto;
+}
+
+.eva-modal-header {
+  @apply px-6 py-4 border-b;
+}
+
+.eva-modal-content {
+  @apply px-6 py-4;
+}
+
+.eva-modal-footer {
+  @apply px-6 py-4 border-t bg-gray-50;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  .eva-page-container,
+  .eva-dashboard-container,
+  .eva-transaction-container {
+    @apply px-2 py-4;
+  }
+  
+  .eva-card-container {
+    @apply p-4;
+  }
+}
+
+/* No Large Gaps Utility */
+.eva-no-large-gaps {
+  max-height: calc(100vh - 106px);
+  overflow-y: auto;
+}
+
+.eva-no-large-gaps > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Eliminate excessive white space */
+.eva-compact {
+  @apply space-y-4;
+}
+
+.eva-compact > * {
+  margin-bottom: 0 !important;
+}
+
+.eva-compact > * + * {
+  margin-top: 1rem;
+}

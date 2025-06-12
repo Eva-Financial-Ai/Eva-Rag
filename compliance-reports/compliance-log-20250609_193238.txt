@@ -1,0 +1,29 @@
+[20250609_193238] DEPENDENCIES: PASSED - All required tools available
+[20250609_193238] CC6.1: PASSED - Access control implementation detected
+[20250609_193238] CC6.2: PASSED - Authentication patterns detected
+[20250609_193238] CC6.3: PASSED - User provisioning patterns detected
+[20250609_193238] CC6.4: PASSED - Access modification patterns detected
+[20250609_193238] CC6.7: PASSED - Secure transmission patterns detected
+[20250609_193238] CC6.8: PASSED - Vulnerability scanning completed
+[20250609_193238] SECURITY_OVERALL: FAILED - Security score: 75%
+[20250609_193238] A1.1: PASSED - Performance monitoring patterns detected
+[20250609_193238] A1.2: PASSED - Comprehensive error handling detected
+[20250609_193238] A1.3: PASSED - Automated deployment procedures detected
+[20250609_193238] AVAILABILITY_OVERALL: PASSED - Availability score: 100%
+[20250609_193238] PI1.1: PASSED - Comprehensive data validation detected
+[20250609_193238] PI1.2: PASSED - Financial precision controls detected
+[20250609_193238] PI1.3: PASSED - Transaction integrity patterns detected
+[20250609_193238] PROCESSING_INTEGRITY_OVERALL: PASSED - Processing integrity score: 100%
+[20250609_193238] PII_HANDLING: PASSED - Sensitive data handling patterns detected
+[20250609_193238] KYC_KYB: PASSED - KYC/KYB patterns detected
+[20250609_193238] AML: PASSED - AML patterns detected
+[20250609_193238] FINANCIAL_SAFETY: FAILED - Unsafe number parsing detected
+[20250609_193238] AUDIT_TRAILS: PASSED - Audit trail patterns detected
+[20250609_193238] FINANCIAL_COMPLIANCE_OVERALL: PASSED - Financial compliance score: 80%
+[20250609_193238] CODEOWNERS: PASSED - CODEOWNERS file exists
+[20250609_193238] CICD_WORKFLOWS: PASSED - CI/CD workflows exist
+[20250609_193238] DOCUMENTATION: PASSED - Required documentation exists
+[20250609_193238] SECURITY_POLICIES: PASSED - Security policy implementation detected
+[20250609_193238] ORGANIZATIONAL_STANDARDS_OVERALL: PASSED - Organizational standards score: 100%
+[20250609_193238] REPORT_GENERATION: COMPLETED - Compliance report generated at compliance-reports/soc2-compliance-report-20250609_193238.md
+[20250609_193238] OVERALL_ASSESSMENT: FAILED - 1 compliance checks failed

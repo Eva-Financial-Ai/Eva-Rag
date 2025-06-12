@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVA Platform Navigation Test</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .test-section {
+        margin: 20px 0;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .test-button {
+        background: #3b82f6;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .test-button:hover {
+        background: #2563eb;
+      }
+      .result {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+      .success {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .error {
+        background: #fef2f2;
+        color: #dc2626;
+      }
+      .info {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      pre {
+        background: #f8fafc;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔍 EVA Platform Navigation Diagnostics</h1>
+
+    <div class="test-section">
+      <h2>🌐 Server Connection Test</h2>
+      <p>Testing if the React development server is accessible:</p>
+      <button class="test-button" onclick="testServerConnection()">Test Server Connection</button>
+      <div id="server-result"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>🧪 Navigation Component Test</h2>
+      <p>
+        When the server is running, paste this code into the browser console on
+        http://localhost:3000:
+      </p>
+      <pre id="navigation-test-code">
+// EVA Platform Navigation Test Script
+// Run this in the browser console when on localhost:3000
+
+const testNavigation = () => {
+    console.log('🔍 Testing EVA Platform Navigation...');
+
+    // Find all navigation buttons and links
+    const navButtons = document.querySelectorAll('button, a[href]');
+    console.log(`Found ${navButtons.length} interactive elements`);
+
+    // Test specific navigation items
+    const expectedNavItems = [
+        'Dashboard',
+        'Auto Originations',
+        'Transaction Summary',
+        'Customer Retention',
+        'Documents',
+        'Shield Vault',
+        'Forms',
+        'Risk Assessment',
+        'Deal Structuring',
+        'Asset Press',
+        'Portfolio Wallet'
+    ];
+
+    const results = [];
+
+    expectedNavItems.forEach(item => {
+        const found = Array.from(navButtons).find(btn =>
+            btn.textContent && btn.textContent.toLowerCase().includes(item.toLowerCase())
+        );
+
+        if (found) {
+            results.push({
+                name: item,
+                found: true,
+                element: found,
+                clickable: !found.disabled,
+                hasOnClick: !!found.onclick || !!found.getAttribute('onclick')
+            });
+            console.log(`✅ ${item} - Found and ${found.disabled ? 'DISABLED' : 'clickable'}`);
+        } else {
+            results.push({
+                name: item,
+                found: false
+            });
+            console.log(`❌ ${item} - Not found`);
+        }
+    });
+
+    return results;
+};
+
+// Test clicking a navigation item
+const testNavClick = (itemName) => {
+    const navButtons = document.querySelectorAll('button, a[href]');
+    const found = Array.from(navButtons).find(btn =>
+        btn.textContent && btn.textContent.toLowerCase().includes(itemName.toLowerCase())
+    );
+
+    if (found) {
+        console.log(`🖱️ Attempting to click: ${found.textContent.trim()}`);
+
+        if (found.disabled) {
+            console.log('❌ Button is disabled!');
+            return false;
+        }
+
+        try {
+            found.click();
+            console.log('✅ Click successful');
+            return true;
+        } catch (error) {
+            console.log('❌ Click failed:', error);
+            return false;
+        }
+    } else {
+        console.log(`❌ Item "${itemName}" not found`);
+        return false;
+    }
+};
+
+// Check navigation service status
+const checkNavigationStatus = () => {
+    console.log('🔍 Checking navigation service status...');
+
+    // Check if React Router is working
+    if (window.location.pathname) {
+        console.log('✅ Current path:', window.location.pathname);
+    }
+
+    // Check if navigation services are available
+    if (window.EVARouter) {
+        console.log('✅ EVA Router service found');
+    } else {
+        console.log('❌ EVA Router service not found');
+    }
+
+    // Check React Router hooks (if available)
+    const reactRouterElements = document.querySelectorAll('[data-testid*="router"], [class*="router"]');
+    console.log(`Found ${reactRouterElements.length} router-related elements`);
+
+    return {
+        currentPath: window.location.pathname,
+        hasEVARouter: !!window.EVARouter,
+        routerElements: reactRouterElements.length
+    };
+};
+
+// Run all tests
+const runAllTests = () => {
+    console.log('🚀 Running complete navigation diagnostics...');
+    console.log('==========================================');
+
+    const navResults = testNavigation();
+    const statusResults = checkNavigationStatus();
+
+    console.log('==========================================');
+    console.log('📊 Summary:');
+    console.log('Navigation items found:', navResults.filter(r => r.found).length);
+    console.log('Navigation items missing:', navResults.filter(r => !r.found).length);
+    console.log('Current path:', statusResults.currentPath);
+    console.log('Router status:', statusResults.hasEVARouter ? 'Available' : 'Not Available');
+
+    return { navResults, statusResults };
+};
+
+// Auto-run basic test
+console.log('EVA Platform Navigation Test Script Loaded');
+console.log('Run runAllTests() to start comprehensive testing');
+console.log('Run testNavClick("dashboard") to test specific navigation');
+        </pre
+      >
+    </div>
+
+    <div class="test-section">
+      <h2>🔧 Quick Navigation Fixes</h2>
+      <p>If navigation buttons aren't working, try these fixes:</p>
+
+      <h3>1. Check Router Configuration</h3>
+      <p>
+        The navigation might be disabled due to router configuration issues. Look in the browser
+        console for errors.
+      </p>
+
+      <h3>2. Navigation Service Status</h3>
+      <p>
+        The useModularNavigation hook might not be properly initialized. Check for these errors in
+        console:
+      </p>
+      <ul>
+        <li>"Navigation service not ready"</li>
+        <li>"routerConfigured: false"</li>
+        <li>Router-related errors</li>
+      </ul>
+
+      <h3>3. Button Disabled State</h3>
+      <p>Navigation buttons might be disabled due to:</p>
+      <ul>
+        <li>Router not configured</li>
+        <li>Authentication issues</li>
+        <li>Component loading state</li>
+      </ul>
+
+      <h3>4. Manual Navigation Test</h3>
+      <p>Try navigating directly by changing the URL:</p>
+      <ul>
+        <li>http://localhost:3000/dashboard</li>
+        <li>http://localhost:3000/auto-originations</li>
+        <li>http://localhost:3000/customer-retention</li>
+        <li>http://localhost:3000/documents</li>
+      </ul>
+    </div>
+
+    <div class="test-section">
+      <h2>📝 Common Solutions</h2>
+
+      <h3>If Server Won't Start:</h3>
+      <pre>
+# Kill existing processes
+pkill -f "react-scripts|craco"
+
+# Clear cache and restart
+npm start -- --reset-cache
+
+# Or try different port
+PORT=3001 npm start
+        </pre
+      >
+
+      <h3>If Navigation Buttons Don't Work:</h3>
+      <pre>
+# Check for router errors in browser console
+# Look for disabled buttons in DevTools
+# Verify useModularNavigation hook status
+# Check if authentication is blocking navigation
+        </pre
+      >
+    </div>
+
+    <script>
+      function testServerConnection() {
+        const resultDiv = document.getElementById('server-result');
+        resultDiv.innerHTML = '<div class="result info">Testing connection...</div>';
+
+        fetch('http://localhost:3000')
+          .then(response => {
+            if (response.ok) {
+              resultDiv.innerHTML = `
+                            <div class="result success">
+                                ✅ Server is running! Status: ${response.status}
+                                <br>You can now navigate to: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+                            </div>
+                        `;
+            } else {
+              resultDiv.innerHTML = `
+                            <div class="result error">
+                                ❌ Server responded with status: ${response.status}
+                            </div>
+                        `;
+            }
+          })
+          .catch(error => {
+            resultDiv.innerHTML = `
+                        <div class="result error">
+                            ❌ Cannot connect to server: ${error.message}
+                            <br><br>Try starting the server with: <code>npm start</code>
+                        </div>
+                    `;
+          });
+      }
+
+      // Auto-test on page load
+      setTimeout(testServerConnection, 1000);
+    </script>
+  </body>
+</html>

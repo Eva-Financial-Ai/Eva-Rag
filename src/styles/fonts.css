@@ -1,0 +1,55 @@
+/*
+ * Font definitions for EVA Platform
+ * Primary font: Bodoni 72 Smallcaps
+ */
+
+/* Commented out until font files are properly added
+@font-face {
+  font-family: 'Bodoni 72 Smallcaps';
+  src: url('/fonts/bodoni-72-smallcaps/Bodoni72Smallcaps-Book.woff2') format('woff2'),
+       url('/fonts/bodoni-72-smallcaps/Bodoni72Smallcaps-Book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bodoni 72 Smallcaps';
+  src: url('/fonts/bodoni-72-smallcaps/Bodoni72Smallcaps-Bold.woff2') format('woff2'),
+       url('/fonts/bodoni-72-smallcaps/Bodoni72Smallcaps-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* Font loading for EVA Platform */
+/* NOTE: Font families are defined in typography-system.css */
+
+/* Dashboard Component Classes - Now using unified typography system */
+.dashboard-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+}
+
+.section-header {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+}
+
+.card-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+}
+
+.metric-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.metric-value {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+}

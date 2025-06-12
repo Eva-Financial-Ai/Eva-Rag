@@ -1,0 +1,30 @@
+# EVA AI Frontend - Cursor Rules
+
+## ESSENTIAL PROJECT RULES
+
+### Node Version
+- Use Node 18.x or 20.x only
+- Run `nvm use 20.11.0` if needed
+
+### Tech Stack
+- React 18 + TypeScript 4.9.5
+- TailwindCSS for styling
+- Zustand for state management
+- React Hook Form for forms
+
+### Development Commands
+```bash
+npm run start:no-lint    # Start without linting
+npm run build           # Production build
+npm run clean-install   # Fix dependency issues
+```
+
+### Code Standards
+- Functional components only (no class components)
+- Follow existing patterns in neighboring files
+- Test builds before committing changes
+
+### Quick Fixes
+- Build fails: `npm run clean-install`
+- Node issues: `nvm use 20.11.0`
+- Emergency: `./emergency-fix.sh`

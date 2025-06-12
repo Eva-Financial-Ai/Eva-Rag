@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Consent Disclaimer Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+      h1 {
+        color: #2c5282;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .links {
+        margin-top: 20px;
+      }
+      .links a {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 8px 16px;
+        background-color: #4299e1;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+      .links a:hover {
+        background-color: #3182ce;
+      }
+      pre {
+        background-color: #f7fafc;
+        padding: 15px;
+        border-radius: 4px;
+        white-space: pre-wrap;
+        overflow-x: auto;
+      }
+      .instructions {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #ebf8ff;
+        border-left: 4px solid #4299e1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Credit Consent Disclaimer Test</h1>
+
+      <div class="links">
+        <a href="/test-disclaimer">Go to Test Disclaimer Page</a>
+        <a href="/">Back to Dashboard</a>
+      </div>
+
+      <div class="instructions">
+        <h3>How to verify the Credit Consent Disclaimer:</h3>
+        <ol>
+          <li>Click on "Go to Test Disclaimer Page" above</li>
+          <li>Scroll down to the "Authorization" section</li>
+          <li>Verify that the Credit Consent Disclaimer is displayed with the correct text</li>
+          <li>Open your browser's developer console (F12 or right-click &gt; Inspect)</li>
+          <li>Run the following code to check for the disclaimer programmatically:</li>
+        </ol>
+        <pre>
+const script = document.createElement('script');
+script.src = '/js/test-disclaimer.js';
+document.body.appendChild(script);
+      </pre
+        >
+      </div>
+
+      <div class="expected-text">
+        <h3>Expected Disclaimer Text:</h3>
+        <p><strong>Credit Consent Disclaimer</strong></p>
+        <p>
+          During your loan, lease, or credit application process, Unisyn Technologies, LLC, and its
+          subsidiaries verifies your information and creditworthiness, and shares such information
+          with potential lenders and third parties to further your loan application process. This
+          verification process includes, but is not limited to, obtaining a consumer credit report
+          and information regarding your background, employment history, education, qualifications,
+          character, personal information, criminal record, motor vehicle record, and/or credit
+          standing or indebtedness.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

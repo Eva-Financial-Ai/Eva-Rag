@@ -1,0 +1,20 @@
+# Simplified EVA Platform Cloudflare Configuration for Authentication
+
+name = "eva-platform"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "eva-platform-production"
+
+[env.staging]
+name = "eva-platform-staging"
+
+[env.development]
+name = "eva-platform-dev"
+
+# Basic variables
+[vars]
+ENVIRONMENT = "development"
+API_VERSION = "v1" 

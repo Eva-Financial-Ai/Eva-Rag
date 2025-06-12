@@ -1,0 +1,112 @@
+/* =================================================================
+   HIGH-PRIORITY ACCESSIBILITY OVERRIDE
+   Force readable text colors on problematic components
+   ================================================================= */
+
+/* --- General Header & Navigation Fixes --- */
+.dashboard-header,
+.top-navigation,
+.enhanced-top-navigation,
+[class*='TopNavigation'],
+[class*='EnhancedTopNavigation'],
+header {
+  background-color: #ffffff !important;
+  color: #111827 !important; /* gray-900 */
+}
+
+.dashboard-header *,
+.top-navigation *,
+.enhanced-top-navigation *,
+[class*='TopNavigation'] *,
+[class*='EnhancedTopNavigation'] *,
+header * {
+  color: #111827 !important; /* gray-900 */
+}
+
+/* --- Force Link Colors in Headers --- */
+.dashboard-header a,
+.top-navigation a,
+.enhanced-top-navigation a,
+header a {
+  color: #3b82f6 !important; /* blue-500 */
+  text-decoration: underline !important;
+}
+
+.dashboard-header a:hover,
+.top-navigation a:hover,
+.enhanced-top-navigation a:hover,
+header a:hover {
+  color: #1d4ed8 !important; /* blue-700 */
+}
+
+/* --- Button Overrides in Headers --- */
+.dashboard-header button,
+.top-navigation button,
+.enhanced-top-navigation button,
+header button {
+  background-color: #f3f4f6 !important; /* gray-100 */
+  color: #111827 !important; /* gray-900 */
+  border: 1px solid #d1d5db !important; /* gray-300 */
+}
+
+.dashboard-header button:hover,
+.top-navigation button:hover,
+.enhanced-top-navigation button:hover,
+header button:hover {
+  background-color: #e5e7eb !important; /* gray-200 */
+}
+
+/* Primary button exception */
+.dashboard-header .btn-primary,
+.top-navigation .btn-primary,
+.enhanced-top-navigation .btn-primary,
+header .btn-primary {
+  background-color: #2563eb !important; /* blue-600 */
+  color: #ffffff !important;
+}
+
+/* --- Sidebar Navigation Readability --- */
+.side-navigation,
+[class*='SideNavigation'] {
+  background-color: #f9fafb !important; /* gray-50 */
+}
+
+.side-navigation a,
+.side-navigation button,
+[class*='SideNavigation'] a,
+[class*='SideNavigation'] button {
+  color: #374151 !important; /* gray-700 */
+}
+
+.side-navigation .nav-item-active,
+[class*='SideNavigation'] .nav-item-active {
+  background-color: #e0e7ff !important; /* indigo-100 */
+  color: #4338ca !important; /* indigo-700 */
+}
+
+.side-navigation .nav-item-active *,
+[class*='SideNavigation'] .nav-item-active * {
+  color: #4338ca !important; /* indigo-700 */
+}
+
+/* --- Specific Component Fixes --- */
+
+/* Fix for Filelock Drive header */
+.filelock-drive-header {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.filelock-drive-header h2,
+.filelock-drive-header p {
+  color: #111827 !important;
+}
+
+/* Fix for Credit Application stepper */
+.credit-app-stepper ol li > span {
+  color: #4b5563 !important; /* gray-600 */
+}
+
+.credit-app-stepper ol li.step-active > span {
+  color: #2563eb !important; /* blue-600 */
+}

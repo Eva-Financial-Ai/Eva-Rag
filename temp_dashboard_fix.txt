@@ -1,0 +1,12 @@
+// Add eslint-disable for mock data that serves as documentation
+/* eslint-disable @typescript-eslint/no-unused-vars */
+const mockChartDataByMonth = [
+  // ... existing data
+];
+const mockChartDataByQuarter = [
+  // ... existing data
+];
+const mockChartDataByYear = [
+  // ... existing data
+];
+/* eslint-enable @typescript-eslint/no-unused-vars */

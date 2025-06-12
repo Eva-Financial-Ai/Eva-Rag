@@ -1,0 +1,100 @@
+/* Dashboard-specific styles */
+
+/* Dashboard Header Styles */
+.dashboard-header, 
+.dashboard-title,
+h1.dashboard-title {
+  font-size: 1.936rem !important;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Card and Panel Headers */
+.card-header,
+.panel-header,
+.info-block-header,
+[class*="Total"],
+[class*="Pending"],
+[class*="Conversion"],
+[class*="Weekly"],
+[class*="Application"],
+[class*="Team"] {
+  font-size: 1.089rem !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+/* Dashboard Value Numbers */
+.value-number,
+.stat-value,
+.large-stat,
+.metric-value,
+[class*="Total"] + div,
+[class*="Rate"] + div {
+  font-size: 1.815rem !important;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* Table Headers */
+th, 
+.table-header,
+.column-header {
+  font-size: 0.847rem !important;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Table Data */
+td,
+.table-data,
+.data-cell {
+  font-size: 0.908rem !important;
+}
+
+/* Chart Labels */
+.chart-label,
+.axis-label,
+.legend-item {
+  font-size: 0.726rem !important;
+}
+
+/* Status indicators */
+.status-tag,
+.badge,
+.pill,
+.tag {
+  font-size: 0.726rem !important;
+  font-weight: bold;
+  padding: 0.242rem 0.484rem;
+  border-radius: 9999px;
+}
+
+/* Percentage Change Indicators */
+.percent-change,
+.trend-indicator,
+[class*="from last"] {
+  font-size: 0.847rem !important;
+  font-weight: medium;
+}
+
+/* Button Text */
+.button,
+.btn,
+button:not(.icon-button) {
+  font-size: 0.908rem !important;
+  font-weight: bold;
+}
+
+/* Apply these styles to existing dashboard components */
+@media screen {
+  /* Ensure that these styles override any existing styles */
+  h1, .h1 { font-size: 1.936rem !important; }
+  h2, .h2 { font-size: 1.452rem !important; }
+  h3, .h3 { font-size: 1.21rem !important; }
+  h4, .h4 { font-size: 0.968rem !important; }
+  h5, .h5 { font-size: 0.847rem !important; }
+  h6, .h6 { font-size: 0.726rem !important; }
+} 

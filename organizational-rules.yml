@@ -1,0 +1,377 @@
+# EVA AI Frontend - Organizational Rules & SOC 2 Type 2 Compliance Configuration
+# This file defines the organizational standards, collaboration protocols, and compliance requirements
+
+version: '2.0'
+organization: 'eva-financial-ai'
+application: 'eva-ai-frontend'
+compliance_framework: 'SOC2_TYPE2'
+industry: 'financial_services'
+
+# SOC 2 Type 2 Trust Service Criteria Configuration
+soc2_type2:
+  # Security (CC6.1 - CC6.8)
+  security:
+    cc6_1:
+      name: 'Logical and Physical Access Controls'
+      required_patterns:
+        - 'auth|Auth0|authentication'
+        - 'permission|role|access'
+        - 'login|logout|session'
+      critical: true
+
+    cc6_2:
+      name: 'Authentication and Authorization'
+      required_implementations:
+        - 'Multi-factor authentication'
+        - 'Role-based access control'
+        - 'Session management'
+      mandatory_files:
+        - 'src/contexts/AuthContext.tsx'
+        - 'src/hooks/useAuth.ts'
+      critical: true
+
+    cc6_3:
+      name: 'User Access Provisioning'
+      required_patterns:
+        - 'onboard|provision|create.*user'
+        - 'access.*grant|permission.*assign'
+      review_required: true
+
+    cc6_4:
+      name: 'User Access Modification and Termination'
+      required_patterns:
+        - 'revoke|disable|terminate'
+        - 'modify.*access|update.*permission'
+      review_required: true
+
+    cc6_7:
+      name: 'Data Transmission and Disposal'
+      required_patterns:
+        - 'https|ssl|tls'
+        - 'encrypt|decrypt'
+        - 'secure.*transmission'
+      mandatory_implementations:
+        - 'HTTPS enforcement'
+        - 'Data encryption at rest and in transit'
+      critical: true
+
+    cc6_8:
+      name: 'Vulnerability Management'
+      required_tools:
+        - 'npm audit'
+        - 'dependency scanning'
+        - 'security linting'
+      automation_required: true
+
+  # Availability (A1.1 - A1.3)
+  availability:
+    a1_1:
+      name: 'Performance Monitoring'
+      required_patterns:
+        - 'monitor|metric|analytics'
+        - 'performance|load|response'
+      recommended_tools:
+        - 'Application performance monitoring'
+        - 'Error tracking'
+
+    a1_2:
+      name: 'Error Handling and Recovery'
+      required_patterns:
+        - 'try|catch|error'
+        - 'fallback|retry|recovery'
+      minimum_coverage: 80
+
+    a1_3:
+      name: 'System Availability Procedures'
+      required_files:
+        - '.github/workflows/deploy.yml'
+        - 'DEPLOYMENT.md'
+      automation_required: true
+
+  # Processing Integrity (PI1.1 - PI1.3)
+  processing_integrity:
+    pi1_1:
+      name: 'Data Processing Controls'
+      required_patterns:
+        - 'validate|verify|sanitize'
+        - 'input.*validation|data.*check'
+      minimum_implementations: 10
+
+    pi1_2:
+      name: 'Financial Calculation Accuracy'
+      required_patterns:
+        - 'decimal|precise|round'
+        - 'financial.*calculation|monetary'
+      prohibited_patterns:
+        - 'parseFloat|parseInt' # In financial calculations
+      critical: true
+
+    pi1_3:
+      name: 'Transaction Integrity'
+      required_patterns:
+        - 'transaction|audit|trail'
+        - 'log|track|record'
+      audit_required: true
+
+  # Confidentiality (C1.1 - C1.2)
+  confidentiality:
+    c1_1:
+      name: 'Confidential Information Identification'
+      required_patterns:
+        - 'encrypt|mask|redact'
+        - 'confidential|sensitive|private'
+      data_classification_required: true
+
+    c1_2:
+      name: 'Confidential Information Disposal'
+      required_patterns:
+        - 'clear|dispose|cleanup'
+        - 'secure.*delete|wipe'
+      retention_policy_required: true
+
+  # Privacy (P1.1 - P8.1)
+  privacy:
+    p1_1:
+      name: 'Privacy Notice and Consent'
+      required_patterns:
+        - 'consent|privacy|notice'
+        - 'gdpr|ccpa|privacy.*policy'
+      mandatory_files:
+        - 'src/components/PrivacyNotice.tsx'
+
+    p3_1:
+      name: 'Personal Information Collection'
+      required_patterns:
+        - 'pii|personal|sensitive'
+        - 'collect|gather|obtain'
+      data_minimization_required: true
+
+# Financial Services Specific Requirements
+financial_services:
+  kyc_kyb:
+    name: 'Know Your Customer / Know Your Business'
+    required_patterns:
+      - 'kyc|kyb|know.*your'
+      - 'verification|identity|customer'
+    compliance_level: 'enhanced'
+
+  aml:
+    name: 'Anti-Money Laundering'
+    required_patterns:
+      - 'aml|anti.*money|suspicious'
+      - 'transaction.*monitoring|alert'
+    monitoring_required: true
+
+  gaap:
+    name: 'Generally Accepted Accounting Principles'
+    required_patterns:
+      - 'gaap|accounting|financial.*statement'
+      - 'balance.*sheet|income.*statement'
+    review_required: true
+
+# Organizational Standards
+organizational_standards:
+  code_review:
+    mandatory_reviewers:
+      financial_components:
+        - '@eva-financial-ai/senior-developers'
+        - '@eva-financial-ai/compliance-team'
+      security_components:
+        - '@eva-financial-ai/security-team'
+        - '@eva-financial-ai/senior-developers'
+      core_application:
+        - '@eva-financial-ai/senior-developers'
+      ci_cd_changes:
+        - '@eva-financial-ai/devops-team'
+
+    review_requirements:
+      minimum_approvals: 2
+      require_code_owner_approval: true
+      dismiss_stale_reviews: true
+      require_conversation_resolution: true
+
+  collaboration_protocols:
+    pr_template_required: true
+    issue_template_required: true
+    documentation_required:
+      - 'README.md'
+      - 'DEPLOYMENT.md'
+      - 'CHANGELOG.md'
+
+  security_policies:
+    dependency_scanning: true
+    vulnerability_alerts: true
+    secret_scanning: true
+    code_scanning: true
+
+  quality_gates:
+    test_coverage_minimum: 80
+    build_success_required: true
+    lint_pass_required: true
+    security_scan_pass_required: true
+
+# Compliance Testing Requirements
+compliance_testing:
+  unit_tests:
+    financial_calculations:
+      coverage_minimum: 95
+      test_patterns:
+        - 'financial.*test|calculation.*test'
+        - 'precision.*test|accuracy.*test'
+
+    security_functions:
+      coverage_minimum: 90
+      test_patterns:
+        - 'auth.*test|security.*test'
+        - 'encrypt.*test|permission.*test'
+
+  integration_tests:
+    api_security:
+      required: true
+      patterns:
+        - 'api.*security|endpoint.*auth'
+
+    data_validation:
+      required: true
+      patterns:
+        - 'validate.*integration|data.*integrity'
+
+  accessibility_tests:
+    wcag_compliance: 'AA'
+    tools_required:
+      - 'axe-core'
+      - 'jest-axe'
+
+# Continuous Monitoring
+continuous_monitoring:
+  security_scans:
+    frequency: 'daily'
+    tools:
+      - 'npm audit'
+      - 'snyk'
+      - 'dependabot'
+
+  compliance_assessments:
+    frequency: 'weekly'
+    automated_reports: true
+    stakeholder_notifications: true
+
+  performance_monitoring:
+    metrics_required:
+      - 'bundle_size'
+      - 'load_time'
+      - 'error_rate'
+    thresholds:
+      bundle_size_max: '500KB'
+      load_time_max: '3s'
+      error_rate_max: '1%'
+
+# Risk Management
+risk_management:
+  high_risk_changes:
+    financial_calculations: true
+    authentication_flows: true
+    data_encryption: true
+    api_endpoints: true
+
+  risk_assessment_required:
+    - 'Financial impact analysis'
+    - 'Security impact assessment'
+    - 'Compliance impact review'
+    - 'Performance impact evaluation'
+
+  mitigation_strategies:
+    rollback_procedures: true
+    feature_flags: true
+    gradual_rollout: true
+    monitoring_alerts: true
+
+# Audit and Documentation
+audit_requirements:
+  change_tracking:
+    git_commit_messages: 'conventional'
+    pr_descriptions: 'detailed'
+    issue_linking: 'required'
+
+  documentation_standards:
+    code_comments: 'complex_logic_only'
+    api_documentation: 'openapi'
+    deployment_docs: 'comprehensive'
+
+  compliance_documentation:
+    soc2_evidence: 'automated_collection'
+    audit_trails: 'comprehensive'
+    policy_documentation: 'current'
+
+# Incident Response
+incident_response:
+  security_incidents:
+    notification_time: '15_minutes'
+    escalation_procedures: true
+    post_incident_review: true
+
+  compliance_violations:
+    immediate_assessment: true
+    remediation_plan: true
+    stakeholder_notification: true
+
+  system_outages:
+    communication_plan: true
+    recovery_procedures: true
+    lessons_learned: true
+
+# Training and Awareness
+training_requirements:
+  security_awareness:
+    frequency: 'quarterly'
+    topics:
+      - 'Secure coding practices'
+      - 'Data protection'
+      - 'Incident response'
+
+  compliance_training:
+    frequency: 'semi_annually'
+    topics:
+      - 'SOC 2 requirements'
+      - 'Financial regulations'
+      - 'Data privacy laws'
+
+  technical_training:
+    frequency: 'as_needed'
+    topics:
+      - 'New security tools'
+      - 'Compliance automation'
+      - 'Best practices'
+
+# Enforcement and Exceptions
+enforcement:
+  automated_checks: true
+  manual_reviews: true
+  exception_process:
+    approval_required: true
+    documentation_required: true
+    review_period: '30_days'
+
+  non_compliance_actions:
+    warning: 'first_violation'
+    escalation: 'second_violation'
+    blocking: 'critical_violations'
+
+# Integration Points
+integrations:
+  github_actions: true
+  dependency_management: true
+  security_tools: true
+  monitoring_platforms: true
+
+  external_services:
+    vanta: 'soc2_automation'
+    auth0: 'authentication'
+    cloudflare: 'security_cdn'
+
+# Version Control
+version_control:
+  version: '2.0'
+  last_updated: '2024-01-XX'
+  next_review: '2024-04-XX'
+  approved_by: 'compliance_team'

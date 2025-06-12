@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2025-05-26T03:45:56.464Z",
+    "totalSize": 4346765,
+    "totalSizeKB": 4244.8876953125,
+    "mainJS": 2064.6728515625,
+    "mainCSS": 151.3388671875,
+    "jsFiles": 42,
+    "cssFiles": 2
+  }
+]

@@ -1,0 +1,336 @@
+/* 
+  Dropdown and Select Color Fix
+  This file contains styles to ensure text is always visible in dropdowns and selects
+  without affecting other UI elements globally.
+  
+  IMPORTANT: We removed the global * { color: #000000 !important; } rule
+  as it was too aggressive and caused issues with buttons and other UI elements.
+  
+  Instead, we now target specific dropdown and select elements to ensure:
+  - Dark text (#111827) on light backgrounds for readability
+  - Proper hover and selected states with appropriate contrast
+  - Support for various dropdown implementations (native, React Select, Headless UI, etc.)
+*/
+
+/* Global text selection color fix */
+::selection {
+  color: black !important;
+  background-color: #e0e7ff !important;
+  -webkit-text-fill-color: black !important;
+}
+
+::-moz-selection {
+  color: black !important;
+  background-color: #e0e7ff !important;
+}
+
+/* Force all selected text to be readable */
+*::selection,
+input::selection,
+textarea::selection,
+p::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+span::selection,
+div::selection,
+a::selection,
+li::selection,
+td::selection,
+th::selection {
+  color: black !important;
+  background-color: #e0e7ff !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Override for specific text colors that should be preserved */
+.text-blue-600, .text-blue-700, .text-blue-800 {
+  color: #2563eb !important;
+  -webkit-text-fill-color: #2563eb !important;
+}
+
+.text-red-600, .text-red-700, .text-red-800 {
+  color: #dc2626 !important;
+  -webkit-text-fill-color: #dc2626 !important;
+}
+
+.text-green-600, .text-green-700, .text-green-800 {
+  color: #16a34a !important;
+  -webkit-text-fill-color: #16a34a !important;
+}
+
+.text-yellow-600, .text-yellow-700, .text-yellow-800 {
+  color: #d97706 !important;
+  -webkit-text-fill-color: #d97706 !important;
+}
+
+.text-purple-600, .text-purple-700, .text-purple-800 {
+  color: #9333ea !important;
+  -webkit-text-fill-color: #9333ea !important;
+}
+
+/* Special buttons and UI elements - preserve some whites but only in specific contexts */
+.bg-blue-500 *, .bg-blue-600 *, .bg-blue-700 *,
+.bg-red-500 *, .bg-red-600 *, .bg-red-700 *,
+.bg-green-500 *, .bg-green-600 *, .bg-green-700 *,
+.bg-purple-500 *, .bg-purple-600 *, .bg-purple-700 *,
+.bg-indigo-500 *, .bg-indigo-600 *, .bg-indigo-700 *,
+.bg-primary-500 *, .bg-primary-600 *, .bg-primary-700 * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Fix for primary buttons to ensure they stay red not blue */
+.bg-primary-500, .bg-primary-600, .bg-primary-700,
+.btn-primary, .button-primary {
+  background-color: #dc2626 !important; /* Red color */
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.bg-primary-500:hover, .bg-primary-600:hover, .bg-primary-700:hover,
+.btn-primary:hover, .button-primary:hover {
+  background-color: #b91c1c !important; /* Darker red on hover */
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Specific styling for text inside red buttons */
+.bg-primary-500 *, .bg-primary-600 *, .bg-primary-700 *,
+.btn-primary *, .button-primary * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Mac OS Safari/WebKit specific fixes - needed for better selection color handling */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    ::selection { 
+      background-color: rgba(224, 231, 255, 0.99) !important;
+      color: black !important;
+      -webkit-text-fill-color: black !important;
+      text-shadow: none !important;
+    }
+    
+    *::-webkit-selection {
+      background-color: rgba(224, 231, 255, 0.99) !important;
+      color: black !important;
+      -webkit-text-fill-color: black !important;
+    }
+    
+    /* For macOS selection issues */
+    *:focus *::selection {
+      color: black !important;
+      -webkit-text-fill-color: black !important;
+    }
+    
+    /* For input field selections */
+    input::selection, 
+    textarea::selection,
+    [contenteditable]::selection {
+      color: black !important;
+      background-color: rgba(224, 231, 255, 0.99) !important;
+      -webkit-text-fill-color: black !important;
+    }
+  }
+}
+
+/* Ensure all select elements and options have proper contrast */
+select {
+  color: var(--color-text-primary, #111827) !important;
+  font-weight: 500 !important;
+  background-color: var(--color-bg-primary, white) !important;
+}
+
+select option {
+  color: #111827 !important;
+  font-weight: 500 !important;
+  background-color: white !important;
+}
+
+/* Force selected items to remain black text (fix for white text on selection) */
+select option:checked,
+select option:active,
+select option:focus,
+select option:hover,
+select option[selected] {
+  color: black !important;
+  background-color: #e0e7ff !important;
+  box-shadow: 0 0 0 30px #e0e7ff inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Mac OS Safari/Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>') !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.5rem center !important;
+    padding-right: 2rem !important;
+  }
+  
+  select:focus option:checked {
+    background: #e0e7ff !important;
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+  }
+  
+  select option:hover {
+    background-color: #e0e7ff !important;
+    color: black !important;
+  }
+  
+  /* Additional fixes for Mac OS Safari */
+  @media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+      select option {
+        background-color: white !important;
+        color: black !important;
+        -webkit-text-fill-color: black !important;
+      }
+      
+      select option:checked {
+        background-color: rgba(224, 231, 255, 0.99) !important;
+        color: black !important;
+        -webkit-text-fill-color: black !important;
+      }
+    }
+  }
+}
+
+/* Generic dropdown menus - ensure dark text on light backgrounds */
+.dropdown-menu,
+.dropdown-content,
+.select-menu {
+  color: #111827 !important;
+  font-weight: 500 !important;
+  background-color: white !important;
+}
+
+/* Menu items and options */
+.menu-item,
+.select-option,
+.dropdown-menu li,
+.dropdown-content li {
+  color: #111827 !important;
+  background-color: transparent !important;
+}
+
+/* Specific dropdown item styling */
+.dropdown-item,
+.autocomplete-option {
+  color: #111827 !important;
+  background-color: transparent !important;
+  padding: 8px !important;
+}
+
+/* Handle hover and selected states with sufficient contrast */
+.dropdown-item:hover,
+.menu-item:hover,
+.select-option:hover,
+.dropdown-menu li:hover,
+.dropdown-content li:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+.dropdown-item.selected,
+.menu-item.selected,
+.select-option.selected,
+.dropdown-item.active,
+.menu-item.active {
+  background-color: #e0e7ff !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Apply styling to any custom dropdown components */
+[role="listbox"] {
+  background-color: white !important;
+}
+
+[role="listbox"] [role="option"] {
+  color: #111827 !important;
+  background-color: transparent !important;
+}
+
+[role="option"]:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+[role="option"][aria-selected="true"],
+[role="option"].selected {
+  color: #111827 !important;
+  background-color: #e0e7ff !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Fix for dropdown triggers/buttons */
+.dropdown-toggle,
+.select-trigger,
+button[aria-haspopup="listbox"],
+button[aria-haspopup="menu"] {
+  color: var(--color-text-primary, #111827) !important;
+  background-color: var(--color-bg-primary, white) !important;
+  border-color: var(--color-border-primary, #e5e7eb) !important;
+}
+
+/* Portfolio Navigator-specific dropdown fixes */
+.portfolio-navigator select,
+.portfolio-navigator .dropdown,
+.portfolio-dropdown {
+  color: #111827 !important;
+  font-weight: 500 !important;
+  background-color: white !important;
+}
+
+/* EVA AI specific dropdowns - from the screenshot */
+.bg-yellow-50 select,
+.bg-yellow-50 .dropdown-menu,
+.bg-yellow-50 [role="listbox"] {
+  background-color: white !important;
+}
+
+.bg-yellow-50 option,
+.bg-yellow-50 .dropdown-item,
+.bg-yellow-50 [role="option"] {
+  color: #111827 !important;
+  background-color: white !important;
+}
+
+/* Tailwind-based dropdown components */
+.bg-white select,
+.bg-gray-50 select,
+.bg-gray-100 select {
+  color: #111827 !important;
+}
+
+/* React Select and similar component library dropdowns */
+.css-1okebmr-indicatorSeparator,
+.css-1wa3eu0-placeholder,
+.css-1g6gooi,
+.css-1uccc91-singleValue,
+.css-qc6sy-singleValue {
+  color: #111827 !important;
+}
+
+.css-26l3qy-menu,
+.css-1n7v3ny-option,
+.css-yt9ioa-option {
+  background-color: white !important;
+  color: #111827 !important;
+}
+
+.css-1n7v3ny-option:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Headless UI dropdown components */
+[data-headlessui-state] {
+  color: var(--color-text-primary, #111827) !important;
+} 

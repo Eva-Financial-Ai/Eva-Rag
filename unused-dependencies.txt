@@ -1,0 +1,48 @@
+# Potentially Unnecessary Dependencies
+
+## Development Dependencies
+- @storybook/* (all storybook packages if not actively using Storybook)
+- @types/swagger-ui-react (if not using Swagger UI)
+- @types/swagger-ui (if not using Swagger UI)
+- eslint-plugin-storybook (if not using Storybook)
+- source-map-explorer (if not regularly analyzing source maps)
+- webpack-bundle-analyzer (if not regularly analyzing bundles)
+
+## UI Dependencies That May Be Redundant
+- @fortawesome/fontawesome-svg-core (already using Heroicons)
+- @fortawesome/free-brands-svg-icons (already using Heroicons)
+- @fortawesome/free-solid-svg-icons (already using Heroicons)
+- @fortawesome/react-fontawesome (already using Heroicons)
+- react-beautiful-dnd (if not using drag and drop)
+- react-draggable (if not using draggable components)
+- swagger-ui-react (if not using Swagger UI)
+
+## Multiple State Management Solutions
+- react-query (redundant with @tanstack/react-query)
+- zustand (if not actively using alongside React context)
+
+## Chart Libraries (Multiple Options)
+- chart.js (redundant with recharts)
+- react-chartjs-2 (redundant with recharts)
+
+## PDF/Document Processing (If Not Needed)
+- html2canvas (if not generating screenshots/PDFs)
+- jspdf (if not generating PDFs)
+
+## Dependencies to Keep
+- tailwindcss (core styling)
+- @headlessui/react (accessible UI components)
+- @heroicons/react (icons)
+- @tanstack/react-query (data fetching)
+- axios (HTTP client)
+- framer-motion (animations)
+- i18next (translations)
+- react-error-boundary (error handling)
+- react-i18next (translations)
+- react-router-dom (routing)
+- recharts (charts if needed)
+- zod (schema validation)
+
+## Review and Consider
+- workbox-* packages (if PWA features are not critical)
+- @vercel/* packages (if not deploying to Vercel) 

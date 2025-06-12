@@ -1,0 +1,69 @@
+/* Chat Text Color Fix - Ensure proper text visibility */
+
+/* EVA Chat Interface Text Colors */
+.eva-chat-widget input,
+.eva-chat-widget textarea,
+.eva-chat-widget select {
+  color: #111827 !important; /* text-gray-900 */
+}
+
+/* Placeholder text */
+.eva-chat-widget input::placeholder,
+.eva-chat-widget textarea::placeholder {
+  color: #9CA3AF !important; /* text-gray-400 */
+}
+
+/* Chat messages */
+.eva-chat-message {
+  color: #1F2937 !important; /* text-gray-800 */
+}
+
+/* Ensure all text in chat panels is dark */
+.chat-history-panel *,
+.chat-widget-container * {
+  color: inherit;
+}
+
+/* Fix any white text on white background */
+.bg-white *:not(.text-white):not([class*="text-white"]) {
+  color: #1F2937 !important; /* text-gray-800 */
+}
+
+/* Buttons with proper contrast */
+.bg-gray-50 button,
+.bg-gray-100 button {
+  color: #1F2937 !important; /* text-gray-800 */
+}
+
+/* Chat suggestion buttons */
+.chat-suggestion-button {
+  color: #1F2937 !important; /* text-gray-800 */
+  background-color: #F9FAFB !important; /* bg-gray-50 */
+}
+
+.chat-suggestion-button:hover {
+  background-color: #F3F4F6 !important; /* bg-gray-100 */
+}
+
+/* Ensure headers are visible */
+h1, h2, h3, h4, h5, h6 {
+  color: #111827 !important; /* text-gray-900 */
+}
+
+/* Specific fix for chat widget text areas */
+.chat-widget textarea,
+.chat-widget input[type="text"],
+.chat-widget input[type="search"] {
+  color: #111827 !important; /* text-gray-900 */
+  background-color: #FFFFFF !important;
+}
+
+/* Fix for any inline styles that might override */
+[style*="color: white"],
+[style*="color:#fff"],
+[style*="color:#ffffff"],
+[style*="color: #fff"],
+[style*="color: #ffffff"],
+[style*="color: rgb(255, 255, 255)"] {
+  color: #1F2937 !important; /* text-gray-800 */
+}

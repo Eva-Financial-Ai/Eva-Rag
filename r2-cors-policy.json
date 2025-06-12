@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "AllowedOrigins": [
+        "https://demo.evafi.ai",
+        "https://app.evafi.ai",
+        "https://evafin.ai",
+        "http://localhost:3002",
+        "http://localhost:3006"
+      ],
+      "AllowedMethods": ["GET", "PUT", "POST", "DELETE", "HEAD"],
+      "AllowedHeaders": ["*"],
+      "ExposeHeaders": ["ETag"],
+      "MaxAgeSeconds": 3600
+    }
+  ]
+}

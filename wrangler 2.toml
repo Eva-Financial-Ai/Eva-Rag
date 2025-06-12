@@ -1,0 +1,267 @@
+# EVA Financial Platform - Cloudflare Configuration
+name = "evafi-ai-fe-demo"
+main = "functions/api/ai/document-processor-simple.js"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat_v2"]
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+
+# Pages build output directory
+pages_build_output_dir = "build"
+
+# AI Binding for Workers AI
+[ai]
+binding = "AI"
+
+# Vectorize for RAG embeddings storage
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "evafi-document-embeddings"
+preview_index_name = "evafi-document-embeddings"
+
+# D1 database for metadata and document tracking
+[[d1_databases]]
+binding = "DOCUMENT_DB"
+database_name = "evafi-documents"
+database_id = "95dd9519-48e5-416d-b386-bf79fd2f1d1c"
+
+# R2 for document storage
+[[r2_buckets]]
+binding = "DOCUMENT_STORAGE"
+bucket_name = "evafi-documents"
+
+# Durable Objects for document processing workflows
+[[durable_objects.bindings]]
+name = "DOCUMENT_PROCESSOR"
+class_name = "DocumentProcessor"
+
+[[durable_objects.bindings]]
+name = "RAG_AGENT"
+class_name = "RAGAgent"
+
+# Workflows for document lifecycle management
+[[workflows]]
+binding = "DOCUMENT_WORKFLOW"
+class_name = "DocumentProcessingWorkflow"
+name = "document-processing"
+
+# KV for caching and session management
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "7290cdd431dd46bab714f6c3d25d6b4b"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "development"
+APP_VERSION = "1.0.0-dev"
+ZONE_ID = "79cbd8176057c91e2e2329ffd8b386a5"
+MAX_FILE_SIZE = "50MB"
+ALLOWED_FILE_TYPES = "pdf,doc,docx,xls,xlsx,jpg,jpeg,png,txt"
+
+# Staging environment (evafin.ai)
+[env.staging]
+name = "eva-ai-api-staging"
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+route = { pattern = "api.evafin.ai/*", zone_id = "79cbd8176057c91e2e2329ffd8b386a5" }
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+APP_VERSION = "1.0.0-staging"
+ZONE_ID = "79cbd8176057c91e2e2329ffd8b386a5"
+MAX_FILE_SIZE = "50MB"
+ALLOWED_FILE_TYPES = "pdf,doc,docx,xls,xlsx,jpg,jpeg,png,txt"
+API_VERSION = "v1"
+CORS_ORIGINS = "https://evafin.ai,https://app.evafin.ai,https://demo.evafi.ai"
+
+# Production environment (evafin.com)
+[env.production]
+name = "eva-ai-api-production"
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+route = { pattern = "api.evafin.com/*", zone_id = "913680b4428f2f4d1c078dd841cd8cdb" }
+
+[env.production.vars]
+ENVIRONMENT = "production"
+APP_VERSION = "1.0.0"
+ZONE_ID = "913680b4428f2f4d1c078dd841cd8cdb"
+MAX_FILE_SIZE = "50MB"
+ALLOWED_FILE_TYPES = "pdf,doc,docx,xls,xlsx,jpg,jpeg,png,txt"
+API_VERSION = "v1"
+CORS_ORIGINS = "https://evafin.com,https://app.evafin.com"
+
+# Preview environment
+[env.preview]
+name = "evafi-ai-fe-demo-preview"
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+
+[env.preview.vars]
+ENVIRONMENT = "preview"
+APP_VERSION = "1.0.0-preview"
+ZONE_ID = "79cbd8176057c91e2e2329ffd8b386a5"
+MAX_FILE_SIZE = "50MB"
+ALLOWED_FILE_TYPES = "pdf,doc,docx,xls,xlsx,jpg,jpeg,png,txt"
+
+# Observability
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# Migrations for Durable Objects
+[[migrations]]
+tag = "v1"
+new_classes = ["DocumentProcessor", "RAGAgent"]
+
+# Pages configuration for frontend
+[pages]
+project_name = "eva-ai-frontend"
+directory = "build"
+production_branch = "main"
+preview_branch = "*"
+
+# Custom domains for staging
+[[pages.env.staging.custom_domains]]
+domain = "evafin.ai"
+
+[[pages.env.staging.custom_domains]]
+domain = "app.evafin.ai"
+
+[[pages.env.staging.custom_domains]]
+domain = "demo.evafi.ai"
+
+# Custom domains for production
+[[pages.env.production.custom_domains]]
+domain = "evafin.com"
+
+[[pages.env.production.custom_domains]]
+domain = "app.evafin.com"
+
+# Build configuration for Pages
+[pages.build]
+command = "npm run build"
+destination_dir = "build"
+root_dir = "./"
+
+# Environment variables for Pages staging
+[pages.env.staging.vars]
+NODE_ENV = "staging"
+REACT_APP_API_URL = "https://api.evafin.ai"
+REACT_APP_ENVIRONMENT = "staging"
+REACT_APP_AUTH0_DOMAIN = "evafi.us.auth0.com"
+
+# Environment variables for Pages production
+[pages.env.production.vars]
+NODE_ENV = "production"
+REACT_APP_API_URL = "https://api.evafin.com"
+REACT_APP_ENVIRONMENT = "production"
+REACT_APP_AUTH0_DOMAIN = "evafi.us.auth0.com"
+
+# Analytics and monitoring
+[analytics_engine_datasets]
+binding = "ANALYTICS"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "WORKFLOW_ENGINE"
+class_name = "WorkflowEngine"
+
+# Migration definitions
+[[migrations]]
+tag = "v2"
+new_classes = ["WorkflowEngine"]
+
+# Cloudflare Worker Configuration for EVA AI Platform
+name = "eva-ai-api"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "evafi-documents"
+database_id = "your-d1-database-id"
+
+# KV Storage bindings
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "your-kv-namespace-id"
+preview_id = "your-kv-preview-id"
+
+# R2 Storage bindings
+[[r2_buckets]]
+binding = "DOCUMENTS_BUCKET"
+bucket_name = "evafi-documents"
+
+# Vectorize binding for AI embeddings
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "evafi-document-embeddings"
+
+# Workers AI binding
+[ai]
+binding = "AI"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "staging"
+API_VERSION = "v1"
+CORS_ORIGINS = "https://evafin.ai,https://app.evafin.ai"
+
+# Secrets (set via wrangler secret)
+# AUTH0_CLIENT_SECRET
+# STRIPE_SECRET_KEY
+# ENCRYPTION_KEY
+# DATABASE_ENCRYPTION_KEY
+
+# Build configuration
+[build]
+command = "npm run build:worker"
+cwd = "./"
+watch_dir = "src"
+
+# Pages configuration for frontend
+[pages]
+project_name = "eva-ai-frontend"
+directory = "build"
+production_branch = "main"
+preview_branch = "*"
+
+# Custom domains
+[[pages.env.staging.custom_domains]]
+domain = "evafin.ai"
+
+[[pages.env.staging.custom_domains]]
+domain = "app.evafin.ai"
+
+# Build configuration for Pages
+[pages.build]
+command = "npm run build"
+destination_dir = "build"
+root_dir = "./"
+
+# Environment variables for Pages
+[pages.env.staging.vars]
+NODE_ENV = "staging"
+REACT_APP_API_URL = "https://api.evafin.ai"
+REACT_APP_ENVIRONMENT = "staging"
+
+# Analytics and monitoring
+[analytics_engine_datasets]
+binding = "ANALYTICS"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "DOCUMENT_PROCESSOR"
+class_name = "DocumentProcessor"
+
+[[durable_objects.bindings]]
+name = "RAG_AGENT"
+class_name = "RAGAgent"
+
+[[durable_objects.bindings]]
+name = "WORKFLOW_ENGINE"
+class_name = "WorkflowEngine"
+
+# Migration definitions
+[[migrations]]
+tag = "v1"
+new_classes = ["DocumentProcessor", "RAGAgent", "WorkflowEngine"]
+
+ 

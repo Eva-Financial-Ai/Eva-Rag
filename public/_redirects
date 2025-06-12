@@ -1,0 +1,26 @@
+# Cloudflare Pages SPA Routing Configuration
+
+# Static assets - must come first and use 404 to let Cloudflare serve them
+/static/* 404
+/favicon.ico 404
+/manifest.json 404
+/robots.txt 404
+/sitemap.xml 404
+/*.js 404
+/*.css 404
+/*.png 404
+/*.jpg 404
+/*.jpeg 404
+/*.gif 404
+/*.svg 404
+/*.ico 404
+/*.woff 404
+/*.woff2 404
+/*.ttf 404
+/*.eot 404
+
+# API routes - let them pass through to Functions
+/api/* 200
+
+# SPA fallback - all other routes serve index.html
+/* /index.html 200 

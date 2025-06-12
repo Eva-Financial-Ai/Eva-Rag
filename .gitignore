@@ -1,0 +1,357 @@
+# =============================================================================
+# EVA PLATFORM - ENHANCED SECURITY .gitignore
+# =============================================================================
+# CRITICAL: Prevents committing secrets, keys, and sensitive financial data
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# ENVIRONMENT & CONFIGURATION FILES
+# -----------------------------------------------------------------------------
+# Environment files containing secrets
+.env
+.env.*
+!.env.example
+*.env
+env.js
+env.ts
+environment.js
+environment.ts
+config.production.js
+config.production.ts
+secrets.json
+secrets.yaml
+secrets.yml
+
+# Configuration files that might contain secrets
+config/production/*
+config/staging/*
+config/secrets/*
+src/config/secrets/*
+private/
+confidential/
+
+# -----------------------------------------------------------------------------
+# FINANCIAL & AUTHENTICATION KEYS
+# -----------------------------------------------------------------------------
+# API Keys and Tokens
+**/api-keys.*
+**/tokens.*
+**/credentials.*
+**/*key*.json
+**/*secret*.json
+**/*token*.json
+**/*credential*.json
+
+# Auth0 Configuration Files
+auth0-config.*
+auth0.json
+auth0-secrets.*
+
+# Financial Service Keys
+plaid-*
+stripe-*
+**/plaid.*
+**/stripe.*
+**/shield-auth.*
+
+# Certificate and Key Files
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# SSH Keys
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+known_hosts
+
+# -----------------------------------------------------------------------------
+# FINANCIAL DATA & CUSTOMER INFORMATION
+# -----------------------------------------------------------------------------
+# Customer Data Files
+customer-data/
+borrower-data/
+loan-data/
+financial-records/
+documents/uploads/
+**/customer-exports/
+**/financial-exports/
+
+# Database Dumps & Backups
+*.sql
+*.dump
+*.backup
+*.bak
+database-backup/
+db-exports/
+
+# Encryption Keys & Seeds
+encryption-keys/
+master-key.*
+seed-phrase.*
+wallet-keys/
+
+# -----------------------------------------------------------------------------
+# CLOUD & DEPLOYMENT SECRETS
+# -----------------------------------------------------------------------------
+# AWS Credentials
+.aws/
+aws-credentials.*
+*.pem
+
+# Google Cloud
+gcloud-key.json
+service-account*.json
+google-credentials.*
+
+# Azure
+azure-credentials.*
+*.publishsettings
+
+# Cloudflare
+cloudflare-*
+cf-*
+
+# Vercel
+.vercel/
+vercel.json.local
+
+# -----------------------------------------------------------------------------
+# DEVELOPMENT & BUILD ARTIFACTS
+# -----------------------------------------------------------------------------
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+package-lock.json.backup
+
+# Testing
+/coverage
+test-results/
+*.test.log
+jest-html-reporters-report/
+
+# Production Builds
+/build
+/dist
+*.tgz
+*.tar.gz
+eva-financial-frontend-mvp.tar.gz
+
+# Development Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime Data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# -----------------------------------------------------------------------------
+# IDE & EDITOR FILES
+# -----------------------------------------------------------------------------
+# IDE Files
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+*~
+
+# Editor Backups
+*storybook.log
+.history/
+
+# -----------------------------------------------------------------------------
+# OPERATING SYSTEM FILES
+# -----------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# -----------------------------------------------------------------------------
+# CLEANUP & MONITORING
+# -----------------------------------------------------------------------------
+# Code Cleanup
+.cleanup-backups/
+cleanup-reports/
+code-cleanup-system/reports/
+
+# Monitoring & Analytics
+analytics-data/
+monitoring-logs/
+performance-reports/
+
+# -----------------------------------------------------------------------------
+# TEMPORARY & CACHE FILES
+# -----------------------------------------------------------------------------
+# Cache
+.cache/
+.npm/
+.eslintcache
+.parcel-cache/
+.next/
+.nuxt/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# -----------------------------------------------------------------------------
+# FINANCIAL COMPLIANCE & AUDIT
+# -----------------------------------------------------------------------------
+# Audit Reports with Sensitive Data
+audit-reports/sensitive/
+compliance-reports/private/
+risk-assessment/private/
+
+# Financial Calculations - Private Algorithms
+algorithms/proprietary/
+risk-models/private/
+pricing-models/confidential/
+
+# -----------------------------------------------------------------------------
+# BROWSER & CLIENT-SIDE PROTECTION
+# -----------------------------------------------------------------------------
+# Source Maps in Production (can expose source code)
+*.map
+!*.min.js.map
+
+# Debug Files
+debug.log
+debug-*
+*.debug
+
+# -----------------------------------------------------------------------------
+# SECURITY SCANNING EXCEPTIONS
+# -----------------------------------------------------------------------------
+# Exclude security scanner reports that might contain sensitive paths
+.security-scan/
+security-reports/
+vulnerability-reports/
+
+# -----------------------------------------------------------------------------
+# CUSTOM FINANCIAL APPLICATION EXCLUSIONS
+# -----------------------------------------------------------------------------
+# Loan Processing Data
+loan-calculations/sensitive/
+underwriting-data/
+credit-reports/
+bank-statements/
+tax-returns/
+
+# Customer Documents
+customer-uploads/
+document-processing/temp/
+ocr-results/sensitive/
+
+# Financial Analytics
+analytics/customer-data/
+reporting/sensitive/
+kpi-data/private/
+.dev.vars
+.dev.vars.backup
+.dev.vars
+.dev.vars.backup
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*secret*
+*credentials*
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build
+build/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Disabled test files
+*.disabled
+*.test.tsx.disabled
+*.test.ts.disabled
+
+# Cloudflare
+.wrangler/
+wrangler.toml.bak
+
+# TypeScript
+*.tsbuildinfo

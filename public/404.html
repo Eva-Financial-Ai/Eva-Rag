@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eva AI Broker</title>
+    <script>
+      // SPA fallback for Cloudflare Pages
+      // Redirect to index.html while preserving the path and query parameters
+      const currentPath = window.location.pathname + window.location.search + window.location.hash;
+      if (currentPath !== '/') {
+        window.history.replaceState(null, null, '/');
+        window.location.href = '/' + window.location.search + window.location.hash;
+      }
+    </script>
+  </head>
+  <body>
+    <div>Redirecting...</div>
+  </body>
+</html> 

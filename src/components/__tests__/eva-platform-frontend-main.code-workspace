@@ -1,0 +1,127 @@
+{
+  "folders": [
+	{
+		"name": "eva-platform-frontend-main",
+		"path": "../../.."
+	}
+],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "editor.rulers": [100],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.git": true
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+      "**/build": true,
+      "**/.cache": true
+    },
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/**": true,
+      "**/build/**": true
+    },
+    "javascript.suggest.autoImports": true,
+    "typescript.suggest.autoImports": true,
+    "javascript.suggest.paths": true,
+    "typescript.suggest.paths": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "json.schemas": [
+      {
+        "fileMatch": ["package.json"],
+        "url": "https://json.schemastore.org/package.json"
+      },
+      {
+        "fileMatch": ["package.json"],
+        "url": ".vscode/schemas/package.schema.json"
+      }
+    ],
+    "cSpell.words": [
+      "geoapify",
+      "headlessui",
+      "languagedetector",
+      "jspdf",
+      "chartjs",
+      "tesseract",
+      "precaching",
+      "craco",
+      "Spooner",
+      "dall",
+      "spooner",
+      "conv",
+      "Conv",
+      "webkitSpeechRecognition",
+      "SpeechRecognition",
+      "speechSynthesis",
+      "onresult",
+      "onerror",
+      "onend",
+      "webkitSpeechRecognition",
+      "SpeechRecognitionEvent",
+      "SpeechRecognitionErrorEvent",
+      "SpeechRecognitionResultList",
+      "SpeechRecognitionResult",
+      "SpeechRecognitionAlternative",
+      "SpeechGrammarList",
+      "SpeechGrammar",
+      "SpeechRecognitionErrorCode",
+      "onaudiostart",
+      "onaudioend",
+      "onnomatch",
+      "onsoundstart",
+      "onsoundend",
+      "onspeechstart",
+      "onspeechend",
+      "onstart",
+      "resultIndex",
+      "isFinal",
+      "addFromURI",
+      "addFromString",
+      "grammars",
+      "maxAlternatives",
+      "serviceURI",
+      "interimResults"
+    ],
+    "cSpell.ignorePaths": [
+      "node_modules",
+      ".git",
+      "dist",
+      "build",
+      "coverage",
+      "*.test.tsx",
+      "*.test.ts",
+      "**/__tests__/**"
+    ],
+    "cSpell.enableFiletypes": [
+      "typescript",
+      "typescriptreact",
+      "javascript",
+      "javascriptreact"
+    ]
+  }
+}

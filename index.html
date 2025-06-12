@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/eva-favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Prevent Caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- End Prevent Caching -->
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="EVA AI Platform - Advanced Financial Analysis and Risk Management"
+    />
+    <link rel="apple-touch-icon" href="/eva-favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Eva AI Broker</title>
+
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "eca9034b85a5457bad7a931633619d32"}'
+    ></script>
+
+    <!-- Prop Types Fix Script for Vite compatibility -->
+    <script>
+      // Inline prop-types fix for development
+      if (typeof window !== 'undefined') {
+        window.process = window.process || {};
+        window.process.env = window.process.env || {};
+        window.process.env.NODE_ENV = window.process.env.NODE_ENV || 'development';
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+// Mock API endpoint for testing
+// This simulates the document upload API response
+{
+  "success": true,
+  "documentId": "doc-123456789",
+  "workflowId": "workflow-987654321",
+  "status": "processing",
+  "message": "Document uploaded successfully"
+}

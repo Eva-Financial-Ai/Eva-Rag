@@ -1,0 +1,977 @@
+/* EVA Platform Design System
+ * Consistent typography, spacing, and component styles
+ * This file defines the core design elements to ensure consistency across the platform
+ */
+
+/* Import the transaction psychology design system */
+@import './transaction-psychology-design-system.css';
+
+/* Design system variables are now centralized in:
+   - typography-system.css (fonts, sizes, weights)
+   - unified-design-system.css (colors, spacing, components)
+   
+   This file now contains additional design patterns and overrides */
+
+:root {
+
+  /* ========================================
+     EVA AI DESIGN SYSTEM - STRICT RULES
+     ======================================== */
+
+  /* CORE DESIGN PRINCIPLES:
+      1. Light backgrounds ALWAYS use black/dark text
+      2. Dark backgrounds ALWAYS use white text
+      3. Blue backgrounds ALWAYS use white text
+      4. Selected buttons must have visible text
+      5. High contrast ratios for accessibility
+  */
+
+  /* ========================================
+     COLOR VARIABLES
+     ======================================== */
+  --eva-primary-blue: #2563eb;
+  --eva-primary-blue-dark: #1d4ed8;
+  --eva-primary-blue-light: #3b82f6;
+
+  /* Text Colors - STRICT RULES */
+  --eva-text-on-light: #111827; /* Black on light backgrounds */
+  --eva-text-on-dark: #ffffff; /* White on dark backgrounds */
+  --eva-text-on-blue: #ffffff; /* White on blue backgrounds */
+  --eva-text-muted-light: #6b7280; /* Gray on light backgrounds */
+  --eva-text-muted-dark: #d1d5db; /* Light gray on dark backgrounds */
+
+  /* Background Colors */
+  --eva-bg-light: #ffffff;
+  --eva-bg-light-secondary: #f9fafb;
+  --eva-bg-dark: #111827;
+  --eva-bg-dark-secondary: #1f2937;
+
+  /* Button States */
+  --eva-button-primary: #2563eb;
+  --eva-button-primary-hover: #1d4ed8;
+  --eva-button-primary-text: #ffffff;
+
+  --eva-button-secondary: #f3f4f6;
+  --eva-button-secondary-hover: #e5e7eb;
+  --eva-button-secondary-text: #111827;
+
+  --eva-button-selected: #2563eb;
+  --eva-button-selected-text: #ffffff;
+  --eva-button-selected-hover: #1d4ed8;
+}
+
+/* Typography styles are now in typography-system.css */
+
+/* Component-specific overrides */
+.h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  margin-bottom: var(--spacing-2);
+}
+
+h5,
+.h5 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--spacing-1);
+}
+
+h6,
+.h6 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Text styles */
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-base {
+  font-size: var(--font-size-base);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-3xl {
+  font-size: var(--font-size-3xl);
+}
+
+.text-4xl {
+  font-size: var(--font-size-4xl);
+}
+
+/* Font weights */
+.font-light {
+  font-weight: var(--font-weight-light);
+}
+
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Common component styles */
+/* Card */
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Button styles are now in unified-design-system.css */
+
+/* Navigation styles */
+.nav-item {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: 0.375rem;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+}
+
+.nav-item-active {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-600);
+}
+
+/* Dark mode overrides - temporarily disabled */
+/*
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--color-gray-100);
+    background-color: var(--color-gray-900);
+  }
+
+  .card {
+    background-color: var(--color-gray-800);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-gray-800);
+    color: var(--color-gray-100);
+    border-color: var(--color-gray-700);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-gray-700);
+  }
+}
+*/
+
+/* ========================================
+   BASE TEXT RULES - STRICT ENFORCEMENT
+   ======================================== */
+
+/* Light backgrounds - BLACK text */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-blue-50,
+.bg-green-50,
+.bg-yellow-50,
+.bg-purple-50,
+.bg-indigo-50 {
+  color: var(--eva-text-on-light) !important;
+}
+
+/* Dark backgrounds - WHITE text */
+.bg-gray-800,
+.bg-gray-900,
+.bg-black {
+  color: var(--eva-text-on-dark) !important;
+}
+
+/* Blue backgrounds - WHITE text */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-primary-600 {
+  color: var(--eva-text-on-blue) !important;
+}
+
+/* ========================================
+   BUTTON DESIGN SYSTEM
+   ======================================== */
+
+/* Primary Buttons */
+.eva-button-primary {
+  background-color: var(--eva-button-primary);
+  color: var(--eva-button-primary-text) !important;
+  border: 1px solid var(--eva-button-primary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.eva-button-primary:hover {
+  background-color: var(--eva-button-primary-hover);
+  border-color: var(--eva-button-primary-hover);
+  color: var(--eva-button-primary-text) !important;
+}
+
+/* Secondary Buttons */
+.eva-button-secondary {
+  background-color: var(--eva-button-secondary);
+  color: var(--eva-button-secondary-text) !important;
+  border: 1px solid #d1d5db;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.eva-button-secondary:hover {
+  background-color: var(--eva-button-secondary-hover);
+  color: var(--eva-button-secondary-text) !important;
+}
+
+/* Selected/Active Buttons */
+.eva-button-selected,
+.eva-tab-selected {
+  background-color: var(--eva-button-selected) !important;
+  color: var(--eva-button-selected-text) !important;
+  border-color: var(--eva-button-selected) !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.eva-button-selected:hover,
+.eva-tab-selected:hover {
+  background-color: var(--eva-button-selected-hover) !important;
+  color: var(--eva-button-selected-text) !important;
+}
+
+/* ========================================
+   TAB NAVIGATION SYSTEM
+   ======================================== */
+
+.eva-tab-container {
+  background-color: var(--eva-bg-light);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.eva-tab {
+  padding: 12px 16px;
+  font-weight: 500;
+  color: var(--eva-text-muted-light);
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.eva-tab:hover {
+  color: var(--eva-text-on-light);
+  background-color: var(--eva-bg-light-secondary);
+}
+
+.eva-tab.eva-tab-selected {
+  color: var(--eva-button-selected) !important;
+  border-bottom-color: var(--eva-button-selected);
+  background-color: var(--eva-bg-light);
+  font-weight: 600;
+}
+
+/* ========================================
+   TOGGLE BUTTON SYSTEM
+   ======================================== */
+
+.eva-toggle-container {
+  background-color: #f3f4f6;
+  padding: 4px;
+  border-radius: 8px;
+  display: flex;
+}
+
+.eva-toggle-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  color: var(--eva-text-muted-light);
+  background-color: transparent;
+}
+
+.eva-toggle-button:hover {
+  color: var(--eva-text-on-light);
+}
+
+.eva-toggle-button.eva-toggle-selected {
+  background-color: var(--eva-bg-light) !important;
+  color: var(--eva-button-selected) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
+.eva-input {
+  background-color: var(--eva-bg-light);
+  color: var(--eva-text-on-light);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.eva-input:focus {
+  border-color: var(--eva-primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.eva-select {
+  background-color: var(--eva-bg-light);
+  color: var(--eva-text-on-light);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+/* ========================================
+   CARD SYSTEM
+   ======================================== */
+
+.eva-card {
+  background-color: var(--eva-bg-light);
+  color: var(--eva-text-on-light);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.eva-card-header {
+  background-color: var(--eva-bg-light-secondary);
+  color: var(--eva-text-on-light);
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px;
+  font-weight: 600;
+}
+
+.eva-card-body {
+  padding: 16px;
+  color: var(--eva-text-on-light);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Text Colors - Override Tailwind when needed */
+.eva-text-primary {
+  color: var(--eva-text-on-light) !important;
+}
+
+.eva-text-secondary {
+  color: var(--eva-text-muted-light) !important;
+}
+
+.eva-text-on-blue {
+  color: var(--eva-text-on-blue) !important;
+}
+
+.eva-text-on-dark {
+  color: var(--eva-text-on-dark) !important;
+}
+
+/* Background Utilities */
+.eva-bg-light {
+  background-color: var(--eva-bg-light) !important;
+  color: var(--eva-text-on-light) !important;
+}
+
+.eva-bg-dark {
+  background-color: var(--eva-bg-dark) !important;
+  color: var(--eva-text-on-dark) !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .eva-tab {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .eva-toggle-button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+/* Focus states */
+.eva-button-primary:focus,
+.eva-button-secondary:focus,
+.eva-tab:focus,
+.eva-toggle-button:focus {
+  outline: 2px solid var(--eva-primary-blue);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --eva-text-on-light: #000000;
+    --eva-text-on-dark: #ffffff;
+    --eva-button-primary: #0000ff;
+    --eva-button-secondary: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .eva-button-primary,
+  .eva-button-secondary,
+  .eva-tab,
+  .eva-toggle-button {
+    transition: none;
+  }
+}
+
+/* ========================================
+   ENHANCED DESIGN SYSTEM INTEGRATION
+   ======================================== */
+
+/* Override existing design system with transaction psychology */
+
+/* Legacy button overrides for better transaction psychology */
+.btn-primary {
+  @apply tx-btn-primary;
+}
+
+.btn-secondary {
+  @apply tx-btn-secondary;
+}
+
+.btn-trust {
+  @apply tx-btn-trust;
+}
+
+.btn-action {
+  @apply tx-btn-action;
+}
+
+.btn-premium {
+  @apply tx-btn-premium;
+}
+
+/* Enhanced card system */
+.card {
+  @apply tx-card;
+}
+
+.card-success {
+  @apply tx-card-success;
+}
+
+.card-trust {
+  @apply tx-card-trust;
+}
+
+.card-premium {
+  @apply tx-card-premium;
+}
+
+/* Enhanced input system */
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='password'],
+select,
+textarea {
+  @apply tx-input;
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+select:focus,
+textarea:focus {
+  @apply tx-input;
+  border-color: var(--tx-trust-blue);
+  box-shadow: var(--tx-focus-ring);
+}
+
+/* Enhanced tooltip system */
+.tooltip {
+  @apply tx-tooltip;
+}
+
+.tooltip-content {
+  @apply tx-tooltip-content;
+}
+
+/* Enhanced badge system */
+.badge {
+  @apply tx-badge;
+}
+
+.badge-success {
+  @apply tx-badge-success;
+}
+
+.badge-trust {
+  @apply tx-badge-trust;
+}
+
+.badge-premium {
+  @apply tx-badge-premium;
+}
+
+.badge-wealth {
+  @apply tx-badge-wealth;
+}
+
+.badge-action {
+  @apply tx-badge-action;
+}
+
+/* ========================================
+   COMPONENT-SPECIFIC ENHANCEMENTS
+   ======================================== */
+
+/* Tab Navigation Enhancement */
+.tab-nav {
+  border-bottom: 2px solid var(--tx-neutral-light);
+}
+
+.tab-nav .tab {
+  position: relative;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-nav .tab.active {
+  color: var(--tx-trust-blue);
+  border-bottom-color: var(--tx-trust-blue);
+  font-weight: var(--tx-font-weight-semibold);
+}
+
+.tab-nav .tab:hover:not(.active) {
+  color: var(--tx-trust-blue-dark);
+  background: var(--tx-trust-blue-light);
+  border-radius: 8px 8px 0 0;
+}
+
+/* Form Enhancement */
+.form-group {
+  margin-bottom: var(--tx-space-4);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--tx-space-2);
+  font-weight: var(--tx-font-weight-medium);
+  color: var(--tx-neutral-dark);
+  font-size: var(--tx-font-size-sm);
+}
+
+.form-error {
+  color: var(--tx-danger-red);
+  font-size: var(--tx-font-size-xs);
+  margin-top: var(--tx-space-1);
+  display: flex;
+  align-items: center;
+}
+
+.form-error::before {
+  content: '⚠️';
+  margin-right: var(--tx-space-1);
+}
+
+.form-success {
+  color: var(--tx-success-green);
+  font-size: var(--tx-font-size-xs);
+  margin-top: var(--tx-space-1);
+  display: flex;
+  align-items: center;
+}
+
+.form-success::before {
+  content: '✅';
+  margin-right: var(--tx-space-1);
+}
+
+/* Enhanced Table System */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--tx-neutral-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--tx-shadow-medium);
+}
+
+.table th {
+  background: var(--tx-trust-blue-light);
+  color: var(--tx-trust-blue-dark);
+  font-weight: var(--tx-font-weight-semibold);
+  padding: var(--tx-space-4);
+  text-align: left;
+  border-bottom: 2px solid var(--tx-trust-blue);
+}
+
+.table td {
+  padding: var(--tx-space-3) var(--tx-space-4);
+  border-bottom: 1px solid var(--tx-neutral-light);
+  color: var(--tx-neutral-dark);
+}
+
+.table tr:hover {
+  background: var(--tx-trust-blue-light);
+}
+
+.table .table-row-success {
+  background: var(--tx-success-green-light);
+}
+
+.table .table-row-danger {
+  background: var(--tx-danger-red-light);
+}
+
+.table .table-row-premium {
+  background: var(--tx-premium-purple-light);
+  position: relative;
+}
+
+.table .table-row-premium::after {
+  content: '💎';
+  position: absolute;
+  right: var(--tx-space-2);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ========================================
+   STATUS INDICATORS
+   ======================================== */
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--tx-space-1) var(--tx-space-2);
+  border-radius: 12px;
+  font-size: var(--tx-font-size-xs);
+  font-weight: var(--tx-font-weight-semibold);
+}
+
+.status-indicator::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: var(--tx-space-1);
+}
+
+.status-active {
+  background: var(--tx-success-green-light);
+  color: var(--tx-success-green-dark);
+}
+
+.status-active::before {
+  background: var(--tx-success-green);
+}
+
+.status-pending {
+  background: var(--tx-warning-amber-light);
+  color: var(--tx-warning-amber-dark);
+}
+
+.status-pending::before {
+  background: var(--tx-warning-amber);
+}
+
+.status-inactive {
+  background: var(--tx-neutral-light);
+  color: var(--tx-neutral-medium);
+}
+
+.status-inactive::before {
+  background: var(--tx-neutral-medium);
+}
+
+.status-premium {
+  background: var(--tx-premium-purple-light);
+  color: var(--tx-premium-purple-dark);
+}
+
+.status-premium::before {
+  background: var(--tx-premium-purple);
+}
+
+/* ========================================
+   MODAL ENHANCEMENTS
+   ======================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: var(--tx-neutral-white);
+  border-radius: 16px;
+  padding: var(--tx-space-8);
+  box-shadow: var(--tx-shadow-strong);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--tx-space-6);
+  padding-bottom: var(--tx-space-4);
+  border-bottom: 2px solid var(--tx-neutral-light);
+}
+
+.modal-title {
+  font-size: var(--tx-font-size-2xl);
+  font-weight: var(--tx-font-weight-bold);
+  color: var(--tx-trust-blue);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: var(--tx-font-size-xl);
+  cursor: pointer;
+  color: var(--tx-neutral-medium);
+  padding: var(--tx-space-2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: var(--tx-danger-red-light);
+  color: var(--tx-danger-red);
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading-spinner {
+  border: 3px solid var(--tx-neutral-light);
+  border-top: 3px solid var(--tx-trust-blue);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--tx-neutral-light) 25%,
+    transparent 37%,
+    var(--tx-neutral-light) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ========================================
+   NOTIFICATION SYSTEM
+   ======================================== */
+
+.notification {
+  position: fixed;
+  top: var(--tx-space-4);
+  right: var(--tx-space-4);
+  padding: var(--tx-space-4) var(--tx-space-6);
+  border-radius: 12px;
+  box-shadow: var(--tx-shadow-strong);
+  z-index: 1100;
+  max-width: 400px;
+  animation: slide-in-right 0.3s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-success {
+  background: var(--tx-success-green-light);
+  color: var(--tx-success-green-dark);
+  border-left: 4px solid var(--tx-success-green);
+}
+
+.notification-error {
+  background: var(--tx-danger-red-light);
+  color: var(--tx-danger-red-dark);
+  border-left: 4px solid var(--tx-danger-red);
+}
+
+.notification-info {
+  background: var(--tx-trust-blue-light);
+  color: var(--tx-trust-blue-dark);
+  border-left: 4px solid var(--tx-trust-blue);
+}
+
+.notification-warning {
+  background: var(--tx-warning-amber-light);
+  color: var(--tx-warning-amber-dark);
+  border-left: 4px solid var(--tx-warning-amber);
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus visible for keyboard navigation */
+.focus-visible:focus {
+  outline: 2px solid var(--tx-trust-blue);
+  outline-offset: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================
+   DARK MODE SUPPORT - temporarily disabled
+   ======================================== */
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tx-neutral-white: #1a1a1a;
+    --tx-neutral-light: #2a2a2a;
+    --tx-neutral-dark: #ffffff;
+    --tx-neutral-black: #ffffff;
+    --tx-neutral-medium: #a0a0a0;
+  }
+
+  .tx-card {
+    background: var(--tx-neutral-light);
+    border-color: #3a3a3a;
+  }
+
+  .tx-input {
+    background: var(--tx-neutral-light);
+    border-color: #3a3a3a;
+    color: var(--tx-neutral-dark);
+  }
+}
+*/
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+  .tx-btn-primary,
+  .tx-btn-trust,
+  .tx-btn-action,
+  .tx-btn-premium,
+  .tx-btn-secondary {
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .tx-card {
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .notification,
+  .modal-overlay {
+    display: none !important;
+  }
+}

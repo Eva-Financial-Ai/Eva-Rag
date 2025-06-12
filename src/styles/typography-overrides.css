@@ -1,0 +1,335 @@
+/*
+ * TYPOGRAPHY OVERRIDES
+ * Ensures unified typography system takes precedence over legacy styles
+ * Applied after other CSS imports to override conflicting declarations
+ */
+
+/* =================
+   FORCE UNIFIED FONT FAMILIES
+   ================= */
+
+/* Override all legacy font declarations */
+* {
+  font-family: var(--font-primary) !important;
+}
+
+/* Specific overrides for components that might resist */
+body, 
+.app,
+#root,
+.main-content,
+.dashboard,
+.sidebar,
+.header,
+.footer {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+/* Override all heading inconsistencies */
+h1, .h1, 
+[class*="title"], 
+[class*="Title"],
+[class*="header"], 
+[class*="Header"],
+[class*="heading"], 
+[class*="Heading"] {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+h2, .h2 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-3xl) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+h3, .h3 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-2xl) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+h4, .h4 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-xl) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+h5, .h5 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+h6, .h6 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+/* =================
+   DASHBOARD COMPONENT OVERRIDES
+   ================= */
+
+/* Override dashboard-specific font issues */
+.dashboard-title,
+.section-header,
+.card-title,
+.metric-label,
+.metric-value,
+.dashboard-card,
+.dashboard-metric,
+.stats-card {
+  font-family: var(--font-primary) !important;
+}
+
+/* Fix dashboard metric sizing */
+.metric-value,
+.large-number,
+.stat-value,
+[class*="Value"],
+[class*="Total"],
+[class*="Rate"] {
+  font-size: var(--font-size-3xl) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.metric-label,
+.stat-label,
+[class*="Label"] {
+  font-size: var(--font-size-sm) !important;
+  font-weight: var(--font-weight-medium) !important;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide) !important;
+}
+
+/* =================
+   FORM ELEMENT OVERRIDES
+   ================= */
+
+/* Ensure all form elements use unified typography */
+input,
+textarea,
+select,
+button,
+.btn,
+.form-control,
+.form-input,
+.form-select {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-normal) !important;
+}
+
+/* Button specific overrides */
+button,
+.btn,
+.button,
+[role="button"] {
+  font-size: var(--font-size-button) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+/* Label overrides */
+label,
+.label,
+.form-label,
+.field-label {
+  font-size: var(--font-size-sm) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+/* =================
+   TABLE AND DATA OVERRIDES
+   ================= */
+
+/* Override table typography inconsistencies */
+table,
+.table,
+.data-table {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-data) !important;
+}
+
+th,
+.table-header {
+  font-size: var(--font-size-sm) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide) !important;
+}
+
+td,
+.table-cell {
+  font-size: var(--font-size-data) !important;
+  font-weight: var(--font-weight-normal) !important;
+}
+
+/* =================
+   NAVIGATION OVERRIDES
+   ================= */
+
+/* Sidebar and navigation typography */
+.sidebar,
+.nav,
+.navigation,
+.menu {
+  font-family: var(--font-primary) !important;
+}
+
+.nav-link,
+.menu-item,
+.sidebar-link {
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-normal) !important;
+}
+
+.nav-title,
+.menu-title,
+.sidebar-title {
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+/* =================
+   MODAL AND POPUP OVERRIDES
+   ================= */
+
+.modal,
+.popup,
+.dialog,
+.overlay {
+  font-family: var(--font-primary) !important;
+}
+
+.modal-title,
+.popup-title,
+.dialog-title {
+  font-size: var(--font-size-xl) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.modal-body,
+.popup-body,
+.dialog-body {
+  font-size: var(--font-size-base) !important;
+  line-height: var(--line-height-relaxed) !important;
+}
+
+/* =================
+   CARD COMPONENT OVERRIDES
+   ================= */
+
+.card,
+.panel,
+.widget {
+  font-family: var(--font-primary) !important;
+}
+
+.card-header,
+.panel-header,
+.widget-header {
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.card-body,
+.panel-body,
+.widget-body {
+  font-size: var(--font-size-base) !important;
+  line-height: var(--line-height-normal) !important;
+}
+
+.card-footer,
+.panel-footer,
+.widget-footer {
+  font-size: var(--font-size-sm) !important;
+}
+
+/* =================
+   FINANCIAL COMPONENT OVERRIDES
+   ================= */
+
+/* Currency and financial data */
+.currency,
+.amount,
+.price,
+.financial-value,
+[class*="currency"],
+[class*="amount"],
+[class*="price"] {
+  font-family: var(--font-mono) !important;
+  font-size: var(--font-size-currency) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  letter-spacing: var(--letter-spacing-tight) !important;
+}
+
+/* =================
+   LEGACY SIZE OVERRIDES
+   ================= */
+
+/* Override any remaining legacy sizing */
+[style*="font-size"] {
+  font-size: var(--font-size-base) !important;
+}
+
+/* Override any remaining legacy font families */
+[style*="font-family"] {
+  font-family: var(--font-primary) !important;
+}
+
+/* =================
+   COMPONENT LIBRARY OVERRIDES
+   ================= */
+
+/* Override React component library defaults */
+.ant-typography,
+.mui-typography,
+.chakra-text,
+.mantine-text {
+  font-family: var(--font-primary) !important;
+}
+
+/* Override any third-party component fonts */
+.react-select__control,
+.react-datepicker,
+.rc-slider,
+.ant-input,
+.mui-textfield,
+.chakra-input {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+/* =================
+   PRINT OVERRIDES
+   ================= */
+
+@media print {
+  * {
+    font-family: 'Times New Roman', serif !important;
+    color: #000000 !important;
+  }
+}
+
+/* =================
+   ACCESSIBILITY OVERRIDES
+   ================= */
+
+/* Ensure minimum font sizes for accessibility */
+@media (max-width: 480px) {
+  body,
+  p,
+  div,
+  span {
+    font-size: 1rem !important; /* Never go below 16px on mobile */
+  }
+  
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 1rem !important; /* Prevent zoom on mobile */
+  }
+} 

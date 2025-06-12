@@ -1,0 +1,407 @@
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { expect, vi } from 'vitest';
+
+// Import components to test
+import Button from '../../components/common/Button';
+import { Checkbox } from '../../components/common/Checkbox';
+import { Input } from '../../components/common/Input';
+import Modal from '../../components/common/Modal';
+import Select from '../../components/common/Select';
+import Toast from '../../components/common/Toast';
+
+// Extend Vitest matchers
+expect.extend(toHaveNoViolations);
+
+describe('Accessibility Tests', () => {
+  describe('Button Component', () => {
+    it('has no accessibility violations', async () => {
+      const { container } = render(<Button onClick={() => {}}>Click me</Button>);
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('has proper ARIA attributes when disabled', async () => {
+      const { container, getByRole } = render(
+        <Button onClick={() => {}} disabled>
+          Disabled Button
+        </Button>,
+      );
+
+      const button = getByRole('button');
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('supports keyboard navigation', () => {
+      const onClick = vi.fn();
+      const { getByRole } = render(<Button onClick={onClick}>Keyboard Test</Button>);
+
+      const button = getByRole('button');
+      button.focus();
+      expect(document.activeElement).toBe(button);
+
+      // Simulate Enter key
+      button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('has proper focus styles', () => {
+      const { getByRole } = render(<Button onClick={() => {}}>Focus Test</Button>);
+
+      const button = getByRole('button');
+      button.focus();
+
+      const styles = window.getComputedStyle(button);
+      expect(styles.outlineStyle).not.toBe('none');
+    });
+  });
+
+  describe('Modal Component', () => {
+    it('has no accessibility violations when open', async () => {
+      const { container } = render(
+        <Modal isOpen={true} onClose={() => {}} title="Test Modal">
+          <p>Modal content</p>
+        </Modal>,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('traps focus when open', () => {
+      const { getByRole, getByText } = render(
+        <Modal isOpen={true} onClose={() => {}} title="Test Modal">
+          <button>First button</button>
+          <button>Second button</button>
+        </Modal>,
+      );
+
+      const firstButton = getByText('First button');
+      const secondButton = getByText('Second button');
+      const closeButton = getByRole('button', { name: /close/i });
+
+      // Focus should cycle through modal elements
+      firstButton.focus();
+      expect(document.activeElement).toBe(firstButton);
+
+      // Tab to next
+      document.activeElement?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+    });
+
+    it('returns focus on close', () => {
+      const triggerButton = document.createElement('button');
+      document.body.appendChild(triggerButton);
+      triggerButton.focus();
+
+      const { rerender } = render(
+        <Modal isOpen={true} onClose={() => {}} title="Test Modal">
+          <p>Content</p>
+        </Modal>,
+      );
+
+      // Modal takes focus
+      expect(document.activeElement).not.toBe(triggerButton);
+
+      // Close modal
+      rerender(
+        <Modal isOpen={false} onClose={() => {}} title="Test Modal">
+          <p>Content</p>
+        </Modal>,
+      );
+
+      // Focus should return
+      expect(document.activeElement).toBe(triggerButton);
+
+      document.body.removeChild(triggerButton);
+    });
+
+    it('closes on Escape key', () => {
+      const onClose = vi.fn();
+      render(
+        <Modal isOpen={true} onClose={onClose} title="Test Modal">
+          <p>Content</p>
+        </Modal>,
+      );
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      expect(onClose).toHaveBeenCalled();
+    });
+  });
+
+  describe('Form Controls', () => {
+    describe('Input Component', () => {
+      it('has no accessibility violations', async () => {
+        const { container } = render(
+          <div>
+            <label htmlFor="test-input">Test Input</label>
+            <Input id="test-input" type="text" />
+          </div>,
+        );
+
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it('associates label with input', () => {
+        const { getByLabelText } = render(
+          <div>
+            <label htmlFor="email">Email Address</label>
+            <Input id="email" type="email" />
+          </div>,
+        );
+
+        const input = getByLabelText('Email Address');
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveAttribute('type', 'email');
+      });
+
+      it('shows error state accessibly', async () => {
+        const { container, getByRole } = render(
+          <div>
+            <label htmlFor="required">Required Field</label>
+            <Input
+              id="required"
+              type="text"
+              required
+              aria-invalid="true"
+              aria-describedby="required-error"
+            />
+            <span id="required-error" role="alert">
+              This field is required
+            </span>
+          </div>,
+        );
+
+        const input = getByRole('textbox');
+        expect(input).toHaveAttribute('aria-invalid', 'true');
+        expect(input).toHaveAttribute('aria-describedby', 'required-error');
+
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+    });
+
+    describe('Select Component', () => {
+      it('has no accessibility violations', async () => {
+        const { container } = render(
+          <div>
+            <label htmlFor="country">Country</label>
+            <Select
+              id="country"
+              options={[
+                { value: '', label: 'Select a country' },
+                { value: 'us', label: 'United States' },
+                { value: 'uk', label: 'United Kingdom' },
+              ]}
+              onChange={() => {}}
+            />
+          </div>,
+        );
+
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it('supports keyboard navigation', () => {
+        const onChange = vi.fn();
+        const { getByRole } = render(
+          <Select
+            options={[
+              { value: '1', label: 'Option 1' },
+              { value: '2', label: 'Option 2' },
+            ]}
+            onChange={onChange}
+          />,
+        );
+
+        const select = getByRole('combobox');
+        select.focus();
+
+        // Arrow down should change selection
+        select.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      });
+    });
+
+    describe('Checkbox Component', () => {
+      it('has no accessibility violations', async () => {
+        const { container } = render(
+          <div>
+            <Checkbox id="terms" />
+            <label htmlFor="terms">I agree to the terms</label>
+          </div>,
+        );
+
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
+      });
+
+      it('can be toggled with Space key', () => {
+        const onChange = vi.fn();
+        const { getByRole } = render(<Checkbox onChange={onChange} />);
+
+        const checkbox = getByRole('checkbox');
+        checkbox.focus();
+
+        checkbox.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+
+        expect(onChange).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('Navigation', () => {
+    it('skip links work correctly', () => {
+      const { getByText } = render(
+        <div>
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          <nav>{/* Navigation items */}</nav>
+          <main id="main-content">Main content</main>
+        </div>,
+      );
+
+      const skipLink = getByText('Skip to main content');
+      skipLink.click();
+
+      expect(window.location.hash).toBe('#main-content');
+    });
+
+    it('has proper heading hierarchy', async () => {
+      const { container } = render(
+        <div>
+          <h1>Page Title</h1>
+          <section>
+            <h2>Section Title</h2>
+            <h3>Subsection Title</h3>
+          </section>
+        </div>,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('Toast Notifications', () => {
+    it('uses live regions for announcements', async () => {
+      const { container, getByRole } = render(
+        <Toast message="Operation successful" type="success" />,
+      );
+
+      const alert = getByRole('alert');
+      expect(alert).toHaveAttribute('aria-live', 'polite');
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('error toasts have appropriate urgency', () => {
+      const { getByRole } = render(<Toast message="Error occurred" type="error" />);
+
+      const alert = getByRole('alert');
+      expect(alert).toHaveAttribute('aria-live', 'assertive');
+    });
+
+    it('has no accessibility violations', async () => {
+      const { container } = render(
+        <Toast message="This is a test toast" type="info" onClose={() => {}} />,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('has proper ARIA role', () => {
+      const { getByRole } = render(<Toast message="Test" type="success" onClose={() => {}} />);
+
+      // Toasts can have 'status' or 'alert' roles depending on importance
+      const toast = getByRole('status');
+      expect(toast).toBeInTheDocument();
+    });
+  });
+
+  describe('Color Contrast', () => {
+    it('meets WCAG AA standards for normal text', async () => {
+      const { container } = render(
+        <div>
+          <p style={{ color: '#333', backgroundColor: '#fff' }}>Normal text content</p>
+        </div>,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('meets WCAG AA standards for large text', async () => {
+      const { container } = render(
+        <div>
+          <h1 style={{ color: '#555', backgroundColor: '#fff' }}>Large heading text</h1>
+        </div>,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('Images and Media', () => {
+    it('requires alt text for images', async () => {
+      const { container } = render(<img src="/test.jpg" alt="Test image description" />);
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+
+    it('decorative images use empty alt', async () => {
+      const { container } = render(<img src="/decorative.jpg" alt="" role="presentation" />);
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('Tables', () => {
+    it('data tables have proper structure', async () => {
+      const { container } = render(
+        <table>
+          <caption>User Data</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>john@example.com</td>
+              <td>Admin</td>
+            </tr>
+          </tbody>
+        </table>,
+      );
+
+      const results = await axe(container);
+      expect(results).toHaveNoViolations();
+    });
+  });
+
+  describe('Loading States', () => {
+    it('announces loading state to screen readers', () => {
+      const { getByText } = render(
+        <div role="status" aria-live="polite">
+          <span className="sr-only">Loading...</span>
+          <div className="spinner" aria-hidden="true" />
+        </div>,
+      );
+
+      const loadingText = getByText('Loading...');
+      expect(loadingText).toHaveClass('sr-only');
+    });
+  });
+});

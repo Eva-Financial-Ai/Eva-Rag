@@ -1,0 +1,85 @@
+# Unused Components Identified for Removal
+
+## Dev Components
+- RouterSelector
+- PQCryptographyProvider
+- Analytics
+- ResponsiveTestingPanel
+- SideNavigationTest
+- PerformanceMonitor
+- RiskReportDevTools
+- ModularRiskNavigator
+- RoleDashboard
+
+## Modal Components
+- ThirdPartyAuthModal
+- DocumentUploadModal
+- PlaidLinkModal
+- StripeConnectModal
+
+## Navigation Components
+- TopNavigation (in multiple files)
+- CreditApplicationNav
+- RiskMapNavigator
+- OrganizationSelector
+
+## Analytics Components
+- BarChart
+- Bar
+- XAxis
+- YAxis
+- CartesianGrid
+- Tooltip
+- Legend
+- ResponsiveContainer
+- PieChart
+- Pie
+- Cell
+- LineChart
+- Line
+- AreaChart
+- Area
+
+## Deal Components
+- DueDiligenceProgress
+- FundingTrendsChart
+- MetricCard
+- DealProgressCard
+- DealStructuringComponent
+- TransactionTimeMetrics
+- DealAdvisor
+- TransactionTeamManager
+
+## Asset Components
+- AssetClassification
+- BlockchainVerification
+- AssetCardGrid
+
+## Tax Components
+- TaxReturnsUpload
+
+## Team Components
+- TeamMembersPanel
+- AddParticipantDialog
+- AgentManagementDialog
+- TransactionTeamManager
+
+## Other Components
+- CreditApplicationForm
+- PaywallModal
+- EVAAssistantWithCustomAgents
+- SmartMatchSkeleton
+- StructureEditorSkeleton
+
+## Types & Enums That May Be Unused
+- VerificationLevel
+- VerificationStatus
+- DealStage
+- UserRole
+- DealType
+- AssetClass
+- FileType
+- DocumentType
+- ScoringOutcome
+- RiskMapType
+- RiskCategory 

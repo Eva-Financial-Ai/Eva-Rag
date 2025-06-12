@@ -1,0 +1,115 @@
+/* Accessibility Enforcement Rules - Prevent white buttons with white text and light backgrounds with light text */
+
+/* Prevent white buttons with white text */
+.bg-white.text-white,
+.text-white.bg-white,
+button.bg-white.text-white,
+button.text-white.bg-white,
+a.bg-white.text-white,
+a.text-white.bg-white {
+  /* Force black text on white backgrounds */
+  color: #1f2937 !important; /* gray-800 */
+}
+
+/* Prevent light gray backgrounds with white or very light text */
+.bg-gray-50.text-white,
+.bg-gray-100.text-white,
+.bg-gray-200.text-white,
+.bg-gray-50.text-gray-100,
+.bg-gray-50.text-gray-200,
+.bg-gray-50.text-gray-300,
+.bg-gray-100.text-gray-100,
+.bg-gray-100.text-gray-200,
+.bg-gray-100.text-gray-300,
+.bg-gray-200.text-gray-100,
+.bg-gray-200.text-gray-200,
+.bg-gray-200.text-gray-300 {
+  /* Force dark text on light backgrounds */
+  color: #374151 !important; /* gray-700 */
+}
+
+/* Ensure proper contrast for semi-transparent white backgrounds */
+[class*="bg-white/"],
+[class*="bg-white"][class*="bg-opacity-"] {
+  /* If text is white, force a darker background */
+  &.text-white {
+    background-color: rgba(31, 41, 55, 0.7) !important; /* gray-800 with opacity */
+  }
+}
+
+/* Ensure buttons have proper hover states */
+button:not([disabled]) {
+  transition: all 0.2s ease-in-out;
+}
+
+button:not([disabled]):hover {
+  filter: brightness(0.9);
+}
+
+/* Ensure disabled buttons have proper contrast */
+button[disabled],
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Global rule to ensure minimum contrast ratios */
+* {
+  /* Prevent color combinations that fail WCAG AA standards */
+  &.text-white {
+    &.bg-white,
+    &.bg-gray-50,
+    &.bg-gray-100,
+    &.bg-gray-200,
+    &.bg-gray-300 {
+      color: #1f2937 !important; /* Force dark text */
+    }
+  }
+  
+  /* Prevent light text on light backgrounds */
+  &.text-gray-100,
+  &.text-gray-200,
+  &.text-gray-300,
+  &.text-gray-400 {
+    &.bg-white,
+    &.bg-gray-50,
+    &.bg-gray-100,
+    &.bg-gray-200 {
+      color: #374151 !important; /* Force gray-700 */
+    }
+  }
+}
+
+/* Special rules for focus states to ensure visibility */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #3b82f6 !important; /* blue-500 */
+  outline-offset: 2px;
+}
+
+/* Ensure form inputs have proper contrast */
+input,
+select,
+textarea {
+  &.bg-white,
+  &.bg-gray-50,
+  &.bg-gray-100 {
+    color: #1f2937 !important; /* gray-800 */
+    
+    &::placeholder {
+      color: #6b7280 !important; /* gray-500 */
+    }
+  }
+}
+
+/* Prevent invisible text scenarios */
+.text-transparent,
+.text-opacity-0 {
+  &:not(.intentionally-hidden) {
+    color: currentColor !important;
+    opacity: 1 !important;
+  }
+}

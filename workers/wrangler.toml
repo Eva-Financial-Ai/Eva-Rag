@@ -1,0 +1,38 @@
+name = "eva-api-gateway-simple"
+main = "api-gateway-simple.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Account Configuration
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "EVA_CACHE"
+id = "e28fe91a1b844808a5b3109592b890a7"
+
+[[kv_namespaces]]
+binding = "USER_SESSIONS"
+id = "3c32a3731dcf444fa788804d20587d43"
+
+[[kv_namespaces]]
+binding = "ANALYTICS_DATA"
+id = "47d169b21b9742db8e3040e7c127964e"
+
+# R2 Buckets
+[[r2_buckets]]
+binding = "DOCUMENTS"
+bucket_name = "evafi-documents"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "eva-main-db-staging"
+database_id = "966ef956-6579-485a-9ac9-53179931324b"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "staging"
+GATEWAY_VERSION = "2.5.0"
+ENABLE_ANALYTICS = "true"
+ENABLE_CACHING = "true" 

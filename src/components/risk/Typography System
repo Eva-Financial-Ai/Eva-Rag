@@ -1,0 +1,36 @@
+/*
+Typography Guidelines
+
+1. Display (44px - 160px): Largest font sizes for the most important headings and strong visual impact.
+2. Headline (28px - 44px): Sizes used for page titles.
+3. Title (16px - 22px): Styled to help organize content sections.
+4. Label (11px - 16px): Small yet readable text used for interactive elements.
+5. Paragraph (14px - 20px): Standard font sizes for body text.
+6. Others (10px - 12px): Smaller font sizes for supporting information.
+
+
+Font Replacement: All instances of Roboto have been replaced with Helvetica Nuse while maintaining the same sizing structure.
+Typography Classes: The configuration includes custom utility classes for:
+
+Display text (large, medium, small)
+Headline text (large, medium, small)
+Title text (large, medium, small)
+Body text (large, medium, small)
+Label text (large, medium, small)
+
+
+Typography Rules: The config implements the typography rules from the original design system:
+
+Title Case formatting for Display, Headline, and Button/Label text
+Sentence Case with proper capitalization and punctuation for Body/Paragraph text
+Avoidance of ALL CAPS except for acronyms
+
+
+Component Example: I've included a React component example that shows how to use this typography system in a real-world application.
+
+To implement this in your project:
+
+Add the Tailwind configuration to your tailwind.config.js file.
+Make sure to add Helvetica Nuse to your project (via @font-face in your CSS or a font service).
+Use the typography utility classes in your React components as demonstrated in the examples.
+*/

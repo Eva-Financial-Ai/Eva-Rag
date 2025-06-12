@@ -1,0 +1,670 @@
+/* ========================================
+   TRANSACTION PSYCHOLOGY DESIGN SYSTEM
+   ========================================
+   
+   Based on color psychology research for financial applications:
+   - Green: Growth, money, success, trust
+   - Blue: Trust, security, professionalism  
+   - Orange: Energy, urgency, action
+   - Purple: Premium, luxury, innovation
+   - Gold/Yellow: Value, wealth, prosperity
+   
+   High contrast for maximum visibility and accessibility.
+*/
+
+:root {
+  /* PRIMARY TRANSACTION COLORS */
+  --tx-success-green: #00c851; /* Bright success green */
+  --tx-success-green-dark: #007e33; /* Dark success green */
+  --tx-success-green-light: #b2ffd6; /* Light success background */
+
+  --tx-trust-blue: #1a73e8; /* Google blue - trust & security */
+  --tx-trust-blue-dark: #1557b0; /* Dark trust blue */
+  --tx-trust-blue-light: #e3f2fd; /* Light trust background */
+
+  --tx-action-orange: #ff5722; /* Action-driving orange */
+  --tx-action-orange-dark: #d84315; /* Dark action orange */
+  --tx-action-orange-light: #ffe0db; /* Light action background */
+
+  --tx-premium-purple: #7b1fa2; /* Premium purple */
+  --tx-premium-purple-dark: #4a148c; /* Dark premium purple */
+  --tx-premium-purple-light: #f3e5f5; /* Light premium background */
+
+  --tx-wealth-gold: #ffb300; /* Wealth-indicating gold */
+  --tx-wealth-gold-dark: #ff8f00; /* Dark wealth gold */
+  --tx-wealth-gold-light: #fff8e1; /* Light wealth background */
+
+  /* PSYCHOLOGICAL NEUTRALS */
+  --tx-neutral-white: #ffffff; /* Pure white */
+  --tx-neutral-light: #f8f9fa; /* Light gray background */
+  --tx-neutral-medium: #6c757d; /* Medium gray text */
+  --tx-neutral-dark: #212529; /* Dark text */
+  --tx-neutral-black: #000000; /* Pure black */
+
+  /* STATUS COLORS WITH PSYCHOLOGY */
+  --tx-danger-red: #dc3545; /* Clear danger indicator */
+  --tx-danger-red-dark: #c82333; /* Dark danger */
+  --tx-danger-red-light: #f8d7da; /* Light danger background */
+
+  --tx-warning-amber: #ffc107; /* Attention-grabbing amber */
+  --tx-warning-amber-dark: #e0a800; /* Dark warning */
+  --tx-warning-amber-light: #fff3cd; /* Light warning background */
+
+  /* INTERACTIVE STATES */
+  --tx-hover-overlay: rgba(255, 255, 255, 0.1);
+  --tx-active-overlay: rgba(0, 0, 0, 0.1);
+  --tx-focus-ring: 0 0 0 3px rgba(26, 115, 232, 0.3);
+
+  /* SHADOWS FOR DEPTH */
+  --tx-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --tx-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --tx-shadow-strong: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+  /* TYPOGRAPHY SCALE */
+  --tx-font-size-xs: 0.75rem; /* 12px */
+  --tx-font-size-sm: 0.875rem; /* 14px */
+  --tx-font-size-md: 1rem; /* 16px */
+  --tx-font-size-lg: 1.125rem; /* 18px */
+  --tx-font-size-xl: 1.25rem; /* 20px */
+  --tx-font-size-2xl: 1.5rem; /* 24px */
+  --tx-font-size-3xl: 2rem; /* 32px */
+
+  --tx-font-weight-normal: 400;
+  --tx-font-weight-medium: 500;
+  --tx-font-weight-semibold: 600;
+  --tx-font-weight-bold: 700;
+
+  /* SPACING SCALE */
+  --tx-space-1: 0.25rem; /* 4px */
+  --tx-space-2: 0.5rem; /* 8px */
+  --tx-space-3: 0.75rem; /* 12px */
+  --tx-space-4: 1rem; /* 16px */
+  --tx-space-5: 1.25rem; /* 20px */
+  --tx-space-6: 1.5rem; /* 24px */
+  --tx-space-8: 2rem; /* 32px */
+  --tx-space-10: 2.5rem; /* 40px */
+  --tx-space-12: 3rem; /* 48px */
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY BUTTONS
+   ======================================== */
+
+/* PRIMARY ACTION BUTTONS - Encourage main transactions */
+.tx-btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--tx-success-green) 0%,
+    var(--tx-success-green-dark) 100%
+  );
+  color: var(--tx-neutral-white);
+  border: none;
+  padding: var(--tx-space-3) var(--tx-space-6);
+  border-radius: 8px;
+  font-weight: var(--tx-font-weight-semibold);
+  font-size: var(--tx-font-size-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--tx-shadow-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.tx-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tx-shadow-strong);
+  background: linear-gradient(
+    135deg,
+    var(--tx-success-green-dark) 0%,
+    var(--tx-success-green) 100%
+  );
+}
+
+.tx-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--tx-shadow-light);
+}
+
+.tx-btn-primary:focus {
+  outline: none;
+  box-shadow: var(--tx-focus-ring), var(--tx-shadow-medium);
+}
+
+/* TRUST BUTTONS - For secure actions */
+.tx-btn-trust {
+  background: linear-gradient(135deg, var(--tx-trust-blue) 0%, var(--tx-trust-blue-dark) 100%);
+  color: var(--tx-neutral-white);
+  border: none;
+  padding: var(--tx-space-3) var(--tx-space-6);
+  border-radius: 8px;
+  font-weight: var(--tx-font-weight-semibold);
+  font-size: var(--tx-font-size-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--tx-shadow-medium);
+}
+
+.tx-btn-trust:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tx-shadow-strong);
+  background: linear-gradient(135deg, var(--tx-trust-blue-dark) 0%, var(--tx-trust-blue) 100%);
+}
+
+/* ACTION BUTTONS - For urgent/immediate actions */
+.tx-btn-action {
+  background: linear-gradient(
+    135deg,
+    var(--tx-action-orange) 0%,
+    var(--tx-action-orange-dark) 100%
+  );
+  color: var(--tx-neutral-white);
+  border: none;
+  padding: var(--tx-space-3) var(--tx-space-6);
+  border-radius: 8px;
+  font-weight: var(--tx-font-weight-bold);
+  font-size: var(--tx-font-size-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--tx-shadow-medium);
+  animation: subtle-pulse 3s infinite;
+}
+
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.tx-btn-action:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--tx-shadow-strong);
+  animation: none;
+}
+
+/* PREMIUM BUTTONS - For high-value actions */
+.tx-btn-premium {
+  background: linear-gradient(
+    135deg,
+    var(--tx-premium-purple) 0%,
+    var(--tx-premium-purple-dark) 100%
+  );
+  color: var(--tx-neutral-white);
+  border: none;
+  padding: var(--tx-space-4) var(--tx-space-8);
+  border-radius: 12px;
+  font-weight: var(--tx-font-weight-bold);
+  font-size: var(--tx-font-size-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--tx-shadow-strong);
+  position: relative;
+}
+
+.tx-btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.tx-btn-premium:hover::before {
+  transform: translateX(100%);
+}
+
+.tx-btn-premium:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(123, 31, 162, 0.4);
+}
+
+/* SECONDARY BUTTONS - For supporting actions */
+.tx-btn-secondary {
+  background: var(--tx-neutral-white);
+  color: var(--tx-trust-blue);
+  border: 2px solid var(--tx-trust-blue);
+  padding: var(--tx-space-3) var(--tx-space-6);
+  border-radius: 8px;
+  font-weight: var(--tx-font-weight-medium);
+  font-size: var(--tx-font-size-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--tx-shadow-light);
+}
+
+.tx-btn-secondary:hover {
+  background: var(--tx-trust-blue);
+  color: var(--tx-neutral-white);
+  transform: translateY(-1px);
+  box-shadow: var(--tx-shadow-medium);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY CARDS
+   ======================================== */
+
+.tx-card {
+  background: var(--tx-neutral-white);
+  border-radius: 12px;
+  padding: var(--tx-space-6);
+  box-shadow: var(--tx-shadow-medium);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tx-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tx-shadow-strong);
+}
+
+.tx-card-success {
+  background: linear-gradient(
+    135deg,
+    var(--tx-success-green-light) 0%,
+    var(--tx-neutral-white) 100%
+  );
+  border-left: 4px solid var(--tx-success-green);
+}
+
+.tx-card-trust {
+  background: linear-gradient(135deg, var(--tx-trust-blue-light) 0%, var(--tx-neutral-white) 100%);
+  border-left: 4px solid var(--tx-trust-blue);
+}
+
+.tx-card-premium {
+  background: linear-gradient(
+    135deg,
+    var(--tx-premium-purple-light) 0%,
+    var(--tx-neutral-white) 100%
+  );
+  border-left: 4px solid var(--tx-premium-purple);
+  position: relative;
+}
+
+.tx-card-premium::after {
+  content: '✨';
+  position: absolute;
+  top: var(--tx-space-4);
+  right: var(--tx-space-4);
+  font-size: var(--tx-font-size-lg);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY INPUTS
+   ======================================== */
+
+.tx-input {
+  width: 100%;
+  padding: var(--tx-space-3) var(--tx-space-4);
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: var(--tx-font-size-md);
+  color: var(--tx-neutral-dark);
+  background: var(--tx-neutral-white);
+  transition: all 0.3s ease;
+}
+
+.tx-input:focus {
+  outline: none;
+  border-color: var(--tx-trust-blue);
+  box-shadow: var(--tx-focus-ring);
+  background: rgba(26, 115, 232, 0.02);
+}
+
+.tx-input:hover {
+  border-color: var(--tx-trust-blue-dark);
+}
+
+.tx-input-success {
+  border-color: var(--tx-success-green);
+  background: var(--tx-success-green-light);
+}
+
+.tx-input-error {
+  border-color: var(--tx-danger-red);
+  background: var(--tx-danger-red-light);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY TOOLTIPS
+   ======================================== */
+
+.tx-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tx-tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tx-neutral-dark);
+  color: var(--tx-neutral-white);
+  padding: var(--tx-space-2) var(--tx-space-3);
+  border-radius: 6px;
+  font-size: var(--tx-font-size-sm);
+  font-weight: var(--tx-font-weight-medium);
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: var(--tx-shadow-strong);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: var(--tx-space-2);
+}
+
+.tx-tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--tx-neutral-dark);
+}
+
+.tx-tooltip:hover .tx-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY BADGES
+   ======================================== */
+
+.tx-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--tx-space-1) var(--tx-space-3);
+  border-radius: 20px;
+  font-size: var(--tx-font-size-sm);
+  font-weight: var(--tx-font-weight-semibold);
+  color: var(--tx-neutral-white);
+}
+
+.tx-badge-success {
+  background: var(--tx-success-green);
+}
+
+.tx-badge-trust {
+  background: var(--tx-trust-blue);
+}
+
+.tx-badge-premium {
+  background: var(--tx-premium-purple);
+}
+
+.tx-badge-wealth {
+  background: var(--tx-wealth-gold);
+  color: var(--tx-neutral-dark);
+}
+
+.tx-badge-action {
+  background: var(--tx-action-orange);
+  animation: gentle-glow 2s infinite alternate;
+}
+
+@keyframes gentle-glow {
+  from {
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 87, 34, 0.8);
+  }
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY PROGRESS
+   ======================================== */
+
+.tx-progress-container {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tx-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: all 0.6s ease;
+  position: relative;
+}
+
+.tx-progress-success {
+  background: linear-gradient(90deg, var(--tx-success-green) 0%, var(--tx-wealth-gold) 100%);
+}
+
+.tx-progress-trust {
+  background: linear-gradient(90deg, var(--tx-trust-blue) 0%, var(--tx-trust-blue-dark) 100%);
+}
+
+.tx-progress-premium {
+  background: linear-gradient(90deg, var(--tx-premium-purple) 0%, var(--tx-wealth-gold) 100%);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY TOGGLES
+   ======================================== */
+
+.tx-toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.tx-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.tx-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.tx-toggle-slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+  box-shadow: var(--tx-shadow-light);
+}
+
+.tx-toggle input:checked + .tx-toggle-slider {
+  background-color: var(--tx-success-green);
+}
+
+.tx-toggle input:checked + .tx-toggle-slider:before {
+  transform: translateX(26px);
+  box-shadow: var(--tx-shadow-medium);
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY ANIMATIONS
+   ======================================== */
+
+@keyframes tx-success-celebration {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes tx-money-flow {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-40px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.tx-celebrate {
+  animation: tx-success-celebration 0.6s ease-in-out;
+}
+
+.tx-money-particle {
+  animation: tx-money-flow 2s ease-out forwards;
+}
+
+/* ========================================
+   TRANSACTION PSYCHOLOGY UTILITIES
+   ======================================== */
+
+.tx-text-success {
+  color: var(--tx-success-green-dark);
+}
+.tx-text-trust {
+  color: var(--tx-trust-blue);
+}
+.tx-text-action {
+  color: var(--tx-action-orange);
+}
+.tx-text-premium {
+  color: var(--tx-premium-purple);
+}
+.tx-text-wealth {
+  color: var(--tx-wealth-gold-dark);
+}
+.tx-text-danger {
+  color: var(--tx-danger-red);
+}
+
+.tx-bg-success-light {
+  background-color: var(--tx-success-green-light);
+}
+.tx-bg-trust-light {
+  background-color: var(--tx-trust-blue-light);
+}
+.tx-bg-premium-light {
+  background-color: var(--tx-premium-purple-light);
+}
+.tx-bg-wealth-light {
+  background-color: var(--tx-wealth-gold-light);
+}
+
+.tx-border-success {
+  border-color: var(--tx-success-green);
+}
+.tx-border-trust {
+  border-color: var(--tx-trust-blue);
+}
+.tx-border-premium {
+  border-color: var(--tx-premium-purple);
+}
+
+.tx-shadow-success {
+  box-shadow: 0 4px 20px rgba(0, 200, 81, 0.3);
+}
+.tx-shadow-trust {
+  box-shadow: 0 4px 20px rgba(26, 115, 232, 0.3);
+}
+.tx-shadow-premium {
+  box-shadow: 0 4px 20px rgba(123, 31, 162, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .tx-btn-primary,
+  .tx-btn-trust,
+  .tx-btn-action,
+  .tx-btn-secondary {
+    padding: var(--tx-space-4) var(--tx-space-6);
+    font-size: var(--tx-font-size-lg);
+  }
+
+  .tx-btn-premium {
+    padding: var(--tx-space-5) var(--tx-space-8);
+    font-size: var(--tx-font-size-xl);
+  }
+
+  .tx-card {
+    padding: var(--tx-space-4);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-btn-primary,
+  .tx-btn-trust,
+  .tx-btn-action,
+  .tx-btn-secondary,
+  .tx-btn-premium,
+  .tx-card,
+  .tx-input,
+  .tx-tooltip-content,
+  .tx-toggle-slider,
+  .tx-toggle-slider:before,
+  .tx-progress-bar {
+    transition: none;
+  }
+
+  .tx-btn-action,
+  .tx-badge-action {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tx-btn-primary,
+  .tx-btn-trust,
+  .tx-btn-action,
+  .tx-btn-premium {
+    border: 2px solid var(--tx-neutral-dark);
+  }
+
+  .tx-input {
+    border-width: 3px;
+  }
+}

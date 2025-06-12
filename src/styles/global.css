@@ -1,0 +1,1307 @@
+/* All imports must be at the top */
+@import './fonts.css';
+@import '../components/dashboard/DashboardStyles.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS for EVA Platform */
+
+/**
+ * TYPOGRAPHY SYSTEM
+ * 
+ * Font sizes (px) - Increased by 21%:
+ * 19 (base) / 22 / 24 / 29 / 34 / 39 / 44 / 53 / 63
+ * 
+ * Font weights:
+ * Regular: 400
+ * Medium: 500
+ * Semi-bold: 600
+ * Bold: 700
+ * Extra-Bold: 800
+ * 
+ * Line heights:
+ * Default: 1.5
+ * Headers: 1.2
+ * Small: 1.1
+ * 
+ * SPACING SYSTEM (px) - Increased by 21%
+ * 5 / 10 / 15 / 19 / 29 / 39 / 58 / 77 / 97 / 116 / 155
+ */
+
+/* Additional global styles and utilities */
+/* NOTE: Typography, colors, and spacing are now defined in:
+   - typography-system.css
+   - unified-design-system.css
+*/
+
+/* Set base HTML font size to be 21% larger */
+html {
+  font-size: 19px; /* Increased from 16px to 19px (approximately 21% increase) */
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Base typography */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring-color);
+}
+
+/* CONSISTENT TYPOGRAPHY SYSTEM */
+
+/* Primary page title - Large, bold, stands out */
+h1,
+.h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-4);
+  color: #222;
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.02em;
+}
+
+/* Section headers - Bold, clear hierarchy */
+h2,
+.h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  color: #222;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--space-2);
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.01em;
+}
+
+/* Subsection headers */
+h3,
+.h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  color: #222;
+  text-shadow: var(--text-shadow);
+}
+
+/* Minor headers */
+h4,
+.h4 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
+  color: #222;
+}
+
+/* Regular text and paragraphs */
+p,
+.text-base {
+  font-size: var(--font-size-base);
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-normal);
+}
+
+/* Small text (captions, hints) */
+.text-sm {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-snug);
+  color: var(--text-color-light);
+}
+
+/* COMMON LAYOUT UTILITY CLASSES */
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack-sm > * + * {
+  margin-top: var(--space-2);
+}
+
+.stack-md > * + * {
+  margin-top: var(--space-4);
+}
+
+.stack-lg > * + * {
+  margin-top: var(--space-8);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cluster-sm {
+  gap: var(--space-1);
+}
+
+.cluster-lg {
+  gap: var(--space-4);
+}
+
+.flow > * + * {
+  margin-top: var(--space-4);
+}
+
+.flow-sm > * + * {
+  margin-top: var(--space-2);
+}
+
+.flow-lg > * + * {
+  margin-top: var(--space-8);
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Additional global styles for headers and information blocks */
+.header-large,
+.title-large,
+.dashboard-header,
+.section-title-large {
+  font-size: 1.936rem !important;
+  font-weight: var(--font-weight-extrabold) !important;
+  color: #222 !important;
+  text-shadow: var(--text-shadow) !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 0.91rem !important;
+}
+
+.header-medium,
+.title-medium,
+.card-header,
+.panel-title {
+  font-size: 1.452rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: #222 !important;
+  text-shadow: var(--text-shadow) !important;
+  letter-spacing: -0.01em !important;
+}
+
+.header-small,
+.title-small,
+.widget-header,
+.box-title {
+  font-size: 1.21rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: #222 !important;
+  text-shadow: var(--text-shadow) !important;
+}
+
+/* Large numbers in dashboards */
+.number-large,
+.stat-value,
+.metric-number,
+.dashboard-stat {
+  font-size: 1.815rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: 1.2;
+  color: #222 !important;
+}
+
+/* FORM STYLES */
+
+/* Form containers */
+.form-section {
+  margin-bottom: var(--space-8);
+  padding: var(--space-4);
+  background-color: #fff;
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Form section headers */
+.form-section-header {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--border-color);
+  color: #222;
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.01em;
+}
+
+/* Labels for form fields */
+.form-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-1);
+  color: #222;
+}
+
+/* Required field indicator */
+.form-label.required:after {
+  content: ' *';
+  color: #d32f2f;
+}
+
+/* Form input fields */
+.form-input {
+  display: block;
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 var(--input-padding);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: #fff;
+  border: var(--input-border-width) solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form-input:focus {
+  border-color: var(--primary-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--focus-ring-color);
+}
+
+/* Select dropdowns */
+.form-select {
+  display: block;
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 var(--input-padding);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: #fff;
+  border: var(--input-border-width) solid var(--border-color);
+  border-radius: var(--input-border-radius);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form-select:focus {
+  border-color: var(--primary-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--focus-ring-color);
+}
+
+/* Form row layout */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  margin-bottom: var(--space-4);
+}
+
+.form-group {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .form-group-half {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .form-group-third {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .form-group-two-thirds {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+
+  .form-group-quarter {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+/* Form helper text */
+.form-helper-text {
+  margin-top: 0.25rem;
+  font-size: var(--font-size-xs);
+  color: var(--text-color-light);
+}
+
+/* Error messages */
+.form-error-message {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: var(--font-size-xs);
+  color: #d32f2f;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+  border-color: #4338ca;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: var(--font-size-lg);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+.btn-link {
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-color);
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.btn-link:hover {
+  color: #4338ca;
+  text-decoration: underline;
+}
+
+/* CUSTOM CLASSES FOR CREDIT APPLICATION */
+
+.credit-application-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  text-align: center;
+  margin-bottom: var(--space-6);
+  color: #222;
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.02em;
+}
+
+.business-information-header {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-4);
+  color: #222;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--space-2);
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.01em;
+}
+
+.contact-information-header {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-4);
+  color: #222;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--space-2);
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.01em;
+}
+
+.owner-information-header {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-4);
+  color: #222;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--space-2);
+  text-shadow: var(--text-shadow);
+  letter-spacing: -0.01em;
+}
+
+.signature-container {
+  border: 1px solid var(--border-color);
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  border-radius: var(--input-border-radius);
+  min-height: 100px;
+  background-color: #f9f9f9;
+}
+
+.clear-signature-btn {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  padding: 0.25rem 0.5rem;
+}
+
+/* Override table styles for better readability */
+table {
+  font-size: 0.847rem !important;
+}
+
+th {
+  font-size: 0.908rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: #222 !important;
+}
+
+/* Make sure status indicators and badges are readable */
+.badge,
+.tag,
+.pill,
+.status {
+  font-size: 0.726rem !important;
+  padding: 0.242rem 0.484rem !important;
+}
+
+/* Override any component-specific headers */
+[class*='Title'],
+[class*='Header'],
+[class*='Heading'] {
+  font-size: 1.21rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: #222 !important;
+  text-shadow: var(--text-shadow) !important;
+}
+
+/* Fix specifically for dashboard metric components */
+.Total,
+.Pending,
+.Conversion,
+.Rate,
+.Status,
+.Weekly,
+.Team {
+  font-size: 1.21rem !important;
+  font-weight: var(--font-weight-bold) !important;
+  text-transform: uppercase;
+  color: #222 !important;
+}
+
+/* Card styles */
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  padding: var(--space-4);
+  border-bottom: 2px solid var(--border-color);
+  font-weight: var(--font-weight-bold);
+  color: #222;
+  text-shadow: var(--text-shadow);
+}
+
+.card-body {
+  padding: var(--space-4);
+}
+
+.card-footer {
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Dark mode theme - temporarily disabled */
+/*
+.dark {
+  --background-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --text-color-light: #b0b0b0;
+  --card-bg: #2a2a2a;
+  --border-color: #444;
+  color-scheme: dark;
+}
+
+.dark .form-section {
+  background-color: var(--card-bg);
+}
+
+.dark .form-input,
+.dark .form-select {
+  background-color: #333;
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.dark .signature-container {
+  background-color: #333;
+}
+
+.dark .card {
+  background-color: var(--card-bg);
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark .h1,
+.dark .h2,
+.dark .h3,
+.dark .h4,
+.dark .header-large,
+.dark .header-medium,
+.dark .header-small,
+.dark .title-large,
+.dark .title-medium,
+.dark .title-small,
+.dark [class*='Title'],
+.dark [class*='Header'],
+.dark [class*='Heading'],
+.dark .form-section-header,
+.dark .business-information-header,
+.dark .contact-information-header,
+.dark .owner-information-header,
+.dark .credit-application-title,
+.dark .form-label,
+.dark th,
+.dark .card-header {
+  color: #f5f5f5 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) !important;
+}
+*/
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group-half,
+  .form-group-third,
+  .form-group-two-thirds,
+  .form-group-quarter {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  h1,
+  .h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2,
+  .h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .credit-application-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .container {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+  }
+
+  .form-section {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+
+  .btn {
+    display: none;
+  }
+}
+
+/* Global modal backdrop fixes */
+.modal-backdrop,
+.fixed.inset-0.bg-black.bg-opacity-50,
+.fixed.inset-0.bg-gray-500.bg-opacity-75 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(2px);
+  z-index: 40;
+}
+
+/* Ensure modals have proper z-index layering */
+.modal-container {
+  z-index: 50;
+}
+
+/* Fix for chat window overlay interactions */
+.chat-overlay {
+  z-index: 1000;
+}
+
+.chat-overlay .modal-backdrop {
+  z-index: 999;
+}
+
+/* Prevent backdrop transparency issues on minimize */
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-open .modal-backdrop {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* === COMPREHENSIVE CHAT INTERFACE FIXES === */
+
+/* Force white background for all chat-related components */
+[class*='chat'],
+[class*='Chat'],
+[id*='chat'],
+[id*='Chat'],
+.eva-chat,
+.eva-assistant,
+.chat-container,
+.chat-interface,
+.chat-window,
+.chat-content {
+  background-color: white !important;
+  color: #1f2937 !important; /* Ensure dark text on white background */
+}
+
+/* Specific EVA Chat Manager fixes */
+.eva-multi-chat-manager,
+.eva-assistant-with-mcp,
+.eva-assistant-chat {
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Chat message areas */
+.chat-messages,
+.message-container,
+.conversation-container {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+/* Chat input areas */
+.chat-input,
+.message-input,
+input[placeholder*='chat' i],
+input[placeholder*='message' i],
+textarea[placeholder*='chat' i],
+textarea[placeholder*='message' i] {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  color: #1f2937 !important;
+}
+
+/* Chat headers and tabs */
+.chat-header,
+.chat-tab,
+.chat-title {
+  background-color: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+/* EVA Chat Widget Specific Fixes */
+.eva-chat-widget {
+  background-color: white !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.eva-chat-widget-header {
+  background-color: #3b82f6 !important; /* Blue header */
+  color: white !important; /* White text on blue */
+  border-bottom: 1px solid #2563eb !important;
+}
+
+.eva-chat-widget-body {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+.eva-chat-widget-footer {
+  background-color: #f9fafb !important;
+  border-top: 1px solid #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+/* Chat bubble styling with proper contrast */
+.chat-bubble-user,
+.message-user {
+  background-color: #3b82f6 !important; /* Blue bubble */
+  color: white !important; /* White text */
+  border: none !important;
+}
+
+.chat-bubble-assistant,
+.chat-bubble-eva,
+.message-assistant {
+  background-color: #f3f4f6 !important; /* Light gray */
+  color: #1f2937 !important; /* Dark text */
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Chat interface buttons */
+.chat-button,
+.eva-chat-button {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border: 1px solid #2563eb !important;
+}
+
+.chat-button:hover,
+.eva-chat-button:hover {
+  background-color: #2563eb !important;
+  color: white !important;
+}
+
+/* Remove any red backgrounds that might be inherited */
+.chat-interface *,
+.eva-chat *,
+.eva-assistant * {
+  background-color: inherit;
+}
+
+/* Override any red theme classes in chat */
+.chat-interface .bg-red-500,
+.chat-interface .bg-red-600,
+.chat-interface .bg-red-700,
+.eva-chat .bg-red-500,
+.eva-chat .bg-red-600,
+.eva-chat .bg-red-700 {
+  background-color: white !important;
+}
+
+.chat-interface .text-red-500,
+.chat-interface .text-red-600,
+.chat-interface .text-red-700,
+.eva-chat .text-red-500,
+.eva-chat .text-red-600,
+.eva-chat .text-red-700 {
+  color: #1f2937 !important;
+}
+
+/* Chat scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Fixed positioning for chat windows */
+.chat-fixed-position {
+  position: fixed !important;
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Ensure chat is always visible above other content */
+.eva-chat-container {
+  z-index: 8999 !important;
+  background-color: white !important;
+}
+
+/* Override any framework styles that might interfere */
+.chat-override {
+  background: white !important;
+  color: #1f2937 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Error message styling for chat */
+.chat-error {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fecaca !important;
+  padding: 0.75rem !important;
+  border-radius: 0.375rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+/* Success message styling for chat */
+.chat-success {
+  background-color: #f0fdf4 !important;
+  color: #16a34a !important;
+  border: 1px solid #bbf7d0 !important;
+  padding: 0.75rem !important;
+  border-radius: 0.375rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+/* === ENHANCED DESIGN SYSTEM RULES === */
+
+/* STRICT RULE: Blue backgrounds ALWAYS use white fonts (never red) */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.from-blue-600,
+.to-blue-700,
+.bg-gradient-to-r.from-blue-600,
+[class*='bg-blue'] {
+  color: white !important;
+}
+
+/* Apply to nested elements within blue backgrounds */
+.bg-blue-500 *,
+.bg-blue-600 *,
+.bg-blue-700 *,
+.bg-blue-800 *,
+.bg-blue-900 *,
+.from-blue-600 *,
+.to-blue-700 *,
+.bg-gradient-to-r.from-blue-600 *,
+[class*='bg-blue'] * {
+  color: inherit !important;
+}
+
+/* Borrower theme enforcement - Blue + White only */
+.borrower-theme,
+.borrower-dashboard,
+.bg-gradient-to-r.from-blue-600.to-blue-700 {
+  color: white !important;
+}
+
+.borrower-theme *,
+.borrower-dashboard *,
+.bg-gradient-to-r.from-blue-600.to-blue-700 * {
+  color: inherit;
+}
+
+/* Prevent red text on blue backgrounds specifically */
+.bg-blue-500 .text-red-500,
+.bg-blue-600 .text-red-500,
+.bg-blue-700 .text-red-500,
+.bg-blue-800 .text-red-500,
+.bg-blue-900 .text-red-500,
+.from-blue-600 .text-red-500,
+.to-blue-700 .text-red-500,
+[class*='bg-blue'] .text-red-500,
+[class*='bg-blue'] .text-red-600,
+[class*='bg-blue'] .text-red-700,
+[class*='bg-blue'] .text-red-800,
+[class*='bg-blue'] .text-red-900 {
+  color: white !important;
+}
+
+/* Blue buttons and interactive elements */
+.btn-blue,
+.button-blue,
+[class*='btn-blue'],
+[class*='button-blue'] {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-color: #2563eb !important;
+}
+
+.btn-blue:hover,
+.button-blue:hover,
+[class*='btn-blue']:hover,
+[class*='button-blue']:hover {
+  background-color: #2563eb !important;
+  color: white !important;
+  border-color: #1d4ed8 !important;
+}
+
+/* Fix for dashboard header specifically */
+.dashboard-header.bg-blue-600,
+.dashboard-header.bg-blue-700,
+[class*='dashboard'] [class*='bg-blue'] {
+  color: white !important;
+}
+
+.dashboard-header.bg-blue-600 *,
+.dashboard-header.bg-blue-700 *,
+[class*='dashboard'] [class*='bg-blue'] * {
+  color: white !important;
+}
+
+/* Analytics dashboard role-based theming */
+.analytics-dashboard {
+  background-color: white;
+  color: #1f2937;
+}
+
+.analytics-dashboard [class*='bg-blue'] {
+  color: white !important;
+}
+
+.analytics-dashboard [class*='bg-blue'] * {
+  color: white !important;
+}
+
+/* Role-specific header improvements */
+.role-header {
+  color: white !important;
+}
+
+.role-header * {
+  color: inherit !important;
+}
+
+/* Navigation and menu fixes */
+.nav-blue,
+.menu-blue,
+[class*='nav-blue'],
+[class*='menu-blue'] {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.nav-blue a,
+.menu-blue a,
+[class*='nav-blue'] a,
+[class*='menu-blue'] a {
+  color: white !important;
+}
+
+.nav-blue:hover,
+.menu-blue:hover,
+[class*='nav-blue']:hover,
+[class*='menu-blue']:hover {
+  background-color: #2563eb !important;
+  color: white !important;
+}
+
+/* Modal and dialog fixes */
+.modal-blue,
+.dialog-blue,
+[class*='modal-blue'],
+[class*='dialog-blue'] {
+  background-color: white !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.modal-blue .modal-header,
+.dialog-blue .dialog-header,
+[class*='modal-blue'] .modal-header,
+[class*='dialog-blue'] .dialog-header {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-bottom: 1px solid #2563eb !important;
+}
+
+/* Card and widget fixes */
+.card-blue,
+.widget-blue,
+[class*='card-blue'],
+[class*='widget-blue'] {
+  background-color: white !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.card-blue .card-header,
+.widget-blue .widget-header,
+[class*='card-blue'] .card-header,
+[class*='widget-blue'] .widget-header {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-bottom: 1px solid #2563eb !important;
+}
+
+/* Table fixes for blue headers */
+.table-blue thead,
+[class*='table-blue'] thead {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.table-blue thead th,
+[class*='table-blue'] thead th {
+  color: white !important;
+  border-color: #2563eb !important;
+}
+
+/* Form element fixes */
+.form-blue,
+[class*='form-blue'] {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+.form-blue .form-header,
+[class*='form-blue'] .form-header {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Alert and notification fixes */
+.alert-blue,
+.notification-blue,
+[class*='alert-blue'],
+[class*='notification-blue'] {
+  background-color: #dbeafe !important;
+  color: #1e40af !important;
+  border: 1px solid #93c5fd !important;
+}
+
+/* Progress bar fixes */
+.progress-blue,
+[class*='progress-blue'] {
+  background-color: #e5e7eb !important;
+}
+
+.progress-blue .progress-fill,
+[class*='progress-blue'] .progress-fill {
+  background-color: #3b82f6 !important;
+}
+
+/* Badge and tag fixes */
+.badge-blue,
+.tag-blue,
+[class*='badge-blue'],
+[class*='tag-blue'] {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border: 1px solid #2563eb !important;
+}
+
+/* Tab fixes */
+.tab-blue,
+[class*='tab-blue'] {
+  background-color: #f8fafc !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.tab-blue.active,
+[class*='tab-blue'].active {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-bottom-color: #3b82f6 !important;
+}
+
+/* Dropdown fixes */
+.dropdown-blue,
+[class*='dropdown-blue'] {
+  background-color: white !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.dropdown-blue .dropdown-header,
+[class*='dropdown-blue'] .dropdown-header {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* === END ENHANCED DESIGN SYSTEM RULES === */
+
+/* === UNIVERSAL LAYOUT CONSISTENCY RULES === */
+
+/* Ensure consistent page layout across all components */
+.eva-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.eva-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Allow flex children to shrink */
+}
+
+/* Standard content spacing - NO excessive gaps */
+.eva-content-main {
+  flex: 1;
+  overflow: auto;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+/* Navigation consistency */
+.eva-nav-header {
+  flex-shrink: 0;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+  z-index: 10;
+}
+
+/* Compact content sections */
+.eva-section {
+  padding: 1rem; /* 16px standard padding */
+  margin: 0;
+}
+
+.eva-section-compact {
+  padding: 0.5rem; /* 8px compact padding */
+  margin: 0;
+}
+
+/* Remove excessive spacing from filelock and document components */
+.filelock-container,
+.document-container,
+.shield-vault-container,
+.forms-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: white;
+}
+
+/* Consistent content areas */
+.content-area {
+  flex: 1;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.content-area-compact {
+  flex: 1;
+  padding: 0.5rem;
+  overflow: auto;
+}
+
+/* Fix specific component spacing issues */
+.bg-gray-50 {
+  background-color: white !important; /* Remove gray backgrounds that create visual gaps */
+}
+
+/* Ensure forms and tools are properly spaced */
+.tool-container,
+.form-container {
+  padding: 1rem;
+  margin: 0;
+  background: white;
+}
+
+/* === END UNIVERSAL LAYOUT CONSISTENCY RULES === */

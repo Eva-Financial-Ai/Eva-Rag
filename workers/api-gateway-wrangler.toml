@@ -1,0 +1,124 @@
+name = "eva-api-gateway"
+main = "api-gateway-worker.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Account Configuration
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+
+# Durable Objects Migrations
+[[migrations]]
+tag = "v1"
+new_classes = ["RateLimiter", "ApiMetrics"]
+
+# Routes Configuration
+[env.staging]
+routes = [
+  { pattern = "api-staging.evafi.ai/*", zone_id = "79cbd8176057c91e2e2329ffd8b386a5" }
+]
+
+[env.production]
+routes = [
+  { pattern = "api.evafi.ai/*", zone_id = "913680b4428f2f4d1c078dd841cd8cdb" }
+]
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "EVA_CACHE"
+id = "e28fe91a1b844808a5b3109592b890a7"
+
+[[kv_namespaces]]
+binding = "USER_SESSIONS"
+id = "3c32a3731dcf444fa788804d20587d43"
+
+[[kv_namespaces]]
+binding = "ANALYTICS_DATA"
+id = "47d169b21b9742db8e3040e7c127964e"
+
+# R2 Buckets
+[[r2_buckets]]
+binding = "DOCUMENTS"
+bucket_name = "eva-documents-staging"
+
+[[r2_buckets]]
+binding = "STATIC_ASSETS"
+bucket_name = "eva-static-assets-staging"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "eva-main-db-staging"
+database_id = "966ef956-6579-485a-9ac9-53179931324b"
+
+# Queue Configuration
+[[queues.producers]]
+queue = "eva-processing-queue"
+binding = "QUEUE"
+
+[[queues.consumers]]
+queue = "eva-processing-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
+# Analytics Engine
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "eva-analytics"
+
+# Durable Objects for Rate Limiting
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+
+[[durable_objects.bindings]]
+name = "API_METRICS"
+class_name = "ApiMetrics"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "staging"
+GATEWAY_VERSION = "2.5.0"
+MAX_REQUEST_SIZE = "10485760"
+DEFAULT_TIMEOUT = "30000"
+ENABLE_ANALYTICS = "true"
+ENABLE_CACHING = "true"
+CLOUDFLARE_STREAM_SUBDOMAIN = "customer-9eikf9ekxbfirnkc.cloudflarestream.com"
+ENABLE_LOAD_BALANCING = "true"
+LOAD_BALANCER_POOL_ID = "eva-api-pool-primary"
+
+# Staging Environment Configuration
+[env.staging.vars]
+ENVIRONMENT = "staging"
+CLOUDFLARE_STREAM_SUBDOMAIN = "customer-9eikf9ekxbfirnkc.cloudflarestream.com"
+ENABLE_LOAD_BALANCING = "true"
+LOAD_BALANCER_POOL_ID = "eva-api-pool-staging"
+
+[env.staging.kv_namespaces]
+EVA_CACHE = { binding = "EVA_CACHE", id = "e28fe91a1b844808a5b3109592b890a7" }
+USER_SESSIONS = { binding = "USER_SESSIONS", id = "3c32a3731dcf444fa788804d20587d43" }
+ANALYTICS_DATA = { binding = "ANALYTICS_DATA", id = "47d169b21b9742db8e3040e7c127964e" }
+
+[env.staging.r2_buckets]
+DOCUMENTS = { binding = "DOCUMENTS", bucket_name = "eva-documents-staging" }
+STATIC_ASSETS = { binding = "STATIC_ASSETS", bucket_name = "eva-static-assets-staging" }
+
+[env.staging.d1_databases]
+DB = { binding = "DB", database_name = "eva-main-db-staging", database_id = "966ef956-6579-485a-9ac9-53179931324b" }
+
+[env.staging.queues]
+QUEUE = { binding = "QUEUE", queue = "eva-processing-queue" }
+
+[env.staging.analytics_engine_datasets]
+ANALYTICS = { binding = "ANALYTICS", dataset = "eva-analytics" }
+
+[env.staging.durable_objects.bindings]
+RATE_LIMITER = { name = "RATE_LIMITER", class_name = "RateLimiter" }
+API_METRICS = { name = "API_METRICS", class_name = "ApiMetrics" }
+
+# Production Environment Overrides
+[env.production.vars]
+ENVIRONMENT = "production"
+CLOUDFLARE_STREAM_SUBDOMAIN = "customer-9eikf9ekxbfirnkc.cloudflarestream.com"
+ENABLE_LOAD_BALANCING = "true"
+LOAD_BALANCER_POOL_ID = "eva-api-pool-production" 

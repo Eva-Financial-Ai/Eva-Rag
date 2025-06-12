@@ -1,0 +1,69 @@
+/* CRP Dashboard Styles */
+.crp-dashboard {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Prevent console debug issues */
+.crp-dashboard * {
+  pointer-events: auto;
+  position: relative;
+  z-index: auto;
+}
+
+/* Ensure dashboard is always visible */
+.crp-dashboard-container {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .crp-dashboard .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .crp-dashboard .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Prevent layout shifts */
+.crp-dashboard .metric-card {
+  min-height: 150px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.crp-dashboard .metric-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Loading state */
+.crp-dashboard-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+/* Tab navigation */
+.crp-dashboard-tabs {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.crp-dashboard-tab {
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.crp-dashboard-tab.active {
+  border-bottom-color: #3b82f6;
+  color: #3b82f6;
+}

@@ -1,0 +1,540 @@
+/* =================================================================
+   EVA AI PLATFORM - RESPONSIVE DESIGN FIXES
+   =================================================================
+   
+   Financial application responsive fixes for console debugging
+   and proper spacing across all screen sizes and viewport states.
+   
+   Last Updated: December 2024
+   ================================================================= */
+
+/* Base Layout Fixes */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Main Application Container */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Content Area Responsive Fixes */
+.content-area {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Fix for console debugging - prevent horizontal overflow */
+@media screen and (min-width: 768px) {
+  .content-area {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .content-area {
+    padding: 2rem;
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+/* Console debugging compatibility */
+@media screen and (min-width: 1400px) {
+  .content-area {
+    max-width: calc(100vw - 400px); /* Account for open dev console */
+  }
+}
+
+/* Dashboard Grid Fixes */
+.dashboard-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.dashboard-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.dashboard-grid.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.dashboard-grid.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.dashboard-grid.cols-4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Card Component Responsive */
+.card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0; /* Prevent flex items from overflowing */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background: white;
+  overflow: hidden;
+}
+
+.card-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-content {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+/* Navigation Fixes */
+.nav-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f3f4f6;
+}
+
+.nav-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.nav-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.nav-container::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 2px;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  min-width: min-content;
+  padding: 0.5rem;
+}
+
+.nav-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  min-width: fit-content;
+}
+
+/* Table Responsive */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px; /* Minimum table width */
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  word-wrap: break-word;
+  max-width: 200px; /* Prevent extremely wide cells */
+}
+
+.table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Form Layout Fixes */
+.form-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.form-grid.cols-2 {
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 640px) {
+  .form-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form-grid.cols-3 {
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 768px) {
+  .form-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .form-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.form-field {
+  width: 100%;
+  min-width: 0;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+/* Modal Responsive */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 32rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-container {
+    max-width: 42rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modal-container {
+    max-width: 48rem;
+  }
+}
+
+.modal-content {
+  padding: 1.5rem;
+}
+
+/* Error State Fixes */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-container h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.error-container p {
+  margin-bottom: 1rem;
+  color: #6b7280;
+}
+
+.error-container button {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.error-container button:hover {
+  background-color: #2563eb;
+}
+
+/* Loading State Fixes */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Focus Management */
+.focus-visible:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid #000;
+  }
+
+  .nav-tab {
+    border: 1px solid #000;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    border: 2px solid #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .nav-container,
+  .modal-overlay,
+  button:not(.print-button) {
+    display: none !important;
+  }
+
+  .card {
+    break-inside: avoid;
+    border: 1px solid #000;
+    margin-bottom: 1rem;
+  }
+
+  .table {
+    font-size: 0.75rem;
+  }
+}
+
+/* Console Debug Mode Compatibility */
+@media screen and (min-width: 1600px) {
+  /* When console is open on the right side */
+  .app-container {
+    max-width: calc(100vw - 500px);
+  }
+
+  .dashboard-grid.cols-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .table {
+    min-width: 500px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1f2937;
+    color: #f9fafb;
+    border: 1px solid #374151;
+  }
+
+  .card-header {
+    border-bottom-color: #374151;
+  }
+
+  .table th {
+    background-color: #374151;
+    color: #f9fafb;
+  }
+
+  .table td {
+    border-bottom-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+
+  .modal-container {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+}
+
+/* =================================================================
+   CRP DASHBOARD SPECIFIC STYLES
+   ================================================================= */
+
+.crp-dashboard-container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.crp-dashboard-container .bg-gray-50 {
+  padding: 0; /* Remove duplicate padding since parent already has padding */
+}
+
+/* CRP Dashboard responsive grid fixes */
+.crp-dashboard-container .grid {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.crp-dashboard-container .overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f3f4f6;
+}
+
+.crp-dashboard-container .overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.crp-dashboard-container .overflow-x-auto::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.crp-dashboard-container .overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  .crp-dashboard-container {
+    padding: 0.5rem;
+  }
+
+  .crp-dashboard-container .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,212 @@
+/* Header and Navigation Font Size Fix - Make text larger for better readability */
+
+/* Main Navigation Items */
+.fixed.top-0 nav a {
+  font-size: 1rem !important; /* 16px instead of 14px */
+  font-weight: 500 !important;
+}
+
+/* Mobile Navigation Items */
+.fixed.top-0 .md\\:hidden a {
+  font-size: 1.125rem !important; /* 18px for mobile */
+}
+
+/* User Type Selector */
+.fixed.top-0 select,
+.fixed.top-0 button {
+  font-size: 1rem !important; /* 16px */
+}
+
+/* Dropdown text */
+.fixed.top-0 .absolute .text-sm {
+  font-size: 0.9375rem !important; /* 15px instead of 14px */
+}
+
+/* Page titles and breadcrumbs */
+.fixed.top-0 h1,
+.fixed.top-0 h2,
+.fixed.top-0 .text-lg {
+  font-size: 1.25rem !important; /* 20px */
+}
+
+.fixed.top-0 .text-xl {
+  font-size: 1.5rem !important; /* 24px */
+}
+
+/* Customer selector and transaction info */
+.fixed.top-0 .text-xs {
+  font-size: 0.8125rem !important; /* 13px instead of 12px */
+}
+
+/* Enhanced readability for all header text */
+.fixed.top-0 * {
+  letter-spacing: 0.01em;
+}
+
+/* Specific fixes for EVA branding */
+.fixed.top-0 .font-bodoni,
+.fixed.top-0 [class*="bodoni"] {
+  font-size: 1.5rem !important; /* 24px for brand text */
+}
+
+/* Increase padding to accommodate larger text */
+.fixed.top-0 nav a {
+  padding: 0.875rem 1.25rem !important; /* More padding for larger text */
+}
+
+/* Adjust header height for larger text */
+.fixed.top-0 > div > div {
+  min-height: 5.5rem !important; /* 88px instead of 80px */
+}
+
+/* Breadcrumb text */
+nav[aria-label="Breadcrumb"] a,
+nav[aria-label="Breadcrumb"] span {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+/* Transaction dropdown */
+.fixed.top-0 [role="menu"] {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+/* Make sure buttons have proper sizing */
+.fixed.top-0 button:not(.text-xs):not(.text-sm) {
+  font-size: 1rem !important;
+  padding: 0.75rem 1rem !important;
+}
+
+/* Customer name and info in header */
+.fixed.top-0 .font-medium:not(.text-sm):not(.text-xs) {
+  font-size: 1.125rem !important; /* 18px */
+}
+
+/* Icon sizes - scale up with text */
+.fixed.top-0 svg {
+  width: 1.5rem !important; /* 24px */
+  height: 1.5rem !important; /* 24px */
+}
+
+/* Small icons should remain smaller */
+.fixed.top-0 .h-4.w-4 {
+  width: 1.25rem !important; /* 20px */
+  height: 1.25rem !important; /* 20px */
+}
+
+/* Medium icons */
+.fixed.top-0 .h-5.w-5 {
+  width: 1.375rem !important; /* 22px */
+  height: 1.375rem !important; /* 22px */
+}
+
+/* Keep large icons as they are */
+.fixed.top-0 .h-6.w-6 {
+  width: 1.5rem !important; /* 24px */
+  height: 1.5rem !important; /* 24px */
+}
+
+/* ========== SIDEBAR NAVIGATION FONT SIZES ========== */
+
+/* Sidebar navigation items */
+nav[class*="sidebar"],
+nav[class*="side-nav"],
+.w-64 nav,
+.w-20 nav {
+  font-size: 1rem !important; /* 16px base */
+}
+
+/* Sidebar buttons and links */
+nav[class*="sidebar"] button,
+nav[class*="side-nav"] button,
+.w-64 nav button,
+.w-20 nav button,
+nav[class*="sidebar"] a,
+nav[class*="side-nav"] a,
+.w-64 nav a,
+.w-20 nav a {
+  font-size: 1rem !important; /* 16px */
+  font-weight: 500 !important;
+  padding: 0.875rem 1rem !important; /* Increase padding */
+}
+
+/* Sidebar item text */
+nav[class*="sidebar"] span:not(.text-xs),
+nav[class*="side-nav"] span:not(.text-xs),
+.w-64 nav span:not(.text-xs),
+.w-20 nav span:not(.text-xs) {
+  font-size: 1rem !important; /* 16px */
+}
+
+/* Sidebar badges */
+nav[class*="sidebar"] .text-xs,
+nav[class*="side-nav"] .text-xs,
+.w-64 nav .text-xs,
+.w-20 nav .text-xs {
+  font-size: 0.8125rem !important; /* 13px instead of 12px */
+}
+
+/* Sidebar tooltips */
+.w-64 .group-hover\\:opacity-100,
+.w-20 .group-hover\\:opacity-100 {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+/* EVA Logo text in sidebar */
+.w-64 .font-bodoni,
+.w-20 .font-bodoni,
+nav .font-bodoni {
+  font-size: 1.75rem !important; /* 28px for branding */
+}
+
+/* ========== GLOBAL NAVIGATION ENHANCEMENTS ========== */
+
+/* All navigation text should have better readability */
+nav {
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+/* Ensure all nav items are readable */
+nav button:not([class*="text-xs"]),
+nav a:not([class*="text-xs"]) {
+  min-height: 3rem; /* 48px minimum height for better clickability */
+}
+
+/* Navigation icons scale */
+nav svg:not(.h-4):not(.h-3) {
+  width: 1.375rem !important; /* 22px */
+  height: 1.375rem !important; /* 22px */
+}
+
+/* Make sure all dropdowns have readable text */
+[role="menu"] {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+[role="menuitem"] {
+  font-size: 0.9375rem !important; /* 15px */
+  padding: 0.75rem 1rem !important;
+}
+
+/* User type selector specific */
+select,
+select option {
+  font-size: 1rem !important; /* 16px */
+  padding: 0.75rem 1rem !important;
+}
+
+/* Enhanced header height for better spacing */
+header,
+.fixed.top-0 {
+  min-height: 5.5rem !important; /* 88px */
+}
+
+/* Ensure readability on all screen sizes */
+@media (max-width: 768px) {
+  /* Mobile navigation should be even larger */
+  nav a,
+  nav button {
+    font-size: 1.125rem !important; /* 18px on mobile */
+    padding: 1rem 1.25rem !important;
+  }
+}

@@ -1,0 +1,151 @@
+[
+  {
+    "timestamp": "2025-05-27T20:44:03.520Z",
+    "level": "info",
+    "message": "EVA Coder Foundation initialized",
+    "data": {},
+    "sessionId": 1748378643520
+  },
+  {
+    "timestamp": "2025-05-27T20:44:09.272Z",
+    "level": "info",
+    "message": "EVA Coder Foundation initialized",
+    "data": {},
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:09.276Z",
+    "level": "info",
+    "message": "Generating daily report",
+    "data": {},
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:09.276Z",
+    "level": "info",
+    "message": "Starting test monitoring",
+    "data": {},
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:20.209Z",
+    "level": "error",
+    "message": "Test monitoring failed",
+    "data": {
+      "error": "spawnSync /bin/sh ENOBUFS"
+    },
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:20.210Z",
+    "level": "info",
+    "message": "Checking TypeScript compilation",
+    "data": {},
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:35.581Z",
+    "level": "error",
+    "message": "TypeScript compilation failed",
+    "data": {
+      "errorCount": 83
+    },
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:35.582Z",
+    "level": "info",
+    "message": "Checking ESLint issues",
+    "data": {},
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:42.778Z",
+    "level": "error",
+    "message": "Linting check failed",
+    "data": {
+      "error": "spawnSync /bin/sh ENOBUFS"
+    },
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:44:42.779Z",
+    "level": "info",
+    "message": "Daily report generated",
+    "data": {
+      "file": "/Users/justinmeyers/Downloads/eva-platform-frontend-main/monitoring/daily-report-2025-05-27.json"
+    },
+    "sessionId": 1748378649271
+  },
+  {
+    "timestamp": "2025-05-27T20:50:36.410Z",
+    "level": "info",
+    "message": "EVA Coder Foundation initialized",
+    "data": {},
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:50:36.414Z",
+    "level": "info",
+    "message": "Generating daily report",
+    "data": {},
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:50:36.415Z",
+    "level": "info",
+    "message": "Starting test monitoring",
+    "data": {},
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:50:47.441Z",
+    "level": "error",
+    "message": "Test monitoring failed",
+    "data": {
+      "error": "spawnSync /bin/sh ENOBUFS"
+    },
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:50:47.442Z",
+    "level": "info",
+    "message": "Checking TypeScript compilation",
+    "data": {},
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:51:03.007Z",
+    "level": "error",
+    "message": "TypeScript compilation failed",
+    "data": {
+      "errorCount": 83
+    },
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:51:03.008Z",
+    "level": "info",
+    "message": "Checking ESLint issues",
+    "data": {},
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:51:11.749Z",
+    "level": "error",
+    "message": "Linting check failed",
+    "data": {
+      "error": "spawnSync /bin/sh ENOBUFS"
+    },
+    "sessionId": 1748379036410
+  },
+  {
+    "timestamp": "2025-05-27T20:51:11.750Z",
+    "level": "info",
+    "message": "Daily report generated",
+    "data": {
+      "file": "/Users/justinmeyers/Downloads/eva-platform-frontend-main/monitoring/daily-report-2025-05-27.json"
+    },
+    "sessionId": 1748379036410
+  }
+]
