@@ -1,6 +1,6 @@
+import React, { Suspense, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,7 +9,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { EVACustomerProvider } from './contexts/EVACustomerContext';
 import { RoleDashboardProvider } from './contexts/RoleDashboardContext';
 import { TransactionContextProvider } from './contexts/TransactionContextProvider';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider, UserContext } from './contexts/UserContext';
 import { WorkflowProvider } from './contexts/WorkflowContext';
 
 // Critical Error Boundary
@@ -30,6 +30,22 @@ import SideNavigation from './components/layout/SideNavigation';
 // EVA Components
 import EVAMultiChatManager from './components/EVAMultiChatManager';
 import MockWebSocketControl from './components/dev/MockWebSocketControl';
+
+// Route Components
+import BorrowerAnalyticsDashboard from './components/dashboard/BorrowerAnalyticsDashboard';
+import { EnhancedCreditApplicationFlow } from './components/credit/EnhancedCreditApplicationFlow';
+import FilelockDriveApp from './components/document/FilelockDriveApp';
+
+// Create placeholder components for missing routes
+const CustomerManagement = () => <div className="p-8"><h1 className="text-2xl font-bold">Customer Management</h1><p>Coming soon...</p></div>;
+const RiskMapNavigator = () => <div className="p-8"><h1 className="text-2xl font-bold">Risk Map Navigator</h1><p>Coming soon...</p></div>;
+const DealStructuring = () => <div className="p-8"><h1 className="text-2xl font-bold">Deal Structuring</h1><p>Coming soon...</p></div>;
+const AssetPools = () => <div className="p-8"><h1 className="text-2xl font-bold">Asset Pools</h1><p>Coming soon...</p></div>;
+const PortfolioNavigator = () => <div className="p-8"><h1 className="text-2xl font-bold">Portfolio Navigator</h1><p>Coming soon...</p></div>;
+const EVAAssistant = () => <div className="p-8"><h1 className="text-2xl font-bold">EVA Assistant</h1><p>Coming soon...</p></div>;
+const LoginPage = () => <div className="p-8"><h1 className="text-2xl font-bold">Login</h1><p>Coming soon...</p></div>;
+const OnboardingFlow = () => <div className="p-8"><h1 className="text-2xl font-bold">Onboarding</h1><p>Coming soon...</p></div>;
+const WelcomePage = () => <div className="p-8"><h1 className="text-2xl font-bold">Welcome</h1><p>Coming soon...</p></div>;
 
 // Global Styles
 import './styles/index.css';
@@ -80,6 +96,45 @@ const fullScreenRoutes = ['/login', '/onboarding', '/welcome'];
 const currentPath = window.location.pathname;
 const hideNavigation = fullScreenRoutes.includes(currentPath);
 
+// Inner component that can access UserContext
+const AppContent: React.FC = () => {
+  const { sidebarCollapsed } = useContext(UserContext);
+  
+  return (
+    <div className="bg-background-primary flex h-screen overflow-hidden">
+      {!hideNavigation && <SideNavigation />}
+      <div className={`flex flex-1 flex-col overflow-hidden ${
+        !hideNavigation ? (sidebarCollapsed ? 'ml-20' : 'ml-64') : ''
+      }`}>
+        {!hideNavigation && <EnhancedTopNavigation />}
+        <main
+          className="bg-background-primary flex-1 overflow-auto"
+          style={{
+            paddingTop: '1rem',
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<BorrowerAnalyticsDashboard />} />
+            <Route path="/credit-application" element={<EnhancedCreditApplicationFlow />} />
+            <Route path="/customer-management" element={<CustomerManagement />} />
+            <Route path="/filelock-drive" element={<FilelockDriveApp />} />
+            <Route path="/risk-map" element={<RiskMapNavigator />} />
+            <Route path="/deal-structuring" element={<DealStructuring />} />
+            <Route path="/asset-pools" element={<AssetPools />} />
+            <Route path="/portfolio-navigator" element={<PortfolioNavigator />} />
+            <Route path="/eva-assistant" element={<EVAAssistant />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/onboarding" element={<OnboardingFlow />} />
+            <Route path="/welcome" element={<WelcomePage />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   return (
     <CriticalErrorBoundary>
@@ -103,44 +158,9 @@ function App() {
               <EVACustomerProvider>
                 <RoleDashboardProvider>
                   <TransactionContextProvider>
-                  <div className="bg-background-primary flex h-screen overflow-hidden">
-                    {!hideNavigation && <SideNavigation />}
-                    <div className="flex flex-1 flex-col overflow-hidden">
-                      {!hideNavigation && <EnhancedTopNavigation />}
-                      <main
-                        className="bg-background-primary flex-1 overflow-auto"
-                        style={{
-                          marginTop: hideNavigation ? '0' : '132px',
-                          paddingTop: '1rem',
-                        }}
-                      >
-                        <ErrorBoundary>
-                          <Suspense
-                            fallback={<SafeFallback message="Loading Eva AI Platform..." />}
-                          >
-                            {isDevelopment || isDemo ? (
-                              <LazyRouter />
-                            ) : (
-                              <Routes>
-                                <Route path="/welcome" element={<LazyRouter />} />
-                                <Route path="/login" element={<Navigate to="/welcome" replace />} />
-                                <Route
-                                  path="/*"
-                                  element={
-                                    <ProtectedRoute>
-                                      <LazyRouter />
-                                    </ProtectedRoute>
-                                  }
-                                />
-                              </Routes>
-                            )}
-                          </Suspense>
-                        </ErrorBoundary>
-                      </main>
-                    </div>
-                  </div>
-                  <EVAMultiChatManager currentTransaction={undefined} currentCustomer={undefined} />
-                  {showMockWS && isDevelopment && <MockWebSocketControl />}
+                    <AppContent />
+                    <EVAMultiChatManager currentTransaction={undefined} currentCustomer={undefined} />
+                    {showMockWS && isDevelopment && <MockWebSocketControl />}
                   </TransactionContextProvider>
                 </RoleDashboardProvider>
               </EVACustomerProvider>

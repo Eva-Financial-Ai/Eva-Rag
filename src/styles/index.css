@@ -200,14 +200,6 @@ select:focus {
   border-color: var(--primary-color) !important;
 }
 
-/* Import typography overrides first */
-@import './typography-overrides.css';
-
-/* Add Tailwind base styles integration */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Custom components and utility classes */
 @layer components {
   /* Ensure dropdown text is always visible */
@@ -430,4 +422,81 @@ td {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Navigation Layout Fixes */
+.main-content {
+  margin-left: 16rem; /* Default sidebar width */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content-collapsed {
+  margin-left: 5rem; /* Collapsed sidebar width */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Ensure top navigation doesn't overlap sidebar */
+.enhanced-top-nav {
+  left: 16rem; /* 256px - default sidebar width */
+  right: 0;
+  width: calc(100vw - 16rem);
+  transition: all 0.3s ease-in-out;
+}
+
+.enhanced-top-nav-collapsed {
+  left: 5rem; /* 80px - collapsed sidebar width */
+  right: 0;
+  width: calc(100vw - 5rem);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Page content spacing */
+.page-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .main-content,
+  .main-content-collapsed {
+    margin-left: 0;
+  }
+  
+  .enhanced-top-nav,
+  .enhanced-top-nav-collapsed {
+    left: 0;
+    width: 100vw;
+  }
+  
+  .page-container {
+    max-width: 100%;
+  }
+}
+
+/* Breadcrumb navigation improvements */
+.breadcrumb-nav {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb-nav .nav-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.breadcrumb-nav .nav-button:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+/* Quick action buttons */
+.quick-action-btn {
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.quick-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }

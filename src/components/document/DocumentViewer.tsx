@@ -135,7 +135,12 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
     'details'
   );
   const [isCertifying, setIsCertifying] = useState(false);
-  const [blockchainInfo] = useState<{ transactionHash?: string; blockNumber?: number; network?: string; timestamp?: string } | null>(null);
+  const [blockchainInfo] = useState<{ 
+    transactionHash?: string; 
+    blockNumber?: number; 
+    network?: string; 
+    timestamp?: string;
+  } | null>(null);
   const [showChat, setShowChat] = useState(false);
   const [documentSummary, setDocumentSummary] = useState<string>('');
   const [extractedData, setExtractedData] = useState<Record<string, unknown>>({});

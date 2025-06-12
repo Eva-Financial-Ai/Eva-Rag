@@ -176,7 +176,7 @@ export const EnhancedCreditApplicationFlow: React.FC<EnhancedCreditApplicationFl
     setIsSaving(true);
     try {
       const sessionManager = SessionManager.getInstance();
-      await sessionManager.saveCreditApplicationProgress(sessionId, formData);
+      await sessionManager.saveCreditApplicationProgress(sessionId, currentStep, formData);
       setLastSaved(new Date());
       debugLog('info', 'application_saved', 'Credit application progress saved');
     } catch (error) {
@@ -206,6 +206,22 @@ export const EnhancedCreditApplicationFlow: React.FC<EnhancedCreditApplicationFl
     }
   };
 
+  // Convert ApplicationProgress status to ApplicationSection status
+  const convertStatus = (status: 'completed' | 'in-progress' | 'locked' | 'available'): 'not-started' | 'in-progress' | 'completed' | 'error' => {
+    switch (status) {
+      case 'completed':
+        return 'completed';
+      case 'in-progress':
+        return 'in-progress';
+      case 'available':
+        return 'not-started';
+      case 'locked':
+        return 'not-started';
+      default:
+        return 'not-started';
+    }
+  };
+
   const renderStepContent = () => {
     const currentSection = sections[currentStep];
 
@@ -220,7 +236,7 @@ export const EnhancedCreditApplicationFlow: React.FC<EnhancedCreditApplicationFl
               title="Business Information"
               description="Tell us about your business"
               icon={<BuildingOfficeIcon className="h-6 w-6" />}
-              status={currentSection.status}
+              status={convertStatus(currentSection.status)}
               completedFields={currentSection.completedFields}
               totalFields={currentSection.totalFields}
               errors={validationErrors['business-info']}
@@ -324,7 +340,7 @@ export const EnhancedCreditApplicationFlow: React.FC<EnhancedCreditApplicationFl
             title="Business Ownership"
             description="Tell us about the business owners"
             icon={<UserGroupIcon className="h-6 w-6" />}
-            status={currentSection.status}
+            status={convertStatus(currentSection.status)}
             completedFields={currentSection.completedFields}
             totalFields={currentSection.totalFields}
           >
@@ -361,7 +377,7 @@ export const EnhancedCreditApplicationFlow: React.FC<EnhancedCreditApplicationFl
           <ApplicationSection
             title="Financial Information"
             icon={<ChartBarIcon className="h-6 w-6" />}
-            status={currentSection.status}
+            status={convertStatus(currentSection.status)}
             completedFields={currentSection.completedFields}
             totalFields={currentSection.totalFields}
           >

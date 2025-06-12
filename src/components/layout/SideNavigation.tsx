@@ -1,6 +1,6 @@
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { navigationConfig } from '../../config/navigationConfig';
 import { UserContext } from '../../contexts/UserContext';
 import NavigationItem from './NavigationItem';
@@ -131,8 +131,8 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
       <nav
         className={`fixed left-0 z-30 h-full border-r border-gray-200 bg-white transition-all duration-300 ease-in-out ${sidebarWidth} ${isMobile && !sidebarCollapsed ? 'translate-x-0' : ''} ${isMobile && sidebarCollapsed ? '-translate-x-full' : 'translate-x-0'} `}
         style={{
-          top: '132px', // Start below the enhanced top navigation (80px + 48px + 4px for border = 132px total height)
-          height: 'calc(100vh - 132px)', // Adjust height to account for enhanced top navigation
+          top: '0', // Start from the very top of the page
+          height: '100vh', // Full viewport height
         }}
       >
         <div className="flex h-full flex-col">
@@ -140,17 +140,21 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
           <div className="flex items-center justify-between border-b border-gray-200 p-4">
             <div className={`flex items-center ${sidebarCollapsed ? 'w-full justify-center' : ''}`}>
               {sidebarCollapsed ? (
-                <img
-                  className="h-8 w-8"
-                  src={`${process.env.PUBLIC_URL}/eva-favicon.png`}
-                  alt="EVA"
-                />
+                <Link to="/" className="flex-shrink-0">
+                  <img
+                    className="h-8 w-8"
+                    src={`${process.env.PUBLIC_URL}/eva-favicon.png`}
+                    alt="EVA"
+                  />
+                </Link>
               ) : (
-                <img
-                  className="h-10 w-auto"
-                  src={`${process.env.PUBLIC_URL}/eva-logo.png`}
-                  alt="EVA Platform"
-                />
+                <Link to="/" className="flex-shrink-0">
+                  <img
+                    className="h-10 w-auto"
+                    src={`${process.env.PUBLIC_URL}/eva-logo.png`}
+                    alt="EVA Platform"
+                  />
+                </Link>
               )}
             </div>
           </div>

@@ -28,6 +28,8 @@ module.exports = {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
         ignoreRestSiblings: true,
+        destructuredArrayIgnorePattern: '^_',
+        caughtErrors: 'none'
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',

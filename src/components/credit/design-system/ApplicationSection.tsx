@@ -137,9 +137,9 @@ export const ApplicationSection: React.FC<ApplicationSectionProps> = ({
       {/* Section Content */}
       {(!collapsible || isExpanded) && (
         <motion.div
-          initial={collapsible ? { height: 0, opacity: 0 } : false}
+          initial={collapsible ? { height: 0, opacity: 0 } : undefined}
           animate={{ height: 'auto', opacity: 1 }}
-          exit={collapsible ? { height: 0, opacity: 0 } : false}
+          exit={collapsible ? { height: 0, opacity: 0 } : undefined}
           transition={{ duration: 0.3 }}
           className="px-6 pb-6"
         >

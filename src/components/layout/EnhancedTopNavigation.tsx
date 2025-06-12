@@ -42,7 +42,7 @@ const EnhancedTopNavigation: React.FC = () => {
   const [previousPageTitle, setPreviousPageTitle] = useState('');
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const transactionDropdownRef = useRef<HTMLDivElement>(null);
-  const { user } = useContext(UserContext);
+  const { user, sidebarCollapsed } = useContext(UserContext);
 
   // NEW: Use enhanced transaction context instead of basic workflow
   const {
@@ -302,23 +302,14 @@ const EnhancedTopNavigation: React.FC = () => {
 
   return (
     <div
-      className="fixed left-0 right-0 top-0 z-40 border-b border-gray-200 bg-white shadow-sm"
+      className="border-b border-gray-200 bg-white shadow-sm"
       style={{ overflow: 'visible' }}
     >
       {/* Main Navigation Bar */}
       <div className="px-4 sm:px-6 lg:px-8" style={{ overflow: 'visible' }}>
         <div className="flex h-20 items-center justify-between" style={{ overflow: 'visible' }}>
-          {/* Left Section: EVA Logo and Main Navigation */}
+          {/* Left Section: Main Navigation */}
           <div className="flex items-center space-x-4" style={{ overflow: 'visible' }}>
-            {/* EVA Logo */}
-            <Link to="/" className="flex-shrink-0">
-              <ModernEVALogo width={120} height={40} className="h-10 w-auto" />
-            </Link>
-
-            {/* Divider */}
-            <div className="h-8 w-px bg-gray-300"></div>
-
-
             {/* Desktop Navigation */}
             <nav className="hidden items-center space-x-1 md:flex">
               {navigationItems.map(item => (
@@ -383,17 +374,40 @@ const EnhancedTopNavigation: React.FC = () => {
       )}
 
       {/* Breadcrumb Navigation - Enhanced styling */}
-      <div className="border-t border-gray-200 bg-gray-50 px-4 sm:px-6 lg:px-8">
-        <div className="flex h-12 items-center">
+      <div className="breadcrumb-nav border-t border-gray-200 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div className="flex h-12 items-center justify-between">
+          {/* Left: Page Navigation */}
           <nav className="flex items-center text-sm">
             {previousPageTitle && (
               <>
-                <span className="text-gray-500">{previousPageTitle}</span>
-                <span className="mx-2 text-gray-400">/</span>
+                <button
+                  onClick={() => navigate(-1)}
+                  className="nav-button flex items-center text-gray-500 hover:text-gray-700 transition-colors px-2 py-1 rounded-md"
+                >
+                  <ArrowLeftIcon className="h-4 w-4 mr-1" />
+                  {previousPageTitle}
+                </button>
+                <span className="mx-3 text-gray-400">/</span>
               </>
             )}
-            <span className="font-medium text-gray-900">{currentPageTitle}</span>
+            <span className="font-semibold text-gray-900 text-base">{currentPageTitle}</span>
           </nav>
+
+          {/* Right: Quick Actions */}
+          <div className="flex items-center space-x-2">
+            {location.pathname.includes('/documents') && (
+              <button className="quick-action-btn flex items-center px-3 py-1.5 text-xs font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <FolderOpenIcon className="h-4 w-4 mr-1" />
+                New Folder
+              </button>
+            )}
+            {location.pathname.includes('/credit') && (
+              <button className="quick-action-btn flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-600 border border-blue-600 rounded-md hover:bg-blue-700 transition-colors">
+                <DocumentTextIcon className="h-4 w-4 mr-1" />
+                Save Progress
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

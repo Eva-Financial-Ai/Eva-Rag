@@ -14,7 +14,7 @@ const NODE_ENV = import.meta.env.MODE || process.env.NODE_ENV || 'development';
 const isDevelopment = import.meta.env.DEV || process.env.NODE_ENV === 'development';
 const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
 
-// Use either VITE_ or REACT_APP_ prefixes ‑ both are supported by vite.config.mts
+// Use either VITE_ or REACT_APP_ prefixes
 const env = import.meta.env as ImportMetaEnv & Record<string, string | undefined>;
 
 // ------------------------

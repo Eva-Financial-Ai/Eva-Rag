@@ -131,7 +131,7 @@ class ApiClient {
           ProductionLogger.debug(
             `Response from ${pendingRequest.method.toUpperCase()} ${pendingRequest.url} in ${duration}ms`,
             'ApiClient',
-            { status: response.status }
+            response.status
           );
         }
 
@@ -179,7 +179,7 @@ class ApiClient {
         ProductionLogger.debug(
           `Network error. Retrying in ${delay}ms (${retryCount + 1}/${config.performance.maxRetries})`,
           'ApiClient',
-          { url: originalRequest.url }
+          originalRequest.url
         );
 
         // Wait before retrying
@@ -190,7 +190,7 @@ class ApiClient {
       }
 
       // Max retries reached
-      ProductionLogger.error('[ApiClient] Max retries reached for network error');
+      ProductionLogger.error('Max retries reached for network error', 'ApiClient');
       return Promise.reject(
         new NetworkError('Network connectivity issue. Please check your connection.'),
       );
@@ -218,7 +218,7 @@ class ApiClient {
             return this.instance(originalRequest);
           }
         } catch (refreshError) {
-          ProductionLogger.error('[ApiClient] Token refresh failed:', refreshError);
+          ProductionLogger.error('Token refresh failed:', 'ApiClient', refreshError);
 
           // Force logout on auth failure
           this.handleAuthFailure();
@@ -236,11 +236,9 @@ class ApiClient {
 
     // Handle server errors (500+)
     if (error.response.status >= 500) {
-      ProductionLogger.error('[ApiClient] Server error:', {
-        status: error.response.status,
-        url: originalRequest.url,
-        data: error.response.data,
-      });
+      ProductionLogger.error(
+        `Server error: ${error.response.status} for ${originalRequest.url} - ${JSON.stringify(error.response.data)}`
+      );
 
       return Promise.reject(
         new ApiError(
@@ -252,11 +250,9 @@ class ApiClient {
     }
 
     // Handle other status errors (4xx)
-    ProductionLogger.error('[ApiClient] API error:', {
-      status: error.response.status,
-      url: originalRequest.url,
-      data: error.response.data,
-    });
+    ProductionLogger.error(
+      `API error: ${error.response.status} for ${originalRequest.url} - ${JSON.stringify(error.response.data)}`
+    );
 
     // Extract error message from response if available
     let errorMessage = 'An error occurred with your request.';
@@ -291,7 +287,7 @@ class ApiClient {
       }
       return false;
     } catch (error) {
-      ProductionLogger.error('[ApiClient] Error refreshing token:', error);
+      ProductionLogger.error(`Error refreshing token: ${JSON.stringify(error)}`);
       return false;
     }
   }
@@ -330,7 +326,7 @@ class ApiClient {
       }
 
       // Handle unexpected errors
-      ProductionLogger.error('[ApiClient] Unexpected error:', error);
+      ProductionLogger.error(`Unexpected error: ${JSON.stringify(error)}`);
       return {
         error: new Error('An unexpected error occurred'),
         status: 0,
