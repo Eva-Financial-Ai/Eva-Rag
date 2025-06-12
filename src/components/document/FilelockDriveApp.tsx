@@ -176,6 +176,9 @@ const FilelockDriveApp: React.FC = () => {
   const [showCollaborationPanel, setShowCollaborationPanel] = useState(false);
   // const [currentCollaborators, setCurrentCollaborators] = useState<any[]>([]); // TODO: Implement collaboration
   const [showComments, setShowComments] = useState(false);
+  
+  // Cloud storage modal state
+  const [showCloudStorageModal, setShowCloudStorageModal] = useState(false);
 
   // Mock data for enhanced FileLock Request
   const mockCustomers = [

@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext } from 'react';
 import { apiClient } from '../api/apiClient';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 
 // Define the structure of the API context
 interface ApiContextType {

@@ -13,7 +13,7 @@ module.exports = {
     'no-console': [
       'warn',
       {
-        allow: ['error', 'warn'], // Allow error and warning logs for audit trails
+        allow: ['error', 'warn', 'log', 'info'], // Allow more console methods during development
       },
     ],
 
@@ -30,7 +30,7 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-ts-comment': 'warn',
@@ -109,7 +109,7 @@ module.exports = {
       ],
       rules: {
         'no-console': 'warn', // More lenient for demos
-        '@typescript-eslint/no-explicit-any': 'warn',
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],

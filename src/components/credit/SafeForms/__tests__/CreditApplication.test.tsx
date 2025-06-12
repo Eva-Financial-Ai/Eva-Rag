@@ -2,10 +2,22 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CreditApplication from '../CreditApplication';
-import { SessionManager } from '../../../../services/sessionManager';
+import SessionManager from '../../../../services/sessionManager';
 
 // Mock dependencies
-jest.mock('../../../../services/sessionManager');
+const mockSessionManager = {
+  getInstance: jest.fn(),
+  getSession: jest.fn(),
+  createSession: jest.fn(),
+  updateSession: jest.fn(),
+  deleteSession: jest.fn(),
+};
+
+jest.mock('../../../../services/sessionManager', () => ({
+  __esModule: true,
+  default: mockSessionManager,
+}));
+
 jest.mock('react-signature-canvas', () => {
   return jest.fn().mockImplementation(() => ({
     clear: jest.fn(),
@@ -20,7 +32,8 @@ describe('CreditApplication Component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (SessionManager.getSession as jest.Mock).mockReturnValue(null);
+    mockSessionManager.getInstance.mockReturnValue(mockSessionManager);
+    mockSessionManager.getSession.mockReturnValue(null);
   });
 
   describe('Form Rendering', () => {
@@ -207,7 +220,7 @@ describe('CreditApplication Component', () => {
         businessAddressStreet: '123 Main St',
       };
       
-      (SessionManager.getSession as jest.Mock).mockReturnValue(mockSessionData);
+      mockSessionManager.getSession.mockReturnValue(mockSessionData);
       
       render(<CreditApplication onSubmit={mockOnSubmit} onSave={mockOnSave} initialData={mockSessionData} />);
       

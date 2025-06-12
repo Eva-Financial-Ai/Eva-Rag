@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ServiceProvider from './ServiceProvider';
 import ApiProvider from './ApiContext';
 import ErrorBoundary from '../components/common/ErrorBoundary';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 
 interface AppProvidersProps {
   children: React.ReactNode;

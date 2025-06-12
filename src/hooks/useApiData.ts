@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { useApiQuery, useApiMutation } from './useApiQuery';
 import { ApiResponse, ApiError } from '../api/apiClient';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 
 /**
  * Custom hook for easier data fetching using React Query and our API client

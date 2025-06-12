@@ -608,8 +608,19 @@ const RoleBasedDashboard: React.FC<RoleBasedDashboardProps> = ({ currentUser, on
   const userContext = useContext(UserContext);
   const location = useLocation();
   
+  // Helper function to get initial user (defined before useState)
+  const getInitialUser = (): UserProfile => {
+    // Try to get from props first
+    if (currentUser) {
+      return currentUser;
+    }
+    
+    // Fallback to first mock user
+    return mockUsers[0];
+  };
+  
   // Single source of truth for activeUser
-  const [activeUser, setActiveUser] = useState<UserProfile>(getCurrentUser());
+  const [activeUser, setActiveUser] = useState<UserProfile>(getInitialUser());
   
   // Add safety check for UserContext
   if (!userContext) {

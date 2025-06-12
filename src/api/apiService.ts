@@ -1,5 +1,6 @@
 // Type definitions for external modules
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import ProductionLogger from '../utils/productionLogger';
 
 
 // NOTE: This service connects to the eva-platform-backend repository
@@ -38,11 +39,11 @@ class ApiService {
           config.headers.Authorization = `Bearer ${token}`;
         }
 
-        console.log(`[apiService] Request to ${config.url}`, { method: config.method });
+        ProductionLogger.debug(`Request to ${config.url}`, 'apiService', { method: config.method });
         return config;
       },
       error => {
-        console.error('[apiService] Request error:', error);
+        ProductionLogger.error('Request error:', 'apiService', error);
         return Promise.reject(error);
       }
     );
@@ -52,7 +53,7 @@ class ApiService {
       response => {
         // Reset network issue flag on successful response
         if (this.isNetworkIssue) {
-          console.log('[apiService] Network connectivity restored');
+          ProductionLogger.info('Network connectivity restored', 'apiService');
           this.isNetworkIssue = false;
         }
         return response;
@@ -64,7 +65,7 @@ class ApiService {
 
         // Check if error is a network error (offline, timeout, etc.)
         if (axios.isAxiosError(error) && !error.response) {
-          console.warn('[apiService] Network error detected:', error.message);
+          ProductionLogger.warn('Network error detected:', 'apiService', error.message);
           this.isNetworkIssue = true;
 
           // If request hasn't been retried yet
@@ -74,8 +75,9 @@ class ApiService {
 
             const retryDelay = Math.pow(2, originalRequest._retryCount) * 1000; // Exponential backoff
 
-            console.log(
-              `[apiService] Retrying request to ${originalRequest.url} in ${retryDelay}ms (attempt ${originalRequest._retryCount}/${MAX_RETRIES})`
+            ProductionLogger.debug(
+              `Retrying request to ${originalRequest.url} in ${retryDelay}ms (attempt ${originalRequest._retryCount}/${MAX_RETRIES})`,
+              'apiService'
             );
 
             // Wait before retrying

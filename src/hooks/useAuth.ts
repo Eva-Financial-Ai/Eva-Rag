@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import * as authService from '../api/authService';
 import { LoginCredentials, RegisterCredentials } from '../api/authService';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 import { useApiMutation } from './useApiQuery';
 
 // Interface for user object

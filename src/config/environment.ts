@@ -11,84 +11,22 @@
 // Environment Detection
 // ------------------------
 const NODE_ENV = import.meta.env.MODE || process.env.NODE_ENV || 'development';
+const isDevelopment = import.meta.env.DEV || process.env.NODE_ENV === 'development';
+const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
 
 // Use either VITE_ or REACT_APP_ prefixes ‑ both are supported by vite.config.mts
 const env = import.meta.env as ImportMetaEnv & Record<string, string | undefined>;
 
 // ------------------------
-// Core Configuration Shape
+// Configuration Interfaces
 // ------------------------
-export interface Environment {
-  name: string;
-  apiUrl: string;
-  braveSearch: {
-    apiKey?: string;
-    publicApiKey?: string;
-  };
-}
-
-export const environment: Environment = {
-  name: env.REACT_APP_ENVIRONMENT || NODE_ENV,
-  apiUrl: env.REACT_APP_API_URL || 'http://localhost:3001',
-  braveSearch: {
-    apiKey: env.REACT_APP_BRAVE_SEARCH_API_KEY,
-    publicApiKey: env.REACT_APP_BRAVE_SEARCH_PUBLIC_API_KEY,
-  },
-};
-
-// ------------------------
-// Extended Config used across hooks / services
-// ------------------------
-export interface ExtendedConfig {
-  api: {
-    baseUrl: string;
-  };
-  performance: {
-    /** global request timeout in ms */
-    requestTimeout: number;
-    /** how many times to retry transient failures */
-    maxRetries: number;
-  };
-  debug: boolean;
-}
-
-export const extendedConfig: ExtendedConfig = {
-  api: {
-    baseUrl: environment.apiUrl,
-  },
-  performance: {
-    requestTimeout: 15_000, // 15s
-    maxRetries: 3,
-  },
-  debug: environment.name !== 'production',
-};
-
-// ------------------------
-// Helper: Brave Search API headers
-// ------------------------
-export const getBraveSearchHeaders = (usePublicApi: boolean = false): Record<string, string> => {
-  const key = usePublicApi ? environment.braveSearch.publicApiKey : environment.braveSearch.apiKey;
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-  if (key) {
-    headers['X-Subscription-Token'] = key;
-  }
-  return headers;
-};
-
-// Environment configuration for EVA AI Platform
-// This file contains environment-specific settings and should be customized per deployment
-
-// Detect environment
-const isDevelopment = import.meta.env.DEV || process.env.NODE_ENV === 'development';
-const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
-
-// Extended configuration interface
 export interface ExtendedConfig {
   baseUrl: string;
   environment: 'development' | 'production' | 'staging';
   debug: boolean;
+  api: {
+    baseUrl: string;
+  };
   performance: {
     requestTimeout: number;
     maxRetries: number;
@@ -100,25 +38,34 @@ export interface ExtendedConfig {
   };
 }
 
-// Environment configuration
 export interface Environment {
+  name: string;
+  apiUrl: string;
   api: {
     baseUrl: string;
     timeout: number;
   };
   braveSearch: {
+    apiKey?: string;
+    publicApiKey?: string;
     apiUrl: string;
-    apiKey: string;
   };
 }
 
-// Main configuration object
+// ------------------------
+// Main Configuration
+// ------------------------
 export const config: ExtendedConfig = {
   baseUrl: isDevelopment 
     ? 'http://localhost:3001' 
     : 'https://api.evafin.ai',
-  environment: isDevelopment ? 'development' : 'production',
+  environment: isDevelopment ? 'development' : isProduction ? 'production' : 'staging',
   debug: isDevelopment,
+  api: {
+    baseUrl: isDevelopment 
+      ? 'http://localhost:3001' 
+      : 'https://api.evafin.ai',
+  },
   performance: {
     requestTimeout: 30000,
     maxRetries: 3,
@@ -130,29 +77,51 @@ export const config: ExtendedConfig = {
   },
 };
 
-// Environment-specific settings
+// ------------------------
+// Environment Settings
+// ------------------------
 export const environment: Environment = {
+  name: env.REACT_APP_ENVIRONMENT || NODE_ENV,
+  apiUrl: env.REACT_APP_API_URL || config.baseUrl,
   api: {
     baseUrl: config.baseUrl,
     timeout: config.performance.requestTimeout,
   },
   braveSearch: {
+    apiKey: env.REACT_APP_BRAVE_SEARCH_API_KEY || env.VITE_BRAVE_SEARCH_API_KEY,
+    publicApiKey: env.REACT_APP_BRAVE_SEARCH_PUBLIC_API_KEY,
     apiUrl: 'https://api.search.brave.com/res/v1/web/search',
-    apiKey: import.meta.env.VITE_BRAVE_SEARCH_API_KEY || '',
   },
 };
 
-// Utility function for Brave Search headers
-export const getBraveSearchHeaders = () => ({
-  'Accept': 'application/json',
-  'Accept-Encoding': 'gzip',
-  'X-Subscription-Token': environment.braveSearch.apiKey,
-});
+// ------------------------
+// Utility Functions
+// ------------------------
+export const getBraveSearchHeaders = (usePublicApi: boolean = false): Record<string, string> => {
+  const key = usePublicApi 
+    ? environment.braveSearch.publicApiKey 
+    : environment.braveSearch.apiKey;
+  
+  const headers: Record<string, string> = {
+    'Accept': 'application/json',
+    'Accept-Encoding': 'gzip',
+    'Content-Type': 'application/json',
+  };
+  
+  if (key) {
+    headers['X-Subscription-Token'] = key;
+  }
+  
+  return headers;
+};
 
 // Export environment detection utilities
 export const getEnvironment = () => config.environment;
 export const isDevMode = () => config.environment === 'development';
 export const isProdMode = () => config.environment === 'production';
+
+// Legacy export for backward compatibility
+export const extendedConfig = config;
 
 // Default export
 export default config; 

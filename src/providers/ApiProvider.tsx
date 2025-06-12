@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../hooks/useApi';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 import ErrorBoundary from '../components/common/ErrorBoundary';
 
 interface ApiProviderProps {

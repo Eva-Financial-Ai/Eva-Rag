@@ -1,6 +1,6 @@
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions, QueryClient } from '@tanstack/react-query';
 import { ApiResponse, ApiError } from '../api/apiClient';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 
 // Create a singleton query client
 export const queryClient = new QueryClient({

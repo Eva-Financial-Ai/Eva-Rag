@@ -24,20 +24,20 @@
   --font-display: 'Helvetica Neue', 'Inter', system-ui, sans-serif;
 
   /* =================
-     FONT SIZES (60% increase applied for better readability)
-     Base: 16px → 25.6px (rounded to 26px)
+     FONT SIZES (Standard web font sizes)
+     Base: 16px (1rem)
      ================= */
-  --font-size-xs: 1.2rem;       /* 12px → 19.2px → 19px */
-  --font-size-sm: 1.4rem;       /* 14px → 22.4px → 22px */
-  --font-size-base: 1.8rem;     /* 16px → 25.6px → 26px (60% increase) */
-  --font-size-md: 1.8rem;       /* Same as base */
-  --font-size-lg: 2rem;         /* 18px → 28.8px → 29px */
-  --font-size-xl: 2.4rem;       /* 20px → 32px */
-  --font-size-2xl: 2.8rem;      /* 24px → 38.4px → 38px */
-  --font-size-3xl: 3.4rem;      /* 30px → 48px */
-  --font-size-4xl: 4rem;        /* 36px → 57.6px → 58px */
-  --font-size-5xl: 4.8rem;      /* 48px → 76.8px → 77px */
-  --font-size-6xl: 6rem;        /* 60px → 96px */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px (standard base) */
+  --font-size-md: 1rem;         /* Same as base */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+  --font-size-6xl: 3.75rem;     /* 60px */
 
   /* =================
      FINANCIAL UI SPECIFIC SIZES (60% increase)

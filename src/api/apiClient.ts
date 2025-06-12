@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { extendedConfig as config } from '../config/environment';
+import { config } from '../config/environment';
 import ProductionLogger from '../utils/productionLogger';
 
 // Error classes for better error handling
@@ -106,7 +106,7 @@ class ApiClient {
     }
 
     if (config.environment === 'development') {
-      console.log(`[ApiClient] Request: ${config.method?.toUpperCase()} ${config.url}`);
+      ProductionLogger.debug(`Request: ${config.method?.toUpperCase()} ${config.url}`, 'ApiClient');
     }
 
     return config;
@@ -114,7 +114,7 @@ class ApiClient {
 
   // Request error interceptor
   private handleRequestError(error: AxiosError): Promise<AxiosError> {
-    console.error('[ApiClient] Request configuration error:', error);
+    ProductionLogger.error('Request configuration error:', 'ApiClient', error);
     return Promise.reject(error);
   }
 
@@ -128,9 +128,10 @@ class ApiClient {
         const duration = Date.now() - pendingRequest.startTime;
 
         if (config.debug) {
-          console.log(
-            `[ApiClient] Response from ${pendingRequest.method.toUpperCase()} ${pendingRequest.url} in ${duration}ms`,
-            { status: response.status },
+          ProductionLogger.debug(
+            `Response from ${pendingRequest.method.toUpperCase()} ${pendingRequest.url} in ${duration}ms`,
+            'ApiClient',
+            { status: response.status }
           );
         }
 
@@ -140,7 +141,7 @@ class ApiClient {
 
     // Reset network issue flag
     if (this.isNetworkIssue) {
-      console.log('[ApiClient] Network connectivity restored');
+      ProductionLogger.debug('Network connectivity restored', 'ApiClient');
       this.isNetworkIssue = false;
       this.retryDelayMs = 1000; // Reset retry delay
     }
@@ -189,7 +190,7 @@ class ApiClient {
       }
 
       // Max retries reached
-      console.error('[ApiClient] Max retries reached for network error');
+      ProductionLogger.error('[ApiClient] Max retries reached for network error');
       return Promise.reject(
         new NetworkError('Network connectivity issue. Please check your connection.'),
       );
@@ -217,7 +218,7 @@ class ApiClient {
             return this.instance(originalRequest);
           }
         } catch (refreshError) {
-          console.error('[ApiClient] Token refresh failed:', refreshError);
+          ProductionLogger.error('[ApiClient] Token refresh failed:', refreshError);
 
           // Force logout on auth failure
           this.handleAuthFailure();
@@ -235,7 +236,7 @@ class ApiClient {
 
     // Handle server errors (500+)
     if (error.response.status >= 500) {
-      console.error('[ApiClient] Server error:', {
+      ProductionLogger.error('[ApiClient] Server error:', {
         status: error.response.status,
         url: originalRequest.url,
         data: error.response.data,
@@ -251,7 +252,7 @@ class ApiClient {
     }
 
     // Handle other status errors (4xx)
-    console.error('[ApiClient] API error:', {
+    ProductionLogger.error('[ApiClient] API error:', {
       status: error.response.status,
       url: originalRequest.url,
       data: error.response.data,
@@ -259,15 +260,18 @@ class ApiClient {
 
     // Extract error message from response if available
     let errorMessage = 'An error occurred with your request.';
-    const responseData = error.response.data as any;
+    const responseData = error.response.data;
 
     if (responseData) {
       if (typeof responseData === 'string') {
         errorMessage = responseData;
-      } else if (responseData.message) {
-        errorMessage = responseData.message;
-      } else if (responseData.error) {
-        errorMessage = responseData.error;
+      } else if (typeof responseData === 'object' && responseData !== null) {
+        const data = responseData as Record<string, unknown>;
+        if (data.message && typeof data.message === 'string') {
+          errorMessage = data.message;
+        } else if (data.error && typeof data.error === 'string') {
+          errorMessage = data.error;
+        }
       }
     }
 
@@ -287,7 +291,7 @@ class ApiClient {
       }
       return false;
     } catch (error) {
-      console.error('[ApiClient] Error refreshing token:', error);
+      ProductionLogger.error('[ApiClient] Error refreshing token:', error);
       return false;
     }
   }
@@ -326,7 +330,7 @@ class ApiClient {
       }
 
       // Handle unexpected errors
-      console.error('[ApiClient] Unexpected error:', error);
+      ProductionLogger.error('[ApiClient] Unexpected error:', error);
       return {
         error: new Error('An unexpected error occurred'),
         status: 0,

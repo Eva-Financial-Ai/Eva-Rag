@@ -135,7 +135,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
     'details'
   );
   const [isCertifying, setIsCertifying] = useState(false);
-  const [blockchainInfo] = useState<{ transactionHash?: string; blockNumber?: number } | null>(null);
+  const [blockchainInfo] = useState<{ transactionHash?: string; blockNumber?: number; network?: string; timestamp?: string } | null>(null);
   const [showChat, setShowChat] = useState(false);
   const [documentSummary, setDocumentSummary] = useState<string>('');
   const [extractedData, setExtractedData] = useState<Record<string, unknown>>({});
@@ -144,7 +144,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
     text: '',
   });
   const [processingStatus, setProcessingStatus] = useState<'idle' | 'processing' | 'completed' | 'error'>('idle');
-  const [blockchainVerification, setBlockchainVerification] = useState<{ verified: boolean; hash?: string } | null>(null);
+  const [blockchainVerification, setBlockchainVerification] = useState<{ verified: boolean; hash?: string; txId?: string } | null>(null);
   const [selectedPrompt, _setSelectedPrompt] = useState<string>('');
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<
@@ -1043,11 +1043,11 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
                             Blockchain Verified
                           </h3>
                           <div className="mt-2 text-xs text-green-700">
-                            <p>Transaction: {blockchainInfo.transactionHash.substr(0, 10)}...</p>
-                            <p className="mt-1">Block: {blockchainInfo.blockNumber}</p>
-                            <p className="mt-1">Network: {blockchainInfo.network}</p>
+                            <p>Transaction: {blockchainInfo.transactionHash?.substr(0, 10) || 'N/A'}...</p>
+                            <p className="mt-1">Block: {blockchainInfo.blockNumber || 'N/A'}</p>
+                            <p className="mt-1">Network: {blockchainInfo.network || 'N/A'}</p>
                             <p className="mt-1">
-                              Timestamp: {new Date(blockchainInfo.timestamp).toLocaleString()}
+                              Timestamp: {blockchainInfo.timestamp ? new Date(blockchainInfo.timestamp).toLocaleString() : 'N/A'}
                             </p>
                           </div>
                         </div>

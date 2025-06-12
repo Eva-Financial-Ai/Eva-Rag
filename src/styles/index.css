@@ -67,7 +67,7 @@ nav a:focus-visible {
   --font-family-base: Georgia, 'Times New Roman', serif;
   --font-family-secondary: 'Book', serif;
   --font-family-system: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-size-base: 1.8rem; /* Increased by 60% for better readability */
+  --font-size-base: 1.0rem; /* Standard base font size */
   --line-height-base: 1.5;
 
   --sidebar-width: 19.36rem;
@@ -114,7 +114,7 @@ h6 {
 
 /* Special heading styles for information blocks */
 h1 {
-  font-size: 1.6rem !important; /* Much larger than base */
+  font-size: 1.875rem !important; /* Much larger than base */
 }
 
 h2,
@@ -123,19 +123,19 @@ h2,
 .info-title,
 [class*='Header'],
 [class*='Title'] {
-  font-size: 1.2rem !important; /* Larger for section headers */
+  font-size: 1.5rem !important; /* Larger for section headers */
 }
 
 h3,
 .section-title,
 .card-title {
-  font-size: 1rem !important; /* Medium size for sub-sections */
+  font-size: 1.25rem !important; /* Medium size for sub-sections */
 }
 
 h4,
 h5,
 h6 {
-  font-size: 0.8rem !important; /* Slightly larger than base */
+  font-size: 1.125rem !important; /* Slightly larger than base */
 }
 
 /* Header styles specifically for information blocks */
@@ -148,7 +148,7 @@ h6 {
 .info-block-header,
 .stats-header,
 .metric-title {
-  font-size: 0.75rem !important;
+  font-size: 0.875rem !important;
   font-weight: bold;
 }
 
@@ -159,7 +159,7 @@ h6 {
 [class*='Rate'] + div,
 .stat-value,
 .large-number {
-  font-size: 1.5rem !important;
+  font-size: 2rem !important;
   font-weight: bold;
 }
 

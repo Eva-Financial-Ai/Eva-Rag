@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import CreditApplicationFlow from '../../CreditApplicationFlow';
 import { WorkflowProvider } from '../../../../contexts/WorkflowContext';
-import { apiService } from '../../../../api/apiService';
+import apiService from '../../../../api/apiService';
 
 // Mock API service
 jest.mock('../../../../api/apiService');

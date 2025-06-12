@@ -1,6 +1,6 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import CreditApplication from '../CreditApplication';
-import { apiService } from '../../../../api/apiService';
+import apiService from '../../../../api/apiService';
 
 // Mock API service
 jest.mock('../../../../api/apiService');
