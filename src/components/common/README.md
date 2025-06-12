@@ -234,4 +234,6 @@ For detailed prop definitions and method signatures, refer to the TypeScript int
 **Version**: 1.1.0  
 **Last Updated**: January 15, 2025  
 **Components**: 50+ reusable components  
-**Test Coverage**: 90%+ with comprehensive test suites 
+**Test Coverage**: 90%+ with comprehensive test suites
+
+**2025-06-12** – Dev server port changed to 5173 (was 3000). Update any hard-coded URLs in demos/tests. 

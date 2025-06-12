@@ -340,15 +340,13 @@ ANALYTICS_DATASET=eva-analytics
 
 ### **🔓 DEVELOPMENT MODE (Auth0 DISABLED)**
 
-**CURRENT STATUS**: 🟢 **Authentication is BYPASSED for development**
+> **Update 2025-06-12** – The Vite dev server now runs on the default port **5173** (was 3000).  If port 5173 is already in use the server will exit immediately (see `vite.config.mts` → `strictPort: true`).
+>
+> Additionally, a lightweight `src/config/environment.ts` wrapper has been restored.  All services/hooks import from this file instead of accessing `process.env` directly. **Do not store secrets in this file** – it only reads from `import.meta.env`/`.env`.
 
 ```bash
 # Quick Start - No Authentication Required
-git clone <repository-url>
-cd evafi-ai-fe-demo-dev-3-testing-to-craco
-nvm use 20.11.0
-npm install --legacy-peer-deps
-npm run start    # Launches with Auth0 disabled
+npm run dev            # opens http://localhost:5173
 ```
 
 **✅ Full Access**: All platform features available without login during development.
