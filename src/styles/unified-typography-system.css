@@ -40,13 +40,13 @@
   --font-size-6xl: 3.75rem;     /* 60px */
 
   /* =================
-     FINANCIAL UI SPECIFIC SIZES (60% increase)
+     FINANCIAL UI SPECIFIC SIZES (Standard sizes)
      ================= */
-  --font-size-currency: 2.2rem;      /* 22px → 35.2px → 35px */
-  --font-size-data: 1.6rem;          /* 16px → 25.6px → 26px */
-  --font-size-caption: 1.3rem;       /* 13px → 20.8px → 21px */
-  --font-size-button: 1.6rem;        /* 16px → 25.6px → 26px */
-  --font-size-input: 1.6rem;         /* 16px → 25.6px → 26px */
+  --font-size-currency: 1.25rem;     /* 20px */
+  --font-size-data: 1rem;            /* 16px */
+  --font-size-caption: 0.875rem;     /* 14px */
+  --font-size-button: 1rem;          /* 16px */
+  --font-size-input: 1rem;           /* 16px */
 
   /* =================
      LINE HEIGHTS

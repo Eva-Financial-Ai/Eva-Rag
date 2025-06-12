@@ -200,6 +200,36 @@ $RECYCLE.BIN/
 .nfs*
 
 # -----------------------------------------------------------------------------
+# DOCUMENTATION CLEANUP PREVENTION
+# -----------------------------------------------------------------------------
+# Prevent accumulation of temporary documentation files
+*-IMPLEMENTATION*.md
+*-SUMMARY*.md
+*-GUIDE*.md
+*-SETUP*.md
+*-FIXES*.md
+*-RESOLVED*.md
+*-COMPLETE*.md
+*-AUDIT*.md
+*-REPORT*.md
+CHUNK-*.md
+TEST-*.md
+*-FIX-*.md
+*-CLEANUP*.md
+console-*.md
+.cleanup-backup/
+cleanup-old-docs.sh
+
+# Keep important documentation
+!README.md
+!CHANGELOG.md
+!LICENSE.md
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!SECURITY.md
+!docs/README.md
+
+# -----------------------------------------------------------------------------
 # CLEANUP & MONITORING
 # -----------------------------------------------------------------------------
 # Code Cleanup
