@@ -75,4 +75,84 @@ export const getBraveSearchHeaders = (usePublicApi: boolean = false): Record<str
     headers['X-Subscription-Token'] = key;
   }
   return headers;
-}; 
+};
+
+// Environment configuration for EVA AI Platform
+// This file contains environment-specific settings and should be customized per deployment
+
+// Detect environment
+const isDevelopment = import.meta.env.DEV || process.env.NODE_ENV === 'development';
+const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
+
+// Extended configuration interface
+export interface ExtendedConfig {
+  baseUrl: string;
+  environment: 'development' | 'production' | 'staging';
+  debug: boolean;
+  performance: {
+    requestTimeout: number;
+    maxRetries: number;
+    cacheTTL: number;
+  };
+  auth: {
+    tokenKey: string;
+    refreshTokenKey: string;
+  };
+}
+
+// Environment configuration
+export interface Environment {
+  api: {
+    baseUrl: string;
+    timeout: number;
+  };
+  braveSearch: {
+    apiUrl: string;
+    apiKey: string;
+  };
+}
+
+// Main configuration object
+export const config: ExtendedConfig = {
+  baseUrl: isDevelopment 
+    ? 'http://localhost:3001' 
+    : 'https://api.evafin.ai',
+  environment: isDevelopment ? 'development' : 'production',
+  debug: isDevelopment,
+  performance: {
+    requestTimeout: 30000,
+    maxRetries: 3,
+    cacheTTL: 300, // 5 minutes
+  },
+  auth: {
+    tokenKey: 'eva_auth_token',
+    refreshTokenKey: 'eva_refresh_token',
+  },
+};
+
+// Environment-specific settings
+export const environment: Environment = {
+  api: {
+    baseUrl: config.baseUrl,
+    timeout: config.performance.requestTimeout,
+  },
+  braveSearch: {
+    apiUrl: 'https://api.search.brave.com/res/v1/web/search',
+    apiKey: import.meta.env.VITE_BRAVE_SEARCH_API_KEY || '',
+  },
+};
+
+// Utility function for Brave Search headers
+export const getBraveSearchHeaders = () => ({
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip',
+  'X-Subscription-Token': environment.braveSearch.apiKey,
+});
+
+// Export environment detection utilities
+export const getEnvironment = () => config.environment;
+export const isDevMode = () => config.environment === 'development';
+export const isProdMode = () => config.environment === 'production';
+
+// Default export
+export default config; 

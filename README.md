@@ -96,6 +96,112 @@ export default {
 };
 ```
 
+## 👥 **Business User Types & Journey Mapping**
+
+### **Business Logic User Types**
+
+EVA AI is designed around business-focused user personas that represent real-world financing scenarios. These user types drive personalized experiences and user journey flows.
+
+#### **Primary Business User Types**
+
+1. **🏪 Small Business Owner**
+   - **Profile**: 1-10 employees, $100K-$1M revenue
+   - **Needs**: Quick working capital, simple processes
+   - **Journey**: Fast application → Document upload → Quick decision
+   - **Key Features**: Streamlined forms, instant pre-qualification
+
+2. **📈 Growing Business Owner**  
+   - **Profile**: 10-50 employees, $1M-$10M revenue
+   - **Needs**: Growth capital, strategic planning
+   - **Journey**: Strategy → Multi-product comparison → Expert consultation
+   - **Key Features**: Advanced analytics, financial modeling
+
+3. **🏢 Enterprise Business Owner**
+   - **Profile**: 50+ employees, $10M+ revenue  
+   - **Needs**: Complex financing, compliance, integrations
+   - **Journey**: RFP → Due diligence → Custom solutions
+   - **Key Features**: API access, dedicated support, custom terms
+
+4. **🆕 First-Time Borrower**
+   - **Profile**: New to business financing
+   - **Needs**: Education, guidance, confidence building
+   - **Journey**: Learn → Assess eligibility → Guided application
+   - **Key Features**: Educational content, step-by-step guidance
+
+5. **🔄 Repeat Borrower**
+   - **Profile**: Existing customer with funding history
+   - **Needs**: Streamlined process, loyalty benefits
+   - **Journey**: Login → Pre-approved offers → Fast-track approval
+   - **Key Features**: Customer portal, relationship pricing
+
+6. **🚛 Equipment Buyer**
+   - **Profile**: Seeking equipment-specific financing
+   - **Needs**: Equipment selection, vendor coordination
+   - **Journey**: Equipment search → Financing options → Vendor coordination
+   - **Key Features**: Equipment catalogs, vendor partnerships
+
+7. **🏘️ Real Estate Investor**
+   - **Profile**: Commercial property focused
+   - **Needs**: Fast closings, market analysis, portfolio tracking
+   - **Journey**: Property analysis → Pre-approval → Fast closing
+   - **Key Features**: Market data, portfolio management
+
+8. **💰 Working Capital Seeker**
+   - **Profile**: Immediate cash flow needs
+   - **Needs**: Quick funding, flexible terms
+   - **Journey**: Apply → Upload docs → Same-day decision
+   - **Key Features**: Express processing, cash flow tools
+
+9. **🚀 Expansion-Focused Business**
+   - **Profile**: Scaling operations or entering new markets
+   - **Needs**: Strategic capital, growth planning
+   - **Journey**: Strategy → Financial modeling → Multi-stage funding
+   - **Key Features**: Growth planning tools, milestone tracking
+
+10. **⚠️ Cash Flow Constrained Business**
+    - **Profile**: Experiencing cash flow challenges
+    - **Needs**: Emergency funding, financial counseling
+    - **Journey**: Emergency application → Flexible terms → Recovery planning
+    - **Key Features**: Emergency processing, financial coaching
+
+### **User Journey Flows**
+
+Each business user type has a tailored journey optimized for their specific needs:
+
+- **Awareness**: Targeted content and education
+- **Consideration**: Personalized product recommendations  
+- **Application**: Role-appropriate forms and processes
+- **Decision**: Customized approval workflows
+- **Onboarding**: User type-specific setup and training
+- **Ongoing**: Relationship management and cross-selling
+
+### **Implementation in Code**
+
+```typescript
+// Business user types are defined in src/types/UserTypes.ts
+export enum BusinessUserType {
+  SMALL_BUSINESS_OWNER = 'SMALL_BUSINESS_OWNER',
+  GROWING_BUSINESS_OWNER = 'GROWING_BUSINESS_OWNER', 
+  ENTERPRISE_BUSINESS_OWNER = 'ENTERPRISE_BUSINESS_OWNER',
+  // ... additional types
+}
+
+// Each type includes detailed persona data
+export interface BusinessUserPersona {
+  userType: BusinessUserType;
+  displayName: string;
+  description: string;
+  businessContext: BusinessContext;
+  painPoints: string[];
+  goals: string[];
+  typicalJourney: string[];
+  keyFeatures: string[];
+  urgencyLevel: 'low' | 'medium' | 'high' | 'urgent';
+  techSavviness: 'low' | 'medium' | 'high';
+  preferredChannels: string[];
+}
+```
+
 ## 🔐 **Authentication & User Management**
 
 ### **Auth0-Based User Type Determination**

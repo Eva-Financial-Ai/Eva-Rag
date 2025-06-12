@@ -3,21 +3,48 @@
 @import './global.css';
 @import './layout-system.css';
 
-/* Ensure html and body have gray background */
-html,
-body {
-  background-color: #f3f4f6 !important; /* gray-100 */
-  margin: 0;
-  padding: 0;
-  height: 100%;
+/* Tailwind CSS Base */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom CSS overrides and enhancements */
+@import './typography-overrides.css';
+@import './header-accessibility-fix.css';
+@import './design-system.css';
+@import './unified-design-system.css';
+@import './transaction-psychology-design-system.css';
+
+/* Navigation outline fix */
+nav button:focus,
+nav a:focus,
+.enhanced-top-navigation button:focus,
+.enhanced-top-navigation a:focus,
+[class*="TopNavigation"] button:focus,
+[class*="TopNavigation"] a:focus {
+  outline: none !important;
 }
 
-#root {
-  min-height: 100vh;
-  background-color: #f3f4f6; /* gray-100 */
+/* Remove browser default button outlines */
+button:focus {
+  outline: none;
 }
 
+/* Add proper focus states for accessibility */
+button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+nav button:focus-visible,
+nav a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Root configuration */
 :root {
+  color-scheme: light;
   --primary-color: #0056b3;
   --secondary-color: #6c757d;
   --success-color: #28a745;
@@ -40,7 +67,7 @@ body {
   --font-family-base: Georgia, 'Times New Roman', serif;
   --font-family-secondary: 'Book', serif;
   --font-family-system: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-size-base: 7.26px; /* Increased by 21% from 6px */
+  --font-size-base: 1.8rem; /* Increased by 60% for better readability */
   --line-height-base: 1.5;
 
   --sidebar-width: 19.36rem;
@@ -173,13 +200,13 @@ select:focus {
   border-color: var(--primary-color) !important;
 }
 
+/* Import typography overrides first */
+@import './typography-overrides.css';
+
 /* Add Tailwind base styles integration */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import typography overrides last to ensure precedence */
-@import './typography-overrides.css';
 
 /* Custom components and utility classes */
 @layer components {
@@ -187,6 +214,24 @@ select:focus {
   .dropdown-menu option,
   .select-menu option {
     @apply text-black font-medium bg-white;
+  }
+  
+  /* Override Tailwind text sizes with our larger values */
+  .text-xs { font-size: var(--font-size-xs) !important; }
+  .text-sm { font-size: var(--font-size-sm) !important; }
+  .text-base { font-size: var(--font-size-base) !important; }
+  .text-lg { font-size: var(--font-size-lg) !important; }
+  .text-xl { font-size: var(--font-size-xl) !important; }
+  .text-2xl { font-size: var(--font-size-2xl) !important; }
+  .text-3xl { font-size: var(--font-size-3xl) !important; }
+  
+  /* Form elements with larger text */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: var(--font-size-input) !important;
+    min-height: 2.5rem;
+    padding: 0.75rem 1rem;
   }
 
   select.form-select,

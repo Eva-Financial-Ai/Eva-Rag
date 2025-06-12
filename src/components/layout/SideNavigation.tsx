@@ -131,8 +131,8 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
       <nav
         className={`fixed left-0 z-30 h-full border-r border-gray-200 bg-white transition-all duration-300 ease-in-out ${sidebarWidth} ${isMobile && !sidebarCollapsed ? 'translate-x-0' : ''} ${isMobile && sidebarCollapsed ? '-translate-x-full' : 'translate-x-0'} `}
         style={{
-          top: '128px', // Start below the enhanced top navigation (80px + 48px = 128px total height)
-          height: 'calc(100vh - 128px)', // Adjust height to account for enhanced top navigation
+          top: '132px', // Start below the enhanced top navigation (80px + 48px + 4px for border = 132px total height)
+          height: 'calc(100vh - 132px)', // Adjust height to account for enhanced top navigation
         }}
       >
         <div className="flex h-full flex-col">

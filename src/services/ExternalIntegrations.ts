@@ -73,7 +73,7 @@ const FilelockService = {
   async getDocumentsForTransaction(transactionId: string): Promise<any[]> {
     // Get cached documents from R2
     const cachedDocs = r2Service.getCachedData(`filelock:${transactionId}`);
-    if (cachedDocs) {
+    if (cachedDocs && Array.isArray(cachedDocs)) {
       return cachedDocs;
     }
     
@@ -154,7 +154,7 @@ const ShieldVaultService = {
   async getAuditLog(transactionId: string): Promise<any[]> {
     // Get cached audit entries
     const cachedAudit = r2Service.getCachedData(`audit:${transactionId}`);
-    if (cachedAudit) {
+    if (cachedAudit && Array.isArray(cachedAudit)) {
       return cachedAudit;
     }
     

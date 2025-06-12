@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { BrowserRouter, useLocation } from 'react-router-dom';
+import Auth0ProviderWrapper from '../components/auth/Auth0ProviderWrapper';
 import { UserProvider } from '../contexts/UserContext';
 import { UserTypeProvider } from '../contexts/UserTypeContext';
 import { WorkflowProvider } from '../contexts/WorkflowContext';
@@ -30,17 +31,19 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         v7_relativeSplatPath: true,
       }}
     >
-      <UserProvider>
-        <UserTypeProvider>
-          <ModalProvider>
-            <WorkflowProvider>
-              <RouteAwareWrapper>
-                {children}
-              </RouteAwareWrapper>
-            </WorkflowProvider>
-          </ModalProvider>
-        </UserTypeProvider>
-      </UserProvider>
+      <Auth0ProviderWrapper>
+        <UserProvider>
+          <UserTypeProvider>
+            <ModalProvider>
+              <WorkflowProvider>
+                <RouteAwareWrapper>
+                  {children}
+                </RouteAwareWrapper>
+              </WorkflowProvider>
+            </ModalProvider>
+          </UserTypeProvider>
+        </UserProvider>
+      </Auth0ProviderWrapper>
     </BrowserRouter>
   );
 };

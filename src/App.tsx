@@ -76,7 +76,7 @@ const showMockWS = (() => {
 })();
 
 // Hide navigation for full-screen routes
-const fullScreenRoutes = ['/login', '/onboarding'];
+const fullScreenRoutes = ['/login', '/onboarding', '/welcome'];
 const currentPath = window.location.pathname;
 const hideNavigation = fullScreenRoutes.includes(currentPath);
 
@@ -110,7 +110,7 @@ function App() {
                       <main
                         className="bg-background-primary flex-1 overflow-auto"
                         style={{
-                          marginTop: hideNavigation ? '0' : '128px',
+                          marginTop: hideNavigation ? '0' : '132px',
                           paddingTop: '1rem',
                         }}
                       >
@@ -122,7 +122,8 @@ function App() {
                               <LazyRouter />
                             ) : (
                               <Routes>
-                                <Route path="/login" element={<Navigate to="/" replace />} />
+                                <Route path="/welcome" element={<LazyRouter />} />
+                                <Route path="/login" element={<Navigate to="/welcome" replace />} />
                                 <Route
                                   path="/*"
                                   element={

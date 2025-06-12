@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
   redirectTo?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, redirectTo = '/login' }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, redirectTo = '/welcome' }) => {
   const { isAuthenticated, isLoading, error } = useAuth();
   const isDemoMode = process.env.REACT_APP_DEMO_MODE === 'true';
   const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;

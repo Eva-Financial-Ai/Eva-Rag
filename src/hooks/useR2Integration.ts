@@ -58,7 +58,7 @@ export const useR2Integration = (options: UseR2IntegrationOptions) => {
             if (event.targetApplicationId === options.applicationId) {
               setState(prev => {
                 const newDocs = new Map(prev.syncedDocuments);
-                newDocs.set(event.payload.fileKey, event.payload);
+                newDocs.set(event.payload.fileKey as string, event.payload);
                 return { ...prev, syncedDocuments: newDocs };
               });
             }

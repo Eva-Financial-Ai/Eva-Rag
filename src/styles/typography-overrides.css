@@ -108,7 +108,7 @@ h6, .h6 {
    FORM ELEMENT OVERRIDES
    ================= */
 
-/* Ensure all form elements use unified typography */
+/* Ensure all form elements use unified typography with larger sizes */
 input,
 textarea,
 select,
@@ -118,8 +118,10 @@ button,
 .form-input,
 .form-select {
   font-family: var(--font-primary) !important;
-  font-size: var(--font-size-base) !important;
+  font-size: var(--font-size-input) !important;
   font-weight: var(--font-weight-normal) !important;
+  min-height: 2.5rem !important; /* Increase input height for larger text */
+  padding: 0.75rem 1rem !important; /* Increase padding for larger text */
 }
 
 /* Button specific overrides */
@@ -314,6 +316,36 @@ td,
 }
 
 /* =================
+   COMPONENT SPECIFIC OVERRIDES
+   ================= */
+
+/* Risk Map Navigator and related components */
+.riskmap-navigator,
+.risk-map-navigator,
+.risk-navigator {
+  font-size: var(--font-size-base) !important;
+}
+
+.riskmap-navigator input,
+.risk-map-navigator input,
+.risk-navigator input,
+.riskmap-navigator select,
+.risk-map-navigator select,
+.risk-navigator select {
+  font-size: var(--font-size-input) !important;
+}
+
+/* Ensure all text content uses larger fonts */
+p, div, span, label, .text-sm, .text-base, .text-lg {
+  font-size: var(--font-size-base) !important;
+}
+
+/* Small text elements - make them readable */
+.text-xs, .text-sm, small {
+  font-size: var(--font-size-sm) !important;
+}
+
+/* =================
    ACCESSIBILITY OVERRIDES
    ================= */
 
@@ -323,13 +355,13 @@ td,
   p,
   div,
   span {
-    font-size: 1rem !important; /* Never go below 16px on mobile */
+    font-size: 1.6rem !important; /* Larger minimum for mobile */
   }
   
   input,
   textarea,
   select,
   button {
-    font-size: 1rem !important; /* Prevent zoom on mobile */
+    font-size: 1.6rem !important; /* Prevent zoom on mobile */
   }
 } 

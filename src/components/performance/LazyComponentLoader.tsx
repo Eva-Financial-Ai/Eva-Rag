@@ -90,7 +90,7 @@ export const createLazyComponent = <T extends ComponentType<unknown>>(
     });
   }
 
-  const WrappedComponent: React.FC<React.ComponentProps<T>> = props => (
+  const WrappedComponent: React.FC<any> = props => (
     <LazyComponentErrorBoundary componentName={componentName}>
       <Suspense fallback={<PerformanceLoadingSpinner componentName={componentName} />}>
         <LazyComponent {...props} />

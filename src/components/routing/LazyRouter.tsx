@@ -195,6 +195,9 @@ const CRPDashboard = lazyWithRetry(() => import('../crp/CRPDashboard'));
 // Primary User Dashboard
 const PrimaryUserDashboard = lazyWithRetry(() => import('../dashboards/PrimaryUserDashboard'));
 
+// Welcome Page
+const WelcomePage = lazyWithRetry(() => import('../../pages/WelcomePage'));
+
 // Remove CRM Dashboard - now using Customer Retention Platform
 
 // Onboarding pages
@@ -218,6 +221,9 @@ const BrokerOnboarding = lazyWithRetry(() => import('../../pages/BrokerOnboardin
 
 // Define routes - all routes are now protected by the parent RouterSelector
 const routes: RouteConfig[] = [
+  // Welcome page for unauthenticated users
+  { path: '/welcome', component: WelcomePage },
+  
   // Root route redirects to role selection or default lender dashboard
   { path: '/', component: RoleBasedDashboard },
 

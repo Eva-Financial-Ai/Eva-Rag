@@ -44,6 +44,13 @@ class ProductionLogger {
   }
 
   /**
+   * Log info messages (alias for log)
+   */
+  static info(message: string, context?: string, ...args: any[]) {
+    this.log(message, context, ...args);
+  }
+
+  /**
    * Log debug messages (only in development with verbose flag)
    */
   static debug(message: string, context?: string, ...args: any[]) {

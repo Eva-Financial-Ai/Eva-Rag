@@ -1,24 +1,39 @@
 /**
- * User type definitions for the application
+ * Business Logic User Types for User Stories, Journeys, and Flows
+ * This file defines user personas and their business contexts for UX design and development
  */
 
 import { UserSpecificRoleType } from './user';
+
+// Business Logic User Types for User Stories and Journey Mapping
+export enum BusinessUserType {
+  SMALL_BUSINESS_OWNER = 'SMALL_BUSINESS_OWNER',
+  GROWING_BUSINESS_OWNER = 'GROWING_BUSINESS_OWNER', 
+  ENTERPRISE_BUSINESS_OWNER = 'ENTERPRISE_BUSINESS_OWNER',
+  FIRST_TIME_BORROWER = 'FIRST_TIME_BORROWER',
+  REPEAT_BORROWER = 'REPEAT_BORROWER',
+  EQUIPMENT_BUYER = 'EQUIPMENT_BUYER',
+  REAL_ESTATE_INVESTOR = 'REAL_ESTATE_INVESTOR',
+  WORKING_CAPITAL_SEEKER = 'WORKING_CAPITAL_SEEKER',
+  EXPANSION_FOCUSED_BUSINESS = 'EXPANSION_FOCUSED_BUSINESS',
+  CASH_FLOW_CONSTRAINED_BUSINESS = 'CASH_FLOW_CONSTRAINED_BUSINESS'
+}
+
+// Legacy User Type Enums - Maintained for technical compatibility
+export enum UserType {
+  BUSINESS = 'BUSINESS',
+  VENDOR = 'VENDOR', 
+  BROKERAGE = 'BROKERAGE',
+  LENDER = 'LENDER',
+  ADMIN = 'ADMIN',
+  DEVELOPER = 'DEVELOPER',
+  FINANCE_MANAGER = 'FINANCE_MANAGER',
+}
 
 // Add UserRoleType back for backward compatibility
 export type UserRoleType = 'borrower' | 'lender' | 'broker' | 'vendor' | 'admin' | 'developer' | 
   'sales_manager' | 'loan_processor' | 'credit_underwriter' | 'credit_committee' | 'portfolio_manager' |
   'finance_manager';
-
-// User Type Enums - Core system categorization
-export enum UserType {
-  BUSINESS = 'BUSINESS', // Borrowers
-  VENDOR = 'VENDOR',
-  BROKERAGE = 'BROKERAGE',
-  LENDER = 'LENDER',
-  ADMIN = 'ADMIN',
-  DEVELOPER = 'DEVELOPER',
-  FINANCE_MANAGER = 'FINANCE_MANAGER', // Added as core type
-}
 
 // Role hierarchy within organizations (used for permission checks)
 export enum EmployeeRole {
@@ -328,6 +343,398 @@ export enum PermissionLevel {
   ADMIN = 4,
 }
 
+// Business User Persona Definitions for User Stories
+export interface BusinessUserPersona {
+  userType: BusinessUserType;
+  displayName: string;
+  description: string;
+  businessContext: {
+    industry?: string;
+    businessSize: 'micro' | 'small' | 'medium' | 'large' | 'enterprise';
+    annualRevenue?: string;
+    employeeCount?: string;
+    yearsInBusiness?: string;
+  };
+  painPoints: string[];
+  goals: string[];
+  typicalJourney: string[];
+  keyFeatures: string[];
+  urgencyLevel: 'low' | 'medium' | 'high' | 'urgent';
+  techSavviness: 'low' | 'medium' | 'high';
+  preferredChannels: string[];
+}
+
+// Business User Personas Data
+export const businessUserPersonas: Record<BusinessUserType, BusinessUserPersona> = {
+  [BusinessUserType.SMALL_BUSINESS_OWNER]: {
+    userType: BusinessUserType.SMALL_BUSINESS_OWNER,
+    displayName: 'Small Business Owner',
+    description: 'Owner of a small business (1-10 employees) seeking financing for growth or operations',
+    businessContext: {
+      businessSize: 'small',
+      annualRevenue: '$100K - $1M',
+      employeeCount: '1-10',
+      yearsInBusiness: '2-10 years'
+    },
+    painPoints: [
+      'Limited access to capital',
+      'Complex application processes', 
+      'Lack of business credit history',
+      'Time constraints for lengthy applications'
+    ],
+    goals: [
+      'Secure working capital quickly',
+      'Simple application process',
+      'Competitive rates',
+      'Flexible repayment terms'
+    ],
+    typicalJourney: [
+      'Identify funding need',
+      'Research lenders',
+      'Compare options',
+      'Submit application',
+      'Provide documentation',
+      'Await decision',
+      'Receive funding'
+    ],
+    keyFeatures: ['Quick application', 'Document upload', 'Status tracking', 'Rate comparison'],
+    urgencyLevel: 'high',
+    techSavviness: 'medium',
+    preferredChannels: ['Online platform', 'Phone support', 'Email']
+  },
+  
+  [BusinessUserType.GROWING_BUSINESS_OWNER]: {
+    userType: BusinessUserType.GROWING_BUSINESS_OWNER,
+    displayName: 'Growing Business Owner',
+    description: 'Owner of an expanding business seeking significant capital for growth initiatives',
+    businessContext: {
+      businessSize: 'medium',
+      annualRevenue: '$1M - $10M',
+      employeeCount: '10-50',
+      yearsInBusiness: '5-15 years'
+    },
+    painPoints: [
+      'Need for substantial funding',
+      'Complex growth planning',
+      'Managing cash flow during expansion',
+      'Balancing multiple financing options'
+    ],
+    goals: [
+      'Secure growth capital',
+      'Optimize financing structure',
+      'Maintain cash flow stability',
+      'Scale operations efficiently'
+    ],
+    typicalJourney: [
+      'Develop growth strategy',
+      'Assess funding requirements',
+      'Explore financing options',
+      'Prepare comprehensive application',
+      'Negotiate terms',
+      'Secure funding',
+      'Execute growth plan'
+    ],
+    keyFeatures: ['Advanced analytics', 'Multi-product comparison', 'Financial modeling', 'Expert consultation'],
+    urgencyLevel: 'medium',
+    techSavviness: 'high',
+    preferredChannels: ['Online platform', 'In-person meetings', 'Video calls']
+  },
+  
+  [BusinessUserType.ENTERPRISE_BUSINESS_OWNER]: {
+    userType: BusinessUserType.ENTERPRISE_BUSINESS_OWNER,
+    displayName: 'Enterprise Business Owner',
+    description: 'Owner/executive of large enterprise requiring complex financing solutions',
+    businessContext: {
+      businessSize: 'enterprise',
+      annualRevenue: '$10M+',
+      employeeCount: '50+',
+      yearsInBusiness: '10+ years'
+    },
+    painPoints: [
+      'Complex financing requirements',
+      'Multiple stakeholder coordination',
+      'Compliance and regulatory requirements',
+      'Integration with existing systems'
+    ],
+    goals: [
+      'Optimize capital structure',
+      'Streamline financing processes',
+      'Ensure regulatory compliance',
+      'Maintain strategic flexibility'
+    ],
+    typicalJourney: [
+      'Strategic planning',
+      'Market analysis',
+      'RFP process',
+      'Due diligence',
+      'Term negotiation',
+      'Legal review',
+      'Execution and monitoring'
+    ],
+    keyFeatures: ['Custom solutions', 'API integrations', 'Advanced reporting', 'Dedicated support'],
+    urgencyLevel: 'low',
+    techSavviness: 'high',
+    preferredChannels: ['Dedicated portal', 'Account management', 'API access']
+  },
+  
+  [BusinessUserType.FIRST_TIME_BORROWER]: {
+    userType: BusinessUserType.FIRST_TIME_BORROWER,
+    displayName: 'First-Time Borrower',
+    description: 'Business owner seeking financing for the first time, needs guidance and education',
+    businessContext: {
+      businessSize: 'micro',
+      annualRevenue: '$50K - $500K',
+      employeeCount: '1-5',
+      yearsInBusiness: '1-3 years'
+    },
+    painPoints: [
+      'Unfamiliar with financing process',
+      'Uncertainty about qualification',
+      'Fear of rejection',
+      'Overwhelming options'
+    ],
+    goals: [
+      'Understand financing options',
+      'Get pre-qualified',
+      'Receive guidance',
+      'Complete first successful application'
+    ],
+    typicalJourney: [
+      'Research financing basics',
+      'Use educational resources',
+      'Take eligibility quiz',
+      'Get pre-qualified',
+      'Submit guided application',
+      'Receive support',
+      'Get approved'
+    ],
+    keyFeatures: ['Educational content', 'Eligibility checker', 'Guided application', 'Live chat support'],
+    urgencyLevel: 'medium',
+    techSavviness: 'low',
+    preferredChannels: ['Educational content', 'Live chat', 'Phone support']
+  },
+  
+  [BusinessUserType.REPEAT_BORROWER]: {
+    userType: BusinessUserType.REPEAT_BORROWER,
+    displayName: 'Repeat Borrower',
+    description: 'Experienced borrower with established relationship, values efficiency and loyalty benefits',
+    businessContext: {
+      businessSize: 'small',
+      annualRevenue: '$500K - $5M',
+      employeeCount: '5-25',
+      yearsInBusiness: '5+ years'
+    },
+    painPoints: [
+      'Repetitive application processes',
+      'Lack of relationship recognition',
+      'No preferential treatment',
+      'Limited loyalty benefits'
+    ],
+    goals: [
+      'Streamlined repeat applications',
+      'Loyalty rewards and benefits',
+      'Preferential rates',
+      'Expedited processing'
+    ],
+    typicalJourney: [
+      'Access customer portal',
+      'Review pre-approved offers',
+      'Submit streamlined application',
+      'Auto-populate from history',
+      'Fast-track approval',
+      'Receive funding'
+    ],
+    keyFeatures: ['Customer portal', 'Pre-approved offers', 'Application history', 'Loyalty rewards'],
+    urgencyLevel: 'medium',
+    techSavviness: 'high',
+    preferredChannels: ['Customer portal', 'Mobile app', 'Direct contact']
+  },
+  
+  [BusinessUserType.EQUIPMENT_BUYER]: {
+    userType: BusinessUserType.EQUIPMENT_BUYER,
+    displayName: 'Equipment Buyer',
+    description: 'Business owner specifically seeking equipment financing or leasing solutions',
+    businessContext: {
+      businessSize: 'small',
+      annualRevenue: '$200K - $2M',
+      employeeCount: '2-20',
+      yearsInBusiness: '2+ years'
+    },
+    painPoints: [
+      'Equipment-specific financing needs',
+      'Vendor relationship coordination',
+      'Lease vs buy decisions',
+      'Equipment depreciation concerns'
+    ],
+    goals: [
+      'Secure equipment financing',
+      'Optimize lease/buy decision',
+      'Coordinate with equipment vendors',
+      'Maintain cash flow for operations'
+    ],
+    typicalJourney: [
+      'Identify equipment need',
+      'Research financing options',
+      'Get vendor quotes',
+      'Compare lease vs buy',
+      'Apply for financing',
+      'Coordinate delivery',
+      'Begin payments'
+    ],
+    keyFeatures: ['Equipment catalogs', 'Lease calculator', 'Vendor network', 'Payment scheduling'],
+    urgencyLevel: 'high',
+    techSavviness: 'medium',
+    preferredChannels: ['Online platform', 'Vendor referrals', 'Phone support']
+  },
+  
+  [BusinessUserType.REAL_ESTATE_INVESTOR]: {
+    userType: BusinessUserType.REAL_ESTATE_INVESTOR,
+    displayName: 'Real Estate Investor',
+    description: 'Investor focused on commercial real estate financing and property development',
+    businessContext: {
+      businessSize: 'medium',
+      annualRevenue: '$1M - $10M',
+      employeeCount: '5-30',
+      yearsInBusiness: '3+ years'
+    },
+    painPoints: [
+      'Property-specific financing requirements',
+      'Market timing pressures',
+      'Complex deal structures',
+      'Due diligence coordination'
+    ],
+    goals: [
+      'Secure property financing',
+      'Optimize deal structures',
+      'Fast closing capabilities',
+      'Portfolio growth'
+    ],
+    typicalJourney: [
+      'Identify investment opportunity',
+      'Assess financing needs',
+      'Get pre-approval',
+      'Submit property application',
+      'Complete due diligence',
+      'Close financing',
+      'Manage portfolio'
+    ],
+    keyFeatures: ['Property analysis tools', 'Market data', 'Fast pre-approval', 'Portfolio management'],
+    urgencyLevel: 'urgent',
+    techSavviness: 'high',
+    preferredChannels: ['Specialized platform', 'Direct relationships', 'Mobile tools']
+  },
+  
+  [BusinessUserType.WORKING_CAPITAL_SEEKER]: {
+    userType: BusinessUserType.WORKING_CAPITAL_SEEKER,
+    displayName: 'Working Capital Seeker',
+    description: 'Business owner needing short-term working capital for operations and cash flow',
+    businessContext: {
+      businessSize: 'small',
+      annualRevenue: '$300K - $3M',
+      employeeCount: '3-15',
+      yearsInBusiness: '2+ years'
+    },
+    painPoints: [
+      'Seasonal cash flow gaps',
+      'Unexpected expenses',
+      'Growth investment needs',
+      'Payroll and operational costs'
+    ],
+    goals: [
+      'Bridge cash flow gaps',
+      'Access quick funding',
+      'Flexible repayment terms',
+      'Maintain operations'
+    ],
+    typicalJourney: [
+      'Identify cash flow need',
+      'Apply for working capital',
+      'Provide financial documents',
+      'Get quick approval',
+      'Receive funding',
+      'Manage repayment'
+    ],
+    keyFeatures: ['Quick application', 'Fast funding', 'Flexible terms', 'Cash flow analysis'],
+    urgencyLevel: 'urgent',
+    techSavviness: 'medium',
+    preferredChannels: ['Online application', 'Phone support', 'Mobile app']
+  },
+  
+  [BusinessUserType.EXPANSION_FOCUSED_BUSINESS]: {
+    userType: BusinessUserType.EXPANSION_FOCUSED_BUSINESS,
+    displayName: 'Expansion-Focused Business',
+    description: 'Established business seeking capital for expansion, new locations, or market entry',
+    businessContext: {
+      businessSize: 'medium',
+      annualRevenue: '$2M - $20M',
+      employeeCount: '15-100',
+      yearsInBusiness: '5+ years'
+    },
+    painPoints: [
+      'Large capital requirements',
+      'Complex expansion planning',
+      'Risk management',
+      'Multiple financing needs'
+    ],
+    goals: [
+      'Fund expansion projects',
+      'Manage expansion risks',
+      'Optimize financing mix',
+      'Achieve growth targets'
+    ],
+    typicalJourney: [
+      'Develop expansion strategy',
+      'Calculate funding needs',
+      'Explore financing options',
+      'Submit comprehensive proposal',
+      'Negotiate terms',
+      'Execute expansion plan',
+      'Monitor performance'
+    ],
+    keyFeatures: ['Business planning tools', 'Risk assessment', 'Multi-product solutions', 'Performance tracking'],
+    urgencyLevel: 'medium',
+    techSavviness: 'high',
+    preferredChannels: ['Business platform', 'Advisory services', 'In-person meetings']
+  },
+  
+  [BusinessUserType.CASH_FLOW_CONSTRAINED_BUSINESS]: {
+    userType: BusinessUserType.CASH_FLOW_CONSTRAINED_BUSINESS,
+    displayName: 'Cash Flow Constrained Business',
+    description: 'Business experiencing cash flow challenges, needs financing to stabilize operations',
+    businessContext: {
+      businessSize: 'small',
+      annualRevenue: '$200K - $2M',
+      employeeCount: '2-20',
+      yearsInBusiness: '1+ years'
+    },
+    painPoints: [
+      'Irregular cash flow',
+      'Difficulty meeting obligations',
+      'Limited financing options',
+      'Time-sensitive needs'
+    ],
+    goals: [
+      'Stabilize cash flow',
+      'Meet immediate obligations',
+      'Improve financial position',
+      'Build credit history'
+    ],
+    typicalJourney: [
+      'Assess cash flow crisis',
+      'Explore emergency funding',
+      'Submit urgent application',
+      'Provide detailed financials',
+      'Negotiate flexible terms',
+      'Implement cash flow management',
+      'Work toward stability'
+    ],
+    keyFeatures: ['Emergency funding', 'Flexible terms', 'Cash flow tools', 'Financial counseling'],
+    urgencyLevel: 'urgent',
+    techSavviness: 'low',
+    preferredChannels: ['Direct phone line', 'Emergency portal', 'In-person consultation']
+  }
+};
+
 // User interface for application-wide use
 export interface User {
   id: string;
@@ -340,4 +747,5 @@ export interface User {
   businessName?: string;
   taxId?: string;
   profileData?: Record<string, any>;
+  businessUserType?: BusinessUserType; // New field for business logic user type
 }
