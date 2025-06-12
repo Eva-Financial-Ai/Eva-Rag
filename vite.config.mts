@@ -35,7 +35,7 @@ export default defineConfig(({ command, mode }) => {
 
     // Development server config
     server: {
-      port: 3000,
+      port: 5173,
       host: true,
       open: true,
       // Prevent hot reload loops
@@ -60,6 +60,7 @@ export default defineConfig(({ command, mode }) => {
           secure: false,
         },
       },
+      strictPort: true,
     },
 
     // Vitest configuration
