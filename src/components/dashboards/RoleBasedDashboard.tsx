@@ -608,8 +608,8 @@ const RoleBasedDashboard: React.FC<RoleBasedDashboardProps> = ({ currentUser, on
   const userContext = useContext(UserContext);
   const location = useLocation();
   
-  // Declare all hooks before any conditional returns
-  const [activeUser, setActiveUser] = useState<UserProfile | null>(null);
+  // Single source of truth for activeUser
+  const [activeUser, setActiveUser] = useState<UserProfile>(getCurrentUser());
   
   // Add safety check for UserContext
   if (!userContext) {
@@ -678,8 +678,6 @@ const RoleBasedDashboard: React.FC<RoleBasedDashboardProps> = ({ currentUser, on
     // Ultimate fallback to first user or default
     return currentUser || mockUsers[0];
   };
-
-  const [activeUser, setActiveUser] = useState<UserProfile>(getCurrentUser());
 
   // Event listeners for role synchronization with TopNavbar
   useEffect(() => {

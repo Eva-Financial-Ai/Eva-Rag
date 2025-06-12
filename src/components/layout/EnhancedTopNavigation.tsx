@@ -82,26 +82,7 @@ const EnhancedTopNavigation: React.FC = () => {
   }, [isTransactionDropdownOpen, setIsTransactionDropdownOpen]);
 
   // Main navigation items
-  const navigationItems: NavigationItem[] = [
-    {
-      name: 'Dashboard',
-      path: '/auto-originations',
-      icon: <HomeIcon className="h-5 w-5" />,
-      description: 'Auto Originations Dashboard',
-    },
-    {
-      name: 'Applications',
-      path: '/credit-application',
-      icon: <DocumentTextIcon className="h-5 w-5" />,
-      description: 'Create new credit application',
-    },
-    {
-      name: 'Documents',
-      path: '/documents',
-      icon: <FolderOpenIcon className="h-5 w-5" />,
-      description: 'Filelock Drive',
-    },
-  ];
+  const navigationItems: NavigationItem[] = [];
 
   // Generate breadcrumbs and page titles based on current location
   useEffect(() => {

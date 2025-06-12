@@ -177,17 +177,6 @@ const FilelockDriveApp: React.FC = () => {
   // const [currentCollaborators, setCurrentCollaborators] = useState<any[]>([]); // TODO: Implement collaboration
   const [showComments, setShowComments] = useState(false);
 
-  // Add state for the cloud storage modal
-  const [showCloudStorageModal, setShowCloudStorageModal] = useState(false);
-
-  // E-signature workflow state
-  // const [signatureWorkflowStatus, setSignatureWorkflowStatus] = useState<'not_started' | 'in_progress' | 'completed'>('not_started');
-  // const [signatureRequest, setSignatureRequest] = useState<any | null>(null); // TODO: Implement e-signature
-
-  // Security and permissions state
-  // const [encryptionEnabled, setEncryptionEnabled] = useState(true); // TODO: Implement encryption controls
-  // const [showPermissionsPanel, setShowPermissionsPanel] = useState(false); // TODO: Implement permissions panel
-
   // Mock data for enhanced FileLock Request
   const mockCustomers = [
     {
@@ -1191,9 +1180,6 @@ const FilelockDriveApp: React.FC = () => {
       />
     );
   };
-
-  // Add state for the cloud storage modal
-  const [showCloudStorageModal, setShowCloudStorageModal] = useState(false);
 
   // In the component's JSX render, add the CloudStorageConnector within the root render
   return (
