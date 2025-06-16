@@ -7,61 +7,40 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // Skip API routes - let them go to their specific functions
-  if (pathname.startsWith('/api/')) {
-    return new Response(null, { status: 404 });
+  // ✅ Handle root "/"
+  if (pathname === "/") {
+    return new Response("✅ Welcome to EVA RAG API", {
+      status: 200,
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
   }
 
-  // Skip static assets - let them go to Cloudflare's static serving
-  if (pathname.startsWith('/static/') || 
-      pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|json|txt|xml)$/) ||
-      pathname === '/favicon.ico' ||
-      pathname === '/manifest.json' ||
-      pathname === '/robots.txt') {
-    // Return early to let Cloudflare handle static files
+  // Handle API routes separately
+  if (pathname.startsWith("/api/")) {
+    return new Response("Not found: API endpoint is missing", { status: 404 });
+  }
+
+  // Handle static asset requests
+  if (
+    pathname.startsWith("/static/") ||
+    pathname.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|json|txt|xml)$/) ||
+    pathname === "/favicon.ico"
+  ) {
     return env.ASSETS.fetch(request);
   }
 
-  // For all other routes, serve index.html to enable SPA routing
+  // Serve index.html for SPA routes
   try {
-    // Get index.html from the static assets
-    const indexRequest = new Request(
-      new URL('/index.html', request.url).toString(),
-      {
-        method: 'GET',
-        headers: request.headers,
-      }
-    );
+    const indexRequest = new Request(new URL("/index.html", request.url).toString(), {
+      method: "GET",
+      headers: request.headers,
+    });
 
-    // Fetch index.html from the static assets
     const indexResponse = await env.ASSETS.fetch(indexRequest);
-    
-    if (indexResponse.status === 200) {
-      // Create a new response with the index.html content
-      const response = new Response(indexResponse.body, {
-        status: 200,
-        statusText: 'OK',
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'public, max-age=300',
-          'X-Frame-Options': 'DENY',
-          'X-Content-Type-Options': 'nosniff',
-          'X-XSS-Protection': '1; mode=block',
-          'Referrer-Policy': 'strict-origin-when-cross-origin',
-        },
-      });
-      
-      return response;
-    }
-  } catch (error) {
-    console.error('SPA routing error:', error);
+    return indexResponse;
+  } catch (err) {
+    return new Response("Failed to load application", { status: 500 });
   }
-
-  // Fallback if index.html cannot be served
-  return new Response('Application not found', { 
-    status: 404,
-    headers: {
-      'Content-Type': 'text/html',
-    }
-  });
 } 
