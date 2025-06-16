@@ -189,7 +189,7 @@ const EnhancedAddressInput: React.FC<EnhancedAddressInputProps> = ({
       const data = await response.json();
 
       // Transform API response to our format
-      const addressSuggestions: AddressSuggestion[] = data
+      const addressSuggestions: AddressSuggestion[] = (data as any[])
         .map((item: any, index: number) => {
           const addr = item.address;
 

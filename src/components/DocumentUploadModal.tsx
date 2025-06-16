@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { useSpring } from '@react-spring/web';
+import { uploadPDF } from "../api/cloudflareAIService";
+import { uploadDocument } from '../api/documentVerificationApi';
 
-interface DocumentUploadModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onUploadComplete: (files: any[]) => void;
-  documentType: string;
-  acceptedFileTypes?: string;
-  maxFileSize?: number; // in MB
+export interface DocumentUploadModalProps {
+  profile?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  onUploadComplete?: (files: File[]) => Promise<void>;
+  documentType?: string;
   multipleFiles?: boolean;
+  acceptedFileTypes?: string;
+  onUploaded?: () => void; // for RAG flow
 }
 
 interface UploadFile {
@@ -19,17 +22,20 @@ interface UploadFile {
 }
 
 const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
-  isOpen,
+  profile,
+  isOpen = true,
   onClose,
   onUploadComplete,
   documentType,
-  acceptedFileTypes = '.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png',
-  maxFileSize = 10, // Default 10MB
-  multipleFiles = true,
+  multipleFiles = false,
+  acceptedFileTypes = ".pdf,.docx,.txt",
+  onUploaded,
 }) => {
   const [files, setFiles] = useState<UploadFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Animation for modal
   const modalAnimation = useSpring({
@@ -79,7 +85,7 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
       const file = fileObj.file;
 
       // Validate file size
-      if (file.size > maxFileSize * 1024 * 1024) {
+      if (file.size > 10 * 1024 * 1024) {
         setFiles(prev => {
           const updated = [...prev];
           const fileIndex = prev.findIndex(f => f.file === file);
@@ -87,7 +93,7 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
             updated[fileIndex] = {
               ...updated[fileIndex],
               status: 'error',
-              errorMessage: `File exceeds maximum size of ${maxFileSize}MB`,
+              errorMessage: `File exceeds maximum size of 10MB`,
             };
           }
           return updated;
@@ -182,14 +188,9 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
       // If all files are processed, notify parent component
       const successfulFiles = files.filter(file => file.status === 'complete');
       if (successfulFiles.length > 0) {
-        onUploadComplete(
-          successfulFiles.map(file => ({
-            name: file.file.name,
-            size: file.file.size,
-            type: file.file.type,
-            lastModified: file.file.lastModified,
-          }))
-        );
+        if (onUploadComplete) {
+          onUploadComplete(successfulFiles.map(file => file.file));
+        }
       }
     }
   };
@@ -289,6 +290,20 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
     }
   };
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length) return;
+    setUploading(true);
+    setError(null);
+    try {
+      await uploadDocument(e.target.files[0]);
+      onUploaded?.();
+    } catch (err: any) {
+      setError(err.message || 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -361,7 +376,7 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
             </p>
 
             <p className="mt-1 text-xs text-gray-500">
-              Supports {acceptedFileTypes.replace(/\./g, '')} (Max {maxFileSize}MB)
+              Supports {acceptedFileTypes.replace(/\./g, '')} (Max 10MB)
             </p>
 
             <input
@@ -370,7 +385,8 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
               className="hidden"
               accept={acceptedFileTypes}
               multiple={multipleFiles}
-              onChange={handleFileSelect}
+              onChange={handleFileChange}
+              disabled={uploading}
             />
           </div>
 
@@ -458,15 +474,10 @@ const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
             onClick={() => {
               const successfulFiles = files.filter(file => file.status === 'complete');
               if (successfulFiles.length > 0) {
-                onUploadComplete(
-                  successfulFiles.map(file => ({
-                    name: file.file.name,
-                    size: file.file.size,
-                    type: file.file.type,
-                    lastModified: file.file.lastModified,
-                  }))
-                );
-                onClose();
+                if (onUploadComplete) {
+                  onUploadComplete(successfulFiles.map(file => file.file));
+                }
+                onClose?.();
               }
             }}
             disabled={!files.some(file => file.status === 'complete')}

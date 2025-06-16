@@ -9,7 +9,7 @@ export const queryClient = new QueryClient({
       refetchOnWindowFocus: !config.debug,
       retry: config.performance.maxRetries,
       staleTime: config.performance.cacheTTL * 1000,
-      gcTime: config.performance.cacheTTL * 2000,
+      cacheTime: config.performance.cacheTTL * 2000,
     },
   },
 });

@@ -73,8 +73,11 @@ global.IntersectionObserver = class IntersectionObserver {
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
   constructor(callback: any) {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   disconnect() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   observe() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   unobserve() {}
 };
 

@@ -92,7 +92,7 @@ const PlaidAccountConnector: React.FC<PlaidAccountConnectorProps> = ({
           }),
         });
         
-        const data = await response.json();
+        const data = await response.json() as { link_token: string };
         setLinkToken(data.link_token);
       } catch (error) {
         // Handle error silently or use proper error reporting

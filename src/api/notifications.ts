@@ -71,7 +71,7 @@ export const sendSignatureRequest = async (payload: SignatureRequestPayload): Pr
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
+    const result = await response.json() as NotificationResponse;
     return result;
   } catch (error) {
     console.error('Error sending signature request:', error);
@@ -101,7 +101,7 @@ export const sendSignatureComplete = async (payload: SignatureCompletePayload): 
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
+    const result = await response.json() as NotificationResponse;
     return result;
   } catch (error) {
     console.error('Error sending signature completion notification:', error);
@@ -134,7 +134,7 @@ export const sendSignatureReminder = async (payload: Omit<SignatureRequestPayloa
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
+    const result = await response.json() as NotificationResponse;
     return result;
   } catch (error) {
     console.error('Error sending signature reminder:', error);
@@ -173,7 +173,7 @@ export const getNotificationStatus = async (transactionId: string): Promise<{
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
+    const result = await response.json() as { success: boolean; notifications: Array<{ id: string; type: string; recipient: string; status: string; timestamp: string; deliveryStatus?: string }> };
     return result;
   } catch (error) {
     console.error('Error getting notification status:', error);
@@ -205,7 +205,7 @@ export const checkSMSOptOut = async (phoneNumber: string): Promise<{
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const result = await response.json();
+    const result = await response.json() as { success: boolean; optedOut: boolean; optOutDate?: string };
     return result;
   } catch (error) {
     console.error('Error checking SMS opt-out status:', error);

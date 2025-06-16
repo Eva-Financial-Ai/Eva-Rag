@@ -1,3 +1,4 @@
+/* global process localStorage fetch console window */
 // Import mock data and services
 import { ApiResponse } from './apiClient';
 import { mockLoginResponse } from './mockData';
@@ -140,7 +141,7 @@ export const login = async (credentials: LoginCredentials): Promise<ApiResponse<
       body: JSON.stringify(credentials),
     });
 
-    const data: AuthResponse = await response.json();
+    const data = await response.json() as AuthResponse;
 
     if (data.success && data.token) {
       // Store the token in localStorage
@@ -246,7 +247,7 @@ export const refreshToken = async (refreshTokenValue?: string): Promise<RefreshT
       },
     });
 
-    const data: AuthResponse = await response.json();
+    const data = await response.json() as AuthResponse;
 
     if (data.success && data.token) {
       localStorage.setItem('auth_token', data.token);
@@ -327,7 +328,7 @@ export const register = async (
       body: JSON.stringify(credentials),
     });
 
-    const data: AuthResponse = await response.json();
+    const data = await response.json() as AuthResponse;
 
     if (data.success && data.token) {
       localStorage.setItem('auth_token', data.token);
@@ -375,7 +376,7 @@ export const validateToken = async (token: string): Promise<boolean> => {
       },
     });
 
-    const data = await response.json();
+    const data = await response.json() as { valid?: boolean };
     return data.valid === true;
   } catch (error) {
     console.error('Token validation failed:', error);

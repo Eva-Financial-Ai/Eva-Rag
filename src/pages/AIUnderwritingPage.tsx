@@ -1,5 +1,5 @@
 import React from 'react';
-import AIUnderwritingDashboard from '../components/financial-services/AIUnderwritingDashboard';
+import { AIUnderwritingDashboard } from '../components/financial-services/AIUnderwritingDashboard';
 
 const AIUnderwritingPage: React.FC = () => {
   return (

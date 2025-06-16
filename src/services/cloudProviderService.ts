@@ -292,7 +292,7 @@ class CloudProviderService {
         throw new Error('Failed to list OneDrive files');
       }
 
-      const data = await response.json();
+      const data = await response.json() as { value: any[] };
       const files: CloudFile[] = data.value.map((file: any) => ({
         id: file.id,
         name: file.name,

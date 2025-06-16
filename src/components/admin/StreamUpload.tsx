@@ -9,6 +9,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useApiMutation } from '../../hooks/useApiQuery';
 import { useAuth } from '../../hooks/useAuth';
+import { ApiResponse } from '../../api/apiClient';
 
 interface UploadedVideo {
   id: string;
@@ -56,7 +57,7 @@ const StreamUpload: React.FC = () => {
         throw new Error('Failed to get upload URL');
       }
 
-      const uploadData = await response.json();
+      const uploadData = await response.json() as ApiResponse<StreamUploadResponse>;
 
       // Upload file directly to Cloudflare Stream
       const formData = new FormData();
@@ -125,7 +126,7 @@ const StreamUpload: React.FC = () => {
         );
 
         if (response.ok) {
-          const videoData = await response.json();
+          const videoData = await response.json() as { status: string; playback_url?: string; thumbnail?: string; duration?: number };
 
           setUploadedVideos(prev =>
             prev.map(video =>

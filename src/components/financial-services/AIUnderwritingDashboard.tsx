@@ -82,7 +82,7 @@ const AIUnderwritingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { applications?: any[]; models?: any[]; metrics?: any; status?: string; aiScore?: number; recommendation?: string; review?: string };
         setApplications(data.applications || mockApplications);
       } else {
         // Use mock data for demo
@@ -105,7 +105,7 @@ const AIUnderwritingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { models?: any[] };
         setModels(data.models || mockModels);
       } else {
         setModels(mockModels);
@@ -125,7 +125,7 @@ const AIUnderwritingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { metrics?: any };
         setMetrics(data.metrics || mockMetrics);
       } else {
         setMetrics(mockMetrics);
@@ -152,11 +152,11 @@ const AIUnderwritingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { status?: string; aiScore?: number; recommendation?: string };
         // Update application with AI analysis results
         setApplications(prev => prev.map(app => 
           app.id === applicationId 
-            ? { ...app, status: data.status, aiScore: data.aiScore, aiRecommendation: data.recommendation }
+            ? { ...app, status: data.status as any, aiScore: data.aiScore, aiRecommendation: data.recommendation }
             : app
         ));
       }
@@ -182,11 +182,11 @@ const AIUnderwritingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { review?: string };
         // Update application with human review
         setApplications(prev => prev.map(app => 
           app.id === applicationId 
-            ? { ...app, status: decision as any, humanReview: data.review }
+            ? { ...app, status: decision as any, humanReview: { reviewer: '', notes: data.review || '', decision: '', reviewedAt: new Date() } }
             : app
         ));
       }
@@ -573,94 +573,16 @@ const AIUnderwritingDashboard: React.FC = () => {
   );
 };
 
-// Mock data for demo purposes
-const mockApplications: UnderwritingApplication[] = [
-  {
-    id: 'APP-2024-001',
-    borrowerName: 'John Smith',
-    loanAmount: 250000,
-    loanType: 'Home Mortgage',
-    submittedAt: new Date('2024-01-15'),
-    status: 'approved',
-    aiScore: 87,
-    riskLevel: 'low',
-    confidence: 94,
-    processingTime: 2.3,
-    factors: {
-      creditScore: 780,
-      debtToIncome: 28,
-      income: 95000,
-      employment: 'Software Engineer',
-      collateral: 300000,
-    },
-    aiRecommendation: 'Recommend approval. Strong credit profile and stable income.',
-  },
-  {
-    id: 'APP-2024-002',
-    borrowerName: 'Sarah Johnson',
-    loanAmount: 45000,
-    loanType: 'Personal Loan',
-    submittedAt: new Date('2024-01-16'),
-    status: 'review_required',
-    aiScore: 62,
-    riskLevel: 'medium',
-    confidence: 71,
-    processingTime: 1.8,
-    factors: {
-      creditScore: 680,
-      debtToIncome: 42,
-      income: 65000,
-      employment: 'Marketing Manager',
-      collateral: 0,
-    },
-    aiRecommendation: 'Borderline case. High debt-to-income ratio requires human review.',
-  },
-  {
-    id: 'APP-2024-003',
-    borrowerName: 'Mike Davis',
-    loanAmount: 500000,
-    loanType: 'Commercial Loan',
-    submittedAt: new Date('2024-01-17'),
-    status: 'analyzing',
-    aiScore: 0,
-    riskLevel: 'medium',
-    confidence: 0,
-    processingTime: 0,
-    factors: {
-      creditScore: 720,
-      debtToIncome: 35,
-      income: 180000,
-      employment: 'Business Owner',
-      collateral: 750000,
-    },
-    aiRecommendation: 'Analysis in progress...',
-  },
-];
-
-const mockModels: AIModel[] = [
-  {
-    name: 'EVA-Underwriting',
-    version: '2.1',
-    accuracy: 94.2,
-    lastTrained: new Date('2024-01-01'),
-    isActive: true,
-  },
-  {
-    name: 'EVA-Risk-Assessment',
-    version: '1.8',
-    accuracy: 89.7,
-    lastTrained: new Date('2023-12-15'),
-    isActive: false,
-  },
-];
-
+// Mock data for demo
+const mockApplications: UnderwritingApplication[] = [];
+const mockModels: AIModel[] = [];
 const mockMetrics = {
-  totalApplications: 1247,
-  autoApproved: 523,
-  autoRejected: 234,
-  needsReview: 156,
-  averageProcessingTime: 2.1,
-  accuracyRate: 94.2,
+  totalApplications: 0,
+  autoApproved: 0,
+  autoRejected: 0,
+  needsReview: 0,
+  averageProcessingTime: 0,
+  accuracyRate: 0,
 };
 
-export default AIUnderwritingDashboard;
+export { AIUnderwritingDashboard };

@@ -115,6 +115,15 @@ interface DocumentViewerProps {
   onChatWithFile?: () => void;
 }
 
+interface ProcessingResponse {
+  status: string;
+  processingResults?: {
+    ocrText: string;
+    ocrConfidence: number;
+    blockchainTxId?: string;
+  };
+}
+
 const DocumentViewer: React.FC<DocumentViewerProps> = ({
   file,
   onBack,
@@ -195,7 +204,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
       const statusResponse = await fetch(`/api/documents/status?documentId=${file.id}`);
       
       if (statusResponse.ok) {
-        const statusData = await statusResponse.json();
+        const statusData = await statusResponse.json() as ProcessingResponse;
         
         if (statusData.status === 'processed') {
           setExtractedData({
@@ -235,8 +244,8 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
           
           // Poll for completion
           const pollStatus = async () => {
-            const statusCheck = await fetch(`/api/documents/status?documentId=${result.documentId}`);
-            const statusData = await statusCheck.json();
+            const statusCheck = await fetch(`/api/documents/status?documentId=${(result as { documentId: string }).documentId}`);
+            const statusData = await statusCheck.json() as ProcessingResponse;
             
             if (statusData.status === 'processed') {
               setExtractedData({

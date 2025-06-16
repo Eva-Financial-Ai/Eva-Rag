@@ -152,7 +152,7 @@ const ElectronicSignatureComponent: React.FC<ElectronicSignatureProps> = ({
   const getUserMetadata = useCallback(async () => {
     try {
       const response = await fetch('https://ipapi.co/json/');
-      const data = await response.json();
+      const data = await response.json() as { ip: string; latitude: number; longitude: number };
       return {
         ipAddress: data.ip,
         geoLocation: {

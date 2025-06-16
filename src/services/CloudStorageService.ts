@@ -68,6 +68,16 @@ const microsoftOneDriveConfig: MicrosoftOneDriveConfig = {
 };
 */
 
+interface CloudStorageResponse {
+  id: string;
+  name: string;
+  size: number;
+  webUrl: string;
+  '@microsoft.graph.downloadUrl'?: string;
+  secureUrl?: string;
+  downloadUrl?: string;
+}
+
 // --- Google Drive API Services ---
 
 // Authenticate with Google Drive
@@ -534,8 +544,7 @@ export class CloudStorageService {
         throw new Error(`Microsoft upload failed: ${response.statusText}`);
       }
 
-      const result = await response.json();
-
+      const result = await response.json() as CloudStorageResponse;
       return {
         success: true,
         fileId: result.id,
@@ -595,7 +604,7 @@ export class CloudStorageService {
         throw new Error(`Google upload failed: ${response.statusText}`);
       }
 
-      const result = await response.json();
+      const result = await response.json() as { id: string; name: string; size: number };
 
       return {
         success: true,
@@ -651,7 +660,7 @@ export class CloudStorageService {
         throw new Error(`Filelock upload failed: ${response.statusText}`);
       }
 
-      const result = await response.json();
+      const result = await response.json() as { fileId: string; fileName: string; size: number; secureUrl: string; downloadUrl: string };
 
       return {
         success: true,
@@ -776,7 +785,7 @@ export class CloudStorageService {
       );
 
       if (tokenResponse.ok) {
-        const tokenData = await tokenResponse.json();
+        const tokenData = await tokenResponse.json() as { access_token: string };
         this.accessTokens.set('microsoft', tokenData.access_token);
 
         const provider = this.providers.get('microsoft')!;

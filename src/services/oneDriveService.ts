@@ -278,8 +278,8 @@ export class OneDriveService {
 
       if (!response.ok) throw new Error('Failed to fetch file metadata');
 
-      const data = await response.json();
-      return data as OneDriveFile;
+      const data = await response.json() as { value: any[] };
+      return data.value[0] as OneDriveFile;
     } catch (error) {
       console.error('Error fetching file metadata:', error);
       return null;
@@ -353,7 +353,7 @@ export class OneDriveService {
 
       if (!response.ok) throw new Error('Failed to list files');
 
-      const data = await response.json();
+      const data = await response.json() as { value: any[] };
       return {
         files: data.value || [],
         nextLink: data['@odata.nextLink'],
@@ -383,7 +383,7 @@ export class OneDriveService {
 
       if (!response.ok) throw new Error('Search failed');
 
-      const data = await response.json();
+      const data = await response.json() as { value: any[] };
       return data.value || [];
     } catch (error) {
       console.error('Error searching files:', error);

@@ -35,6 +35,7 @@ import MockWebSocketControl from './components/dev/MockWebSocketControl';
 import BorrowerAnalyticsDashboard from './components/dashboard/BorrowerAnalyticsDashboard';
 import { EnhancedCreditApplicationFlow } from './components/credit/EnhancedCreditApplicationFlow';
 import FilelockDriveApp from './components/document/FilelockDriveApp';
+import DocumentVerificationWrapper from "./components/DocumentVerificationWrapper";
 
 // Create placeholder components for missing routes
 const CustomerManagement = () => <div className="p-8"><h1 className="text-2xl font-bold">Customer Management</h1><p>Coming soon...</p></div>;
@@ -127,6 +128,7 @@ const AppContent: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/onboarding" element={<OnboardingFlow />} />
             <Route path="/welcome" element={<WelcomePage />} />
+            <Route path="/document-verification" element={<DocumentVerificationWrapper />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>

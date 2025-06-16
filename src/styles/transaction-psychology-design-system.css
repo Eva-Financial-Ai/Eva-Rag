@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ========================================
    TRANSACTION PSYCHOLOGY DESIGN SYSTEM
    ========================================
@@ -270,17 +274,11 @@
 }
 
 .tx-card-success {
-  background: linear-gradient(
-    135deg,
-    var(--tx-success-green-light) 0%,
-    var(--tx-neutral-white) 100%
-  );
-  border-left: 4px solid var(--tx-success-green);
+  @apply bg-green-100 text-green-800 font-semibold p-2 rounded;
 }
 
 .tx-card-trust {
-  background: linear-gradient(135deg, var(--tx-trust-blue-light) 0%, var(--tx-neutral-white) 100%);
-  border-left: 4px solid var(--tx-trust-blue);
+  @apply bg-blue-100 text-blue-800 font-semibold p-2 rounded;
 }
 
 .tx-card-premium {
@@ -306,14 +304,7 @@
    ======================================== */
 
 .tx-input {
-  width: 100%;
-  padding: var(--tx-space-3) var(--tx-space-4);
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: var(--tx-font-size-md);
-  color: var(--tx-neutral-dark);
-  background: var(--tx-neutral-white);
-  transition: all 0.3s ease;
+  @apply px-3 py-2 border rounded text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
 .tx-input:focus {
@@ -342,44 +333,19 @@
    ======================================== */
 
 .tx-tooltip {
-  position: relative;
-  display: inline-block;
+  @apply bg-gray-900 text-white text-xs rounded px-2 py-1 shadow-lg z-50;
 }
 
 .tx-tooltip-content {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--tx-neutral-dark);
-  color: var(--tx-neutral-white);
-  padding: var(--tx-space-2) var(--tx-space-3);
-  border-radius: 6px;
-  font-size: var(--tx-font-size-sm);
-  font-weight: var(--tx-font-weight-medium);
-  white-space: nowrap;
-  z-index: 1000;
-  box-shadow: var(--tx-shadow-strong);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  margin-bottom: var(--tx-space-2);
+  @apply bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg z-50;
 }
 
 .tx-tooltip-content::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: var(--tx-neutral-dark);
+  @apply border-transparent border-solid border-4;
 }
 
 .tx-tooltip:hover .tx-tooltip-content {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-4px);
+  @apply opacity-100;
 }
 
 /* ========================================
@@ -666,5 +632,11 @@
 
   .tx-input {
     border-width: 3px;
+  }
+}
+
+@layer components {
+  .tx-card-success {
+    @apply bg-green-100 text-green-800 font-semibold p-2 rounded;
   }
 }

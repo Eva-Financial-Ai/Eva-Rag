@@ -336,9 +336,9 @@ const TransactionTooltip: React.FC<{ children: React.ReactNode; content: string 
   content,
 }) => {
   return (
-    <div className="tx-tooltip">
+    <div className="bg-gray-900 text-white text-xs rounded px-2 py-1 shadow-lg z-50">
       {children}
-      <div className="tx-tooltip-content">{content}</div>
+      <div className="bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg z-50">{content}</div>
     </div>
   );
 };

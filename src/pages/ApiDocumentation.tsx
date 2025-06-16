@@ -16,7 +16,7 @@ const ApiDocumentationContent: React.FC = () => {
         if (!response.ok) {
           throw new Error(`Failed to load API documentation: ${response.statusText}`);
         }
-        const data = await response.json();
+        const data = await response.json() as object;
         setApiSpec(data);
       } catch (err) {
         setError('Could not load API documentation. Please try again later.');

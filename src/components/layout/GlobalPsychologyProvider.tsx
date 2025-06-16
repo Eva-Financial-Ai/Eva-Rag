@@ -164,13 +164,11 @@ export const GlobalPsychologyProvider: React.FC<GlobalPsychologyProviderProps> =
       }
       
       /* Personalization Level Adjustments */
-      [data-personalization="1"] .tx-badge,
-      [data-personalization="1"] .tx-tooltip {
+      [data-personalization="1"] .bg-gray-900 {
         opacity: 0.7;
       }
       
-      [data-personalization="5"] .tx-badge,
-      [data-personalization="5"] .tx-tooltip {
+      [data-personalization="5"] .bg-gray-900 {
         opacity: 1;
         transform: scale(1.1);
       }

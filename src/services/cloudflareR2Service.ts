@@ -308,7 +308,7 @@ class CloudflareR2Service {
         };
       }
 
-      const data = await response.json();
+      const data = await response.json() as { result?: any[] };
       const account = accountId
         ? data.result.find((acc: CloudflareAccount) => acc.id === accountId)
         : data.result[0];
@@ -410,11 +410,11 @@ class CloudflareR2Service {
         const error = await vectorResponse.json();
         return {
           success: false,
-          errorMessage: `Failed to create vector index: ${error.errors?.[0]?.message || 'Unknown error'}`,
+          errorMessage: `Failed to create vector index: ${(error as { errors?: { message?: string }[] }).errors?.[0]?.message || 'Unknown error'}`,
         };
       }
 
-      const vectorData = await vectorResponse.json();
+      const vectorData = await vectorResponse.json() as { result: { id: string } };
       const vectorIndexId = vectorData.result.id;
 
       // Configure R2 bucket with Auto RAG webhook (if needed)
@@ -521,7 +521,7 @@ class CloudflareR2Service {
         throw new Error(`Failed to get presigned URL: ${response.statusText}`);
       }
 
-      const { uploadUrl } = await response.json();
+      const { uploadUrl } = await response.json() as { uploadUrl: string };
       return uploadUrl;
     } catch (error) {
       ProductionLogger.error('Error getting signed upload URL:', 'cloudflareR2Service', error);

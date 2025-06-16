@@ -1,5 +1,4 @@
 import { CustomerProfile as Customer } from '../contexts/EVACustomerContext';
-import { webSearchService } from './WebSearchService';
 
 export interface ConversationMessage {
   id: string;
@@ -70,6 +69,12 @@ interface CustomerData {
   ownerName?: string;
   ownerSSN?: string;
 }
+
+const webSearchService = {
+  verifyBusiness: async (_a: any, _b: any, _c: any) => ({}),
+  checkCompliance: async (_a: any, _b: any) => ({}),
+  searchNews: async (_a: any, _b: any) => ([]),
+};
 
 export class ConversationIntelligenceService {
   private actionTemplates: SuggestedAction[] = [

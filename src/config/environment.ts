@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Centralized environment and runtime configuration
  * Provides a single source of truth for API URLs, feature flags, and 3rd-party keys
@@ -7,15 +8,19 @@
  * and avoids accessing process.env directly throughout the app.
  */
 
+// Polyfill for process in browser (for CRA/Vite compatibility)
+declare const process: any;
+declare const console: any;
+
 // ------------------------
 // Environment Detection
 // ------------------------
-const NODE_ENV = import.meta.env.MODE || process.env.NODE_ENV || 'development';
-const isDevelopment = import.meta.env.DEV || process.env.NODE_ENV === 'development';
-const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production';
+const mode = import.meta?.env?.MODE || process.env.NODE_ENV || 'development';
+const isDevelopment = mode === 'development';
+const isProduction = mode === 'production';
 
 // Use either VITE_ or REACT_APP_ prefixes
-const env = import.meta.env as ImportMetaEnv & Record<string, string | undefined>;
+// const env = import.meta.env as ImportMetaEnv & Record<string, string | undefined>; // Removed unused variable
 
 // ------------------------
 // Configuration Interfaces
@@ -44,11 +49,6 @@ export interface Environment {
   api: {
     baseUrl: string;
     timeout: number;
-  };
-  braveSearch: {
-    apiKey?: string;
-    publicApiKey?: string;
-    apiUrl: string;
   };
 }
 
@@ -80,42 +80,36 @@ export const config: ExtendedConfig = {
 // ------------------------
 // Environment Settings
 // ------------------------
+
+// Universal environment fallback
+function getSafeEnvironment() {
+  return (
+    (typeof process !== 'undefined' && process.env && process.env.REACT_APP_ENVIRONMENT) ||
+    (typeof import.meta !== 'undefined' && import.meta.env && (import.meta.env.REACT_APP_ENVIRONMENT || import.meta.env.VITE_ENVIRONMENT)) ||
+    'development'
+  );
+}
+
+function getSafeApiUrl() {
+  return (
+    (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_URL) ||
+    (typeof import.meta !== 'undefined' && import.meta.env && (import.meta.env.REACT_APP_API_URL || import.meta.env.VITE_API_URL)) ||
+    'http://localhost:3001'
+  );
+}
+
 export const environment: Environment = {
-  name: env.REACT_APP_ENVIRONMENT || NODE_ENV,
-  apiUrl: env.REACT_APP_API_URL || config.baseUrl,
+  name: getSafeEnvironment(),
+  apiUrl: getSafeApiUrl(),
   api: {
-    baseUrl: config.baseUrl,
+    baseUrl: getSafeApiUrl(),
     timeout: config.performance.requestTimeout,
-  },
-  braveSearch: {
-    apiKey: env.REACT_APP_BRAVE_SEARCH_API_KEY || env.VITE_BRAVE_SEARCH_API_KEY,
-    publicApiKey: env.REACT_APP_BRAVE_SEARCH_PUBLIC_API_KEY,
-    apiUrl: 'https://api.search.brave.com/res/v1/web/search',
   },
 };
 
 // ------------------------
 // Utility Functions
 // ------------------------
-export const getBraveSearchHeaders = (usePublicApi: boolean = false): Record<string, string> => {
-  const key = usePublicApi 
-    ? environment.braveSearch.publicApiKey 
-    : environment.braveSearch.apiKey;
-  
-  const headers: Record<string, string> = {
-    'Accept': 'application/json',
-    'Accept-Encoding': 'gzip',
-    'Content-Type': 'application/json',
-  };
-  
-  if (key) {
-    headers['X-Subscription-Token'] = key;
-  }
-  
-  return headers;
-};
-
-// Export environment detection utilities
 export const getEnvironment = () => config.environment;
 export const isDevMode = () => config.environment === 'development';
 export const isProdMode = () => config.environment === 'production';
@@ -124,4 +118,11 @@ export const isProdMode = () => config.environment === 'production';
 export const extendedConfig = config;
 
 // Default export
-export default config; 
+export default config;
+
+console.log('ENVIRONMENT CHECK:', {
+  REACT_APP_ENVIRONMENT: typeof process !== 'undefined' && process.env ? process.env.REACT_APP_ENVIRONMENT : undefined,
+  VITE_ENVIRONMENT: typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_ENVIRONMENT : undefined,
+});
+
+export const ENVIRONMENT = getSafeEnvironment(); 

@@ -88,7 +88,7 @@ const ImageProcessingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { images?: any[]; jobs?: any[]; metrics?: any; id?: string; url?: string };
         setImages(data.images || mockImages);
       } else {
         setImages(mockImages);
@@ -108,7 +108,7 @@ const ImageProcessingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { jobs?: any[] };
         setProcessingJobs(data.jobs || []);
       }
     } catch (error) {
@@ -125,7 +125,7 @@ const ImageProcessingDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { metrics?: any };
         setMetrics(data.metrics || mockMetrics);
       } else {
         setMetrics(mockMetrics);
@@ -171,7 +171,7 @@ const ImageProcessingDashboard: React.FC = () => {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json() as { id?: string; url?: string };
           const newImage: ProcessedImage = {
             id: data.id || Date.now().toString(),
             fileName: file.name,

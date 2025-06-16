@@ -94,7 +94,7 @@ const VideoConferencing: React.FC<VideoConferencingProps> = ({
         throw new Error('Failed to get access token');
       }
 
-      const data = await response.json();
+      const data = await response.json() as { token: string };
       return data.token;
     } catch (error) {
       logError('system_error', 'Error getting access token:', error);
@@ -203,7 +203,7 @@ const VideoConferencing: React.FC<VideoConferencingProps> = ({
 
       if (response.ok) {
         setIsRecording(false);
-        const data = await response.json();
+        const data = await response.json() as { recordingUrl: string };
         if (currentMeeting) {
           setCurrentMeeting({
             ...currentMeeting,

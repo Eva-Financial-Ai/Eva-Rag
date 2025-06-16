@@ -316,11 +316,11 @@ const FilelockDriveIntegrated: React.FC<FilelockDriveIntegratedProps> = ({
           });
           
           if (!response.ok) {
-            const error = await response.json();
+            const error = await response.json() as { error: string };
             throw new Error(error.error || 'Upload failed');
           }
           
-          const result = await response.json();
+          const result = await response.json() as { documentId: string; transactionId: string };
           
           // Create new file item with proper structure
           const newFile: FileItem = {

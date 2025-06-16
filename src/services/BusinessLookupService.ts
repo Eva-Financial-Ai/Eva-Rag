@@ -160,7 +160,7 @@ export class BusinessLookupService {
           })
         });
 
-        const data = await response.json();
+        const data = await response.json() as { result?: any; entities?: any[] };
         results.push(...(data.result?.web?.results || []));
       } catch (error) {
         console.error(`Brave search error for query "${query}":`, error);
@@ -231,7 +231,7 @@ export class BusinessLookupService {
           })
         });
 
-        const data = await response.json();
+        const data = await response.json() as { result?: any; entities?: any[] };
         
         if (data.entities) {
           for (const entity of data.entities) {
@@ -297,7 +297,7 @@ export class BusinessLookupService {
       })
     });
 
-    const data = await response.json();
+    const data = await response.json() as { result?: any };
     return this.parseWebScrapingResults(stateCode, data.result);
   }
 
@@ -344,7 +344,7 @@ export class BusinessLookupService {
       })
     });
 
-    const data = await response.json();
+    const data = await response.json() as { result?: any };
     
     // Convert AI recommendations into actionable lookup steps
     return await this.executeAIRecommendations(stateCode, businessName, dbaName, data.result);

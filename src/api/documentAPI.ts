@@ -67,7 +67,7 @@ export async function uploadDocuments(
       });
 
       if (response.ok) {
-        const result = await response.json();
+        const result = await response.json() as DocumentUploadResponse;
         results.push(result);
       } else {
         const error = await response.text();

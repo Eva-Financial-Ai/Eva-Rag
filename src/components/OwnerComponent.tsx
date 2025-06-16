@@ -190,7 +190,7 @@ const OwnerComponent: React.FC<OwnerComponentProps> = ({
       const data = await response.json();
 
       // Transform OSM response into our suggestion format
-      const suggestions: AddressSuggestion[] = data
+      const suggestions: AddressSuggestion[] = (data as any[])
         .map((item: any, index: number) => {
           const addr = item.address;
           let street = '';

@@ -154,7 +154,7 @@ class SessionManager {
 
       const data = await response.json();
       debugLog('general', 'log_statement', `[SessionManager] Session loaded from Cloudflare KV: ${sessionId}`)
-      return data;
+      return data as SessionData;
     } catch (error) {
       console.error('[SessionManager] Failed to load from Cloudflare KV:', error);
       return this.loadFromLocalStorage(sessionId);

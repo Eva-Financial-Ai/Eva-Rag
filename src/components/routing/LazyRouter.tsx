@@ -224,6 +224,9 @@ const routes: RouteConfig[] = [
   // Welcome page for unauthenticated users
   { path: '/welcome', component: WelcomePage },
   
+  // RAG Test Page
+  { path: '/rag-test', component: lazy(() => import('../../pages/RAGTestPage')) },
+  
   // Root route redirects to role selection or default lender dashboard
   { path: '/', component: RoleBasedDashboard },
 

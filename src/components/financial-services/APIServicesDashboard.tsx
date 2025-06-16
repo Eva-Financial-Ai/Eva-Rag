@@ -81,7 +81,7 @@ const APIServicesDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { endpoints?: any[] };
         setEndpoints(data.endpoints || mockEndpoints);
       } else {
         setEndpoints(mockEndpoints);
@@ -101,7 +101,7 @@ const APIServicesDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { services?: any[] };
         setServiceHealth(data.services || mockServiceHealth);
       } else {
         setServiceHealth(mockServiceHealth);
@@ -121,7 +121,7 @@ const APIServicesDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json() as { metrics?: any };
         setMetrics(data.metrics || mockMetrics);
       } else {
         setMetrics(mockMetrics);

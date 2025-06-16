@@ -1,0 +1,32 @@
+name = "eva-rag"
+main = "src/index.ts"
+compatibility_date = "2024-06-15"
+account_id = "eace6f3c56b5735ae4a9ef385d6ee914"
+workers_dev = true
+
+[ai]
+binding = "AI"
+
+[[vectorize]]
+binding = "equipment_vector"
+index_name = "autorag-equipment-vehicle-rag"
+
+[[vectorize]]
+binding = "Realestate_vector"
+index_name = "autorag-real-estate-rag"
+
+[[vectorize]]
+binding = "Sba_vector"
+index_name = "autorag-sba-rag"
+
+[[vectorize]]
+binding = "lender_rag"
+index_name = "autorag-general-lending-rag"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "evafi-rag"
+
+[dev]
+port = 8787
+local_protocol = "http"

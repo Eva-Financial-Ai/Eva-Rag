@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import DocumentVerificationSystem from './DocumentVerificationSystem';
+import DocumentVerificationSystem, { DocumentVerificationSystemProps } from './DocumentVerificationSystem';
 import useTransactionStore from '../hooks/useTransactionStore';
 import { Transition } from '@headlessui/react';
 
@@ -37,15 +37,12 @@ interface UserData {
   agreeToTerms?: boolean;
 }
 
-interface DocumentVerificationWrapperProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface DocumentVerificationWrapperProps extends DocumentVerificationSystemProps {
   documentId?: string;
-  transactionId?: string;
-  onVerificationComplete?: (result: { success: boolean; documentId?: string }) => void;
-  initialError?: string | null;
+  navigate?: (path: string, options?: any) => void;
   redirectOnSuccess?: boolean;
-  navigate?: NavigateFunction;
+  profile?: string;
+  // Add any additional props specific to the wrapper here
 }
 
 /**
@@ -58,16 +55,8 @@ interface DocumentVerificationWrapperProps {
  * 4. Success redirection
  * 5. Proper cleanup on unmount
  */
-const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = ({
-  isOpen,
-  onClose,
-  documentId,
-  transactionId: initialTransactionId,
-  onVerificationComplete,
-  initialError,
-  redirectOnSuccess = false,
-  navigate,
-}) => {
+const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = (props) => {
+  const { profile = "equipment", ...systemProps } = props;
   const location = useLocation();
   const {
     currentTransaction,
@@ -75,9 +64,9 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
     error: transactionError,
   } = useTransactionStore();
 
-  const [error, setError] = useState<string | null>(initialError || null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [transactionId, setTransactionId] = useState<string | null>(initialTransactionId || null);
+  const [transactionId, setTransactionId] = useState<string | null>(null);
   const [userData, setUserData] = useState<UserData>({
     applicantType: 'business',
     businessName: 'Acme LLC',
@@ -116,8 +105,8 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
     // 3. Current transaction from context
     // 4. Fallback ID
 
-    if (documentId) {
-      setTransactionId(documentId);
+    if (props.documentId) {
+      setTransactionId(props.documentId);
       setIsLoading(false);
     } else if (transactionId) {
       // We already have a transaction ID from URL params
@@ -134,7 +123,7 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
       setIsLoading(false);
 
       // Only show error if transaction loading has completed
-      if (!transactionLoading && !documentId) {
+      if (!transactionLoading && !props.documentId) {
         setError(
           'No active transaction found. Document verification may have limited functionality.'
         );
@@ -142,31 +131,31 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
     }
 
     // Handle transaction errors
-    if (transactionError && !documentId) {
+    if (transactionError && !props.documentId) {
       setError(`Error loading transaction: ${transactionError.message}`);
     }
-  }, [currentTransaction, documentId, transactionId, transactionLoading, transactionError]);
+  }, [currentTransaction, props.documentId, transactionId, transactionLoading, transactionError]);
 
   // Custom close handler to clean up URL params if needed
   const handleClose = () => {
     // Remove URL parameters when closing
     if (
-      navigate &&
+      props.navigate &&
       ((location.search && location.search.includes('documentId')) ||
         location.search.includes('doc=verification'))
     ) {
-      navigate(location.pathname, { replace: true });
+      props.navigate(location.pathname, { replace: true });
     }
 
     // Call the parent onClose handler
-    onClose();
+    props.onClose();
   };
 
   // Handle verification completion - could redirect to another page
   const handleVerificationComplete = (result: { success: boolean; documentId?: string }) => {
-    if (result.success && redirectOnSuccess && navigate) {
+    if (result.success && props.redirectOnSuccess && props.navigate) {
       // Example: redirect to transaction details or confirmation page
-      navigate(`/transactions/details/${result.documentId || transactionId}`);
+      props.navigate(`/transactions/details/${result.documentId || transactionId}`);
     }
 
     // Close the verification window
@@ -177,11 +166,11 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
     setUserData(newData);
   };
 
-  if (!isOpen) return null;
+  if (!props.isOpen) return null;
 
   return (
     <Transition
-      show={isOpen}
+      show={props.isOpen}
       enter="transition-opacity duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"
@@ -200,13 +189,14 @@ const DocumentVerificationWrapper: React.FC<DocumentVerificationWrapperProps> = 
         </div>
       ) : (
         <DocumentVerificationSystem
-          isOpen={isOpen}
+          isOpen={props.isOpen}
           onClose={handleClose}
-          documentId={documentId || transactionId || 'DOC-FALLBACK'}
+          documentId={props.documentId || transactionId || 'DOC-FALLBACK'}
           userData={userData}
           onUserDataChange={handleUserDataChange}
           onVerificationComplete={handleVerificationComplete}
           initialError={error}
+          profile={profile}
         />
       )}
     </Transition>

@@ -87,7 +87,7 @@ const PlaidBankVerification: React.FC<PlaidBankVerificationProps> = ({
           throw new Error('Failed to create link token');
         }
 
-        const data = await response.json();
+        const data = await response.json() as { linkToken: string };
         setLinkToken(data.linkToken);
       } catch (err) {
         console.error('Error fetching link token:', err);
@@ -117,7 +117,7 @@ const PlaidBankVerification: React.FC<PlaidBankVerificationProps> = ({
           throw new Error('Failed to exchange token');
         }
 
-        const { accessToken, itemId } = await response.json();
+        const { accessToken, itemId } = await response.json() as { accessToken: string; itemId: string };
 
         // Fetch account details
         const accountsResponse = await fetch('/api/plaid/accounts', {
@@ -130,7 +130,7 @@ const PlaidBankVerification: React.FC<PlaidBankVerificationProps> = ({
           throw new Error('Failed to fetch accounts');
         }
 
-        const { accounts } = await accountsResponse.json();
+        const { accounts } = await accountsResponse.json() as { accounts: BankAccount[] };
 
         // Mock verification for demo
         const mockAccounts: BankAccount[] = [

@@ -1,6 +1,5 @@
 import { BusinessRecord, EntityType, RegisteredAgent } from '../types/businessLookup';
 import { BusinessLookupService } from './BusinessLookupService';
-import { WebSearchService } from './WebSearchService';
 
 export interface EnhancedBusinessRecord extends BusinessRecord {
   // Additional fields for enhanced lookup
@@ -145,12 +144,10 @@ interface EnhancedLookupConfig {
 export class EnhancedBusinessLookupService {
   private businessLookupService: BusinessLookupService;
   private config: EnhancedLookupConfig;
-  private webSearchService: WebSearchService;
 
   constructor(businessLookupService: BusinessLookupService, config: EnhancedLookupConfig) {
     this.businessLookupService = businessLookupService;
     this.config = config;
-    this.webSearchService = new WebSearchService();
   }
 
   async performEnhancedLookup(params: {
@@ -219,7 +216,7 @@ export class EnhancedBusinessLookupService {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json() as { results?: any[] };
 
           // Convert e-Secretary format to our format
           for (const result of data.results || []) {
@@ -277,7 +274,7 @@ export class EnhancedBusinessLookupService {
         return undefined;
       }
 
-      const searchData = await searchResponse.json();
+      const searchData = await searchResponse.json() as { results?: any[] };
 
       if (!searchData.results || searchData.results.length === 0) {
         return undefined;
@@ -297,7 +294,7 @@ export class EnhancedBusinessLookupService {
         return undefined;
       }
 
-      const filingsData = await filingsResponse.json();
+      const filingsData = await filingsResponse.json() as { tickers?: string[]; exchanges?: string[]; filings?: any };
 
       return {
         isPublic: true,
@@ -587,3 +584,5 @@ export class EnhancedBusinessLookupService {
     return { dbaFilings, stateFilings };
   }
 }
+
+export {};
